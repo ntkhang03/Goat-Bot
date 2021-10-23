@@ -67,7 +67,6 @@ module.exports = {
       const threadInfo = await threadsData.getData(event.threadID);
       let { customRankCard } = threadInfo.data;
       if (!customRankCard) customRankCard = {};
-      console.log(customRankCard);
       const dataLevel = {
         exp: currentExp,
         expNextLevel,
