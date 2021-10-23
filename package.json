@@ -5,11 +5,11 @@
   "main": "goat.js",
   "author": "NTKhang",
   "scripts": {
-    "start": "node goat.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ntkhang03/Goat-Bot.git"
+    "url": "git+https://github.com/ntkhang03/Goat-Bot.git"
   },
   "bugs": {
     "url": "https://github.com/ntkhang03/Goat-Bot/issues"
@@ -22,21 +22,19 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
-    "bitly": "^7.1.2",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "chalk": "^4.1.1",
     "child_process": "^1.0.2",
     "express": "^4.17.1",
     "fb-chat-api": "github:fb-chat-api/fb-chat-api",
-    "fb-tools": "^2.0.10",
+    "fb-tools": "^2.0.11",
+    "fetch": "^1.1.0",
     "form-data": "^4.0.0",
     "fs-extra": "^10.0.0",
     "got": "^11.8.2",
-    "gradient-string": "^1.2.0",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.13.7",
-    "mysql": "^2.18.1",
     "node-cmd": "^4.0.0",
     "node-superfetch": "^0.2.3",
     "path": "^0.12.7",
@@ -44,7 +42,7 @@
     "readline": "^1.3.0",
     "request": "^2.88.2",
     "require-from-string": "^2.0.2",
-    "tinyurl": "^1.1.7",
     "ytdl-core": "^4.9.1"
-  }
+  },
+  "homepage": "https://github.com/ntkhang03/Goat-Bot#readme"
 }

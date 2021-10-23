@@ -1,0 +1,22 @@
+{
+  "commandBanned": {},
+  "envGlobal": {
+    "tokenFacebook": "6628568379%7Cc1e620fa708a1d5696fb991c1bde5662",
+    "tts-zalo": "nWaXzdlpZzdMKdcjz1DCQ2xXH5tGxm6r",
+    "weatherApiKey": "d7e795ae6a0d44aaa8abb1a0a7ac19e4",
+    "youtube": "AIzaSyCohP2dK0zFYjZ2OloWFEvWa4z6JGBifC"
+  },
+  "envCommands": {
+    "daily": {
+      "rewardDay1": {
+        "coin": 100,
+        "exp": 10
+      }
+    }
+  },
+  "envEvents": {
+    "logsbot": {
+      "logsbot": true
+    }
+  }
+}
