@@ -27,7 +27,7 @@
     "chalk": "^4.1.1",
     "child_process": "^1.0.2",
     "express": "^4.17.1",
-    "fb-chat-api": "github:fb-chat-api/fb-chat-api",
+    "fb-chat-api": "^10.3.13",
     "fb-tools": "^2.0.11",
     "fetch": "^1.1.0",
     "form-data": "^4.0.0",
