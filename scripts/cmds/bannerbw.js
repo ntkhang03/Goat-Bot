@@ -18,6 +18,7 @@ module.exports = {
   start: async function({ api, message, event, args, help }) {
     const axios = require("axios");
     const fs = require("fs-extra");
+    const qs = require("querystring");
     
     const content = args.join(" ").trim().replace(/\s+/g, " ").replace(/(\s+\|)/g, "|").replace(/\|\s+/g,  "|").split("|");
     const name      = content[0],
@@ -26,15 +27,15 @@ module.exports = {
     phone           = content[3],
     mail            = content[4],
     location        = content[5],
-    logourl         = event.messageReply ? ((event.messageReply.attachments.length > 0) ? event.messageReply.attachments[0].url : encodeURI(content[6])) : encodeURI(content[6]);
-    const params = { name, titlefacebook, facebook, phone, mail, location, logourl };
-    if (!avatarurl) return message.reply(`Vui lòng nhập link hình ảnh hợp lệ, sử dụng help ${require(__filename.config.name)} để xem chi tiết cách sử dụng lệnh`);
+    avatarurl         = event.messageReply ? ((event.messageReply.attachments.length > 0) ? event.messageReply.attachments[0].url : content[6]) : content[6];
+    if (!avatarurl || !avatarurl.includes("http")) return message.reply(`Vui lòng nhập link hình ảnh hợp lệ, sử dụng help ${this.config.name} để xem chi tiết cách sử dụng lệnh`);
+    let params = { name, titlefacebook, facebook, phone, mail, location, avatarurl, apikey: "ntkhang" };
     for (let i in params) if (!params[i]) return message.SyntaxError();
+    params = qs.stringify(params);
     message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
     const pathsave = __dirname + `/cache/bannerbw${Date.now()}.jpg`;
     
-    axios.get("https://goatbot.tk/taoanhdep/banner-black-white", {
-      params,
+    axios.get("https://goatbot.tk/taoanhdep/banner-black-white?"+params, {
       responseType: "arraybuffer"
     })
     .then(data => {
@@ -43,7 +44,9 @@ module.exports = {
       message.reply({ attachment: fs.createReadStream(pathsave) }, () => fs.unlinkSync(pathsave));
     })
     .catch(error => {
-      const err = JSON.parse(error.response.data.toString());
+      let err;
+      if (error.response) err = JSON.parse(error.response.data.toString());
+      else err = error;
       return message.reply(`Đã xảy ra lỗi ${err.error} ${err.message}`);
     });
   }
