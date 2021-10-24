@@ -14,3 +14,7 @@ Tạm thời chưa có tài liệu hướng dẫn. Bên dưới là tóm tắt c
 ## Lưu Ý:
 * Đây là một project sử dụng api chat bot không chính thức nên có thể sẽ bị facebook quét acc và dính checkpoint (block acc). Vì vậy nên cân nhắc trước khi sử dụng hoặc sử dụng một tài khoản clone (tài khoản phụ) để treo.
 * Nghiêm cấm mọi hình thức rao bán source code. Vì đây là một project hoàn toàn miễn phí
+
+## DONATE ME:
+* MB Bank: 0789629831 (Nguyễn Thành Khang)
+* Momo: 0789629831 (Nguyễn Thành Khang)
