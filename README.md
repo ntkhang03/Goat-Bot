@@ -15,6 +15,12 @@ Tạm thời chưa có tài liệu hướng dẫn. Bên dưới là tóm tắt c
 * Đây là một project sử dụng api chat bot không chính thức nên có thể sẽ bị facebook quét acc và dính checkpoint (block acc). Vì vậy nên cân nhắc trước khi sử dụng hoặc sử dụng một tài khoản clone (tài khoản phụ) để treo.
 * Nghiêm cấm mọi hình thức rao bán source code. Vì đây là một project hoàn toàn miễn phí
 
+## FEEDBACK & REPORT BUGS
+https://github.com/ntkhang03/Goat-Bot/issues
+
+## CONTACT
+[NTKhang](https://facebook.com/100010382497517)
+
 ## DONATE ME:
 * MB Bank: 0789629831 (Nguyễn Thành Khang)
 * Momo: 0789629831 (Nguyễn Thành Khang)
