@@ -1,6 +1,6 @@
 this.config = {    
   name: "cmd",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -30,13 +30,17 @@ module.exports = {
         
         if (!fs.existsSync(pathCommand)) throw new Error(`Không tìm thấy file ${filename}.js`);
         
+        const oldCommand = require(join(__dirname, filename + ".js"));
+        const oldNameCommand = oldCommand.config.name;
+        const oldEnvConfig = oldCommand.config.envConfig || {};
+        const oldEnvGlobal = oldCommand.config.envGlobal || {};
+        
+        // delete old command
+        delete require.cache[require.resolve(pathCommand)];
+        
         const command = require(join(__dirname, filename + ".js"));
         const configCommand = command.config;
         if (!configCommand) throw new Error("Config of command undefined");
-        
-        let oldNameCommand = command.name;
-        require.resolve(pathCommand);
-        delete require.cache[require.resolve(pathCommand)];
         
         const nameScript = configCommand.name;
         // Check whenChat function
@@ -45,7 +49,7 @@ module.exports = {
         if (command.whenChat) allWhenChat.push(nameScript);
         // -------------
         var { packages, envGlobal, envConfig } = configCommand;
-        const configCommands = require(client.dirConfigCommands);
+        const { configCommands } = globalGoat;
         if (!command.start) throw new Error(`Command không được thiếu function start!`);
         if (!configCommand.name) throw new Error(`Tên Command không được để trống!`);
         if (packages) {
@@ -68,14 +72,14 @@ module.exports = {
         // env Global
         if (envGlobal && typeof envGlobal == "object") {
     		  if (!configCommands.envGlobal) configCommands.envGlobal = {};
-    		  for (let i in envGlobal) if (!configCommands.envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
+    		  for (let i in envGlobal) if (configCommands.envGlobal[i] != envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
         }
         // env Config
         if (envConfig && typeof envConfig == "object") {
           for (const [key, value] of Object.entries(envConfig)) {
     		    if (!configCommands.envCommands) configCommands.envCommands = {};
     		    if (!configCommands.envCommands[nameScript]) configCommands.envCommands[nameScript] = {};
-    		    if (!configCommands.envCommands[nameScript][key]) configCommands.envCommands[nameScript][key] = value;
+    		    if (JSON.stringify(configCommands.envCommands[nameScript]) != JSON.stringify(oldEnvConfig)) configCommands.envCommands[nameScript] = envConfig;
     		  }
         }
         globalGoat.commands.delete(oldNameCommand);

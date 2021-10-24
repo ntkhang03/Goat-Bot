@@ -1,6 +1,6 @@
 this.config = {    
   name: "dhbc",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -27,11 +27,15 @@ module.exports = {
     message.reply({
       body: `Hãy reply tin nhắn này với câu trả lời\n${wordcomplete.replace(/\S/g, "█ ")}${casi ? `\nĐây là tên bài hát của ca sĩ ${casi}` : ''}`,
       attachment: [fs.createReadStream(pathImage1), fs.createReadStream(pathImage2)]
-    }, (err, info) => globalGoat.whenReply[info.messageID] = {
-      messageID: info.messageID,
-      nameCmd: this.config.name,
-      author: event.senderID,
-      wordcomplete
+    }, (err, info) => {
+      fs.unlinkSync(pathImage1);
+      fs.unlinkSync(pathImage2);
+      globalGoat.whenReply[info.messageID] = {
+        messageID: info.messageID,
+        nameCmd: this.config.name,
+        author: event.senderID,
+        wordcomplete
+      };
     });
   },
   whenReply: ({ message, Reply, event, globalGoat }) => {

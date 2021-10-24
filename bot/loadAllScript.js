@@ -28,7 +28,8 @@ module.exports = async (globalGoat, configCommands) => {
     
     for (const file of Files) {
       try {
-        var command = require(`../scripts/${folderModules}/${file}`);
+        const pathCommand = __dirname + `/../scripts/${folderModules}/${file}`;
+        var command = require(pathCommand);
         const configCommand = command.config;
 // ——————————————— CHECK SYNTAXERROR ——————————————— //
     		if (!configCommand) throw new Error("Config of command undefined");
@@ -59,7 +60,14 @@ module.exports = async (globalGoat, configCommands) => {
     		  const { envGlobal } = configCommand;
     		  if (typeof envGlobal != "object" && Array.isArray(envGlobal)) throw new Error("envGlobal need to be a object");
     		  if (!configCommands.envGlobal) configCommands.envGlobal = {};
-    		  for (let i in envGlobal) if (!configCommands.envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
+    		  for (let i in envGlobal) {
+    		    if (!configCommands.envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
+    		    else {
+    		      const oldCommand = fs.readFileSync(pathCommand).toString();
+    		      const newCommand = oldCommand.replace(envGlobal[i], configCommands.envGlobal[i]);
+    		      fs.writeFileSync(pathCommand, newCommand);
+    		    }
+    		  }
     		}
 // ———————————————— CHECK CONFIG CMD ——————————————— //
         if (configCommand.envConfig && typeof configCommand.envConfig == "object") {
