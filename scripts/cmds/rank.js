@@ -57,9 +57,9 @@ module.exports = {
         widthCard: 2000,
         heightCard: 500,
         main_color: "#474747",
-        sub_color: "rgba(255, 255, 255, 0.3)",
+        sub_color: "rgba(255, 255, 255, 0.5)",
         alpha_subcard: 1,
-        exp_color: "#959595",
+        exp_color: "#e1e1e1",
         expNextLevel_color: "#3f3f3f",
         text_color: "#000000"
       };
