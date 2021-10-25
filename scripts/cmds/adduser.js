@@ -16,17 +16,19 @@ this.config = {
 
 module.exports = {
   config: this.config,
-  start: function({ message, api, client, event, args }) {
+  start: async function({ message, api, client, event, args }) {
     let uid;
     const fbtools = require("fb-tools");
     if (isNaN(args[0])) {
-      fbtools.findUid(args[0])
-      .then(id => uid = id)
-      .catch(err => {
+      try {
+        uid = await fbtools.findUid(args[0]);
+      }
+      catch(err) {
         return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
-      });
+      }
     }
     else uid = args[0];
+    
     const threadInfo = client.allThreadData[event.threadID];
     
     api.addUserToGroup(uid, event.threadID, (err) => {
