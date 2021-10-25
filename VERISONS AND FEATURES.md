@@ -6,3 +6,6 @@
 
 ### v1.0.1
 * Fix error can't use adminOnly, (update file index.js)
+
+## 26/10/2021
+* [00:21] New script command adminonly.js

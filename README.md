@@ -4,7 +4,7 @@
   <img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=ntkhang3.Goat-Bot">
 </p>
 
-## HƠE TO INSTALL
+## HOW TO INSTALL
 ### Video
 How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
 [![IMAGE_ALT](https://i.imgur.com/n4svD1I.png)](https://youtu.be/PIjtrHXLakE)
@@ -25,6 +25,6 @@ How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
 ## CONTACT
 [NTKhang](https://facebook.com/100010382497517)
 
-## DONATE ME:
+## DONATE ME
 * MB Bank: 0789629831 (Nguyễn Thành Khang)
 * Momo: 0789629831 (Nguyễn Thành Khang)
