@@ -4,8 +4,12 @@
   <img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=ntkhang3.Goat-Bot">
 </p>
 
-## YOU CAN USE IT...
-Tạm thời chưa có tài liệu hướng dẫn. Bên dưới là tóm tắt cách cái đặt và sử dụng bot:
+## HƠE TO INSTALL
+### Video
+How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
+[![IMAGE_ALT](https://img.youtube.com/vi/PIjtrHXLakE/0.jpg)](https://www.youtube.com/watch?v=UmX4kyB2wfg)
+
+### Bên dưới là tóm tắt cách cái đặt và sử dụng bot:
 * Bước 1: cài đặt nodejs
 * Bước 2: clone project về máy
 * Bước 3: tải và cài đặt [tiện ích này](https://github.com/ntkhang03/resources-goat-bot/blob/master/c3c-fbstate-extractor.crx?raw=true) vào trình duyệt
@@ -16,8 +20,8 @@ Tạm thời chưa có tài liệu hướng dẫn. Bên dưới là tóm tắt c
 * Nghiêm cấm mọi hình thức rao bán source code. Vì đây là một project hoàn toàn miễn phí
 
 ## FEEDBACK & REPORT BUGS
-https://github.com/ntkhang03/Goat-Bot/issues
-
+* https://github.com/ntkhang03/Goat-Bot/issues
+* https://www.facebook.com/groups/399521505099456/?ref=share
 ## CONTACT
 [NTKhang](https://facebook.com/100010382497517)
 
