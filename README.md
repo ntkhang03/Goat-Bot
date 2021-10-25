@@ -7,7 +7,7 @@
 ## HƠE TO INSTALL
 ### Video
 How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
-[![IMAGE_ALT](https://i.imgur.com/n4svD1I.png)](https://www.youtube.com/watch?v=UmX4kyB2wfg)
+[![IMAGE_ALT](https://i.imgur.com/n4svD1I.png)](https://youtu.be/PIjtrHXLakE)
 
 ### Bên dưới là tóm tắt cách cái đặt và sử dụng bot:
 * Bước 1: cài đặt nodejs
