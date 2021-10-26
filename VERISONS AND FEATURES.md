@@ -8,6 +8,11 @@
 * Fix error can't use adminOnly, (update file index.js)
 
 ## 26/10/2021
-* [00:21] New script command adminonly.js
-* [16:28] Update fix error script command users.js
-* [16:28] Edit file bot/handler/handlerEvents.js
+* [00h21m] New script command adminonly.js
+* [16h28m] Update fix error script command users.js
+* [16h28m] Edit file bot/handler/handlerEvents.js
+* update script command adduser.js v1.0.1
+
+### v1.0.2
+* [22h21m] update script command adduser.js v1.0.2
+* [22h21m] remove unnecessary libraries in package.json

@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -29,7 +29,9 @@ module.exports = {
     }
     else uid = args[0];
     
-    const threadInfo = client.allThreadData[event.threadID];
+    const threadInfo = await api.getThreadInfo(event.threadID);
+    
+    if (threadInfo.participantIDs.includes(uid)) return message.reply("Người này đã có trong nhóm của bạn");
     
     api.addUserToGroup(uid, event.threadID, (err) => {
       if (err) message.reply(err.errorDescription);

@@ -2,7 +2,7 @@
   "name": "goat-bot",
   "version": "1.0.2",
   "description": "A simple Bot chat messenger made by NTKhang",
-  "main": "goat.js",
+  "main": "index.js",
   "author": "NTKhang",
   "scripts": {
     "start": "node index.js"
@@ -17,26 +17,21 @@
   "keywords": [
     "bot-chat-messenger",
     "bot-messenger",
-    "bot-chat-goat"
+    "bot-chat-goat",
+    "GoatBot Chat Bot"
   ],
   "license": "GPL-3.0",
   "dependencies": {
     "axios": "^0.21.1",
-    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "chalk": "^4.1.1",
     "child_process": "^1.0.2",
     "express": "^4.17.1",
     "fb-chat-api": "^10.3.13",
-    "fb-tools": "^2.0.11",
-    "fetch": "^1.1.0",
-    "form-data": "^4.0.0",
+    "fb-tools": "",
     "fs-extra": "^10.0.0",
-    "got": "^11.8.2",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.13.7",
-    "node-cmd": "^4.0.0",
-    "node-superfetch": "^0.2.3",
     "path": "^0.12.7",
     "querystring": "^0.2.1",
     "readline": "^1.3.0",
