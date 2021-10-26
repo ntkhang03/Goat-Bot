@@ -9,7 +9,7 @@
 
 ## 26/10/2021
 * [00h21m] New script command adminonly.js
-* [16h28m] Update fix error script command users.js
+* [16h28m] Update fix error script command user.js
 * [16h28m] Edit file bot/handler/handlerEvents.js
 * update script command adduser.js v1.0.1
 

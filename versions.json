@@ -1,0 +1,23 @@
+[
+  {
+    "version": "1.0.1",
+    "info": {
+      "scripts/cmds/banner.js": "(v1.0.1) fix error when call api",
+      "scripts/cmds/banner2.js": "(v1.0.1) fix error when call api",
+      "scripts/cmds/bannerbw.js": "(v1.0.1) fix error when call api",
+      "scripts/cmds/cmd.js": "(v1.0.1) synchronized envGlobal & envConfig when load scripts",
+      "scripts/cmds/adminonly.js": "new script command",
+      "bot/loadAllScript.js": "synchronized envGlobal & envConfig when load scripts",
+      "index.js": "Fix error can't use adminOnly"
+    }
+  },
+  {
+    "version": "1.0.2",
+    "info": {
+      "scripts/cmds/user.js": "fix error",
+      "scripts/cmds/adduser.js": "(v1.0.2) Additional features",
+      "bot/handler/handlerEvents.js": "no description",
+      "package.json": "remove unnecessary libraries"
+    }
+  }
+]
