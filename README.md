@@ -21,8 +21,11 @@ How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
 
 ## HOW TO UPDATE WHEN HAVE NEW VERSION
 * Type in cmd
+
 > node update.js
+
 or
+
 > npm update
 
 ## FEEDBACK & REPORT BUGS
