@@ -9,3 +9,5 @@
 
 ## 26/10/2021
 * [00:21] New script command adminonly.js
+* [16:28] Update fix error script command users.js
+* [16:28] Edit file bot/handler/handlerEvents.js
