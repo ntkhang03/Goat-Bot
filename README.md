@@ -37,3 +37,6 @@ or
 ## DONATE ME
 * MB Bank: 0789629831 (Nguyễn Thành Khang)
 * Momo: 0789629831 (Nguyễn Thành Khang)
+
+## THANKS FOR USING MY PROJECT
+[failed image](https://www.english-learning.net/wp-content/uploads/2018/03/Thank-you.jpg)
