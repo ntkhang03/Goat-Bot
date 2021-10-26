@@ -24,4 +24,7 @@ const chalk = require("chalk");
       loading.green(`Đã cập nhật xong file ${chalk.hex("#ff5208")(location)}, tính năng: ${chalk.hex("#d6d6d6")(data.info[location])}\n`, "UPDATE");
     }
   }
+  
+  const packageJson = (await axios.get("https://github.com/ntkhang03/Goat-Bot/raw/main/package.json")).data;
+  fs.writeFileSync(__dirname + "/package.json", JSON.stringify(packageJson, null, 2));
 })();
