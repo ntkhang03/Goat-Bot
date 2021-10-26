@@ -39,4 +39,4 @@ or
 * Momo: 0789629831 (Nguyễn Thành Khang)
 
 ## THANKS FOR USING MY PROJECT
-[failed image](https://www.english-learning.net/wp-content/uploads/2018/03/Thank-you.jpg)
+![failed image](https://www.english-learning.net/wp-content/uploads/2018/03/Thank-you.jpg)
