@@ -19,5 +19,12 @@
       "bot/handler/handlerEvents.js": "no description",
       "package.json": "remove unnecessary libraries"
     }
+  },
+  {
+    "version": "1.0.3",
+    "info": {
+      "update.js": "new features (update with command)",
+      "versions.json": "new features (update with command)"
+    }
   }
 ]
