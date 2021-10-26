@@ -55,7 +55,6 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		// ————————————  CHECK HAS COMMAND ——————————— //
   		const commandName = args.shift().toLowerCase();
   		const command = globalGoat.commands.get(commandName);
-  		if (!command) return message.reply("Lệnh bạn sử dụng không tồn tại");
   		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
   		// ————————————— GET THREAD INFO ————————————— //
   		const threadInfo = client.allThreadData[threadID] || {};
@@ -69,6 +68,7 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
     		const infoBannedThread = threadInfo.banned;
     		if (infoBannedThread.status == true) return message.reply(`Nhóm của bạn đã bị Admin bot cấm dùng bot\n> Lý do: ${infoBannedThread.reason}\n> Ngày: ${infoBannedThread.date}`);
   		}
+  		if (!command) return message.reply("Lệnh bạn sử dụng không tồn tại");
   		//============================================//
   		
       // ————————————— COMMAND BANNED ————————————— //

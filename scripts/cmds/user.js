@@ -1,6 +1,6 @@
 this.config = {    
   name: "user",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -32,33 +32,35 @@ module.exports = {
         if (allUser[i].name.toLowerCase().includes(keyword.toLowerCase())) {
           length++;
           msg += `\n╭Name: ${allUser[i].name}\n╰ID: ${i}`;
-        };
-      };
+        }
+      }
       message.reply(length == 0 ? `❌Không có kết quả tìm kiếm nào phù hợp với từ khóa ${keyword}` : `🔎Có ${length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
     }
     else if (["ban", "-b"].includes(type)) {
-      var id, reason;
+      let id, reason;
       if (event.type == "message_reply") {
         id = event.messageReply.senderID;
         reason = args.slice(1).join(" ");
       } 
       else if (event.mentions) {
-        var { mentions } = event;
+        let { mentions } = event;
         id = Object.keys(mentions)[0];
         reason = args.slice(1).join(" ").slice(mentions[id].length + 1);
       }
-      else if (client.allUser.includes(args[1])) {
+      else if (args[1]) {
         id = args[1];
         reason = args.slice(2).join(" ");
       }
       else return message.SyntaxError();
-      if (!id || !reason) return message.SyntaxError();
-      if (!client.allUser.includes(id)) return message.reply(`Người dùng mang id ${id} không tồn tại trong dữ liệu bot`);
+      
+      if (!id) return message.reply("Id của người cần ban không được để trống, vui lòng nhập id hoặc tag hoặc teply tin nhắn của 1 người theo cú pháp user ban <id> <lý do>");
+			if (!reason) return message.reply("Lý do cấm người dùng không được để trống, vui lòng soạn tin nhắn theo cú pháp user ban <id> <lý do>");
+      if (!client.allUserData[id]) return message.reply(`Người dùng mang id ${id} không tồn tại trong dữ liệu bot`);
       reason = reason.replace(/\s+/g, ' ');
       const name = (await usersData.getData(id)).name;
       await usersData.setData(id, {
         banned: {
-          banned: true,
+          status: true,
           reason,
           date: moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss")
       }}, (err) => {
@@ -67,7 +69,7 @@ module.exports = {
       });
     }
     else if (["unban", "-u"].includes(type)) {
-      var id;
+      let id;
       if (event.type == "message_reply") {
         id = event.messageReply.senderID;
       } 
@@ -75,14 +77,16 @@ module.exports = {
         const { mentions } = event;
         id = Object.keys(mentions)[0];
       }
-      else if (client.allUser.includes(args[1])) {
+      else if (args[1]) {
         id = args[1];
       }
       else return message.SyntaxError();
+      if (!id) return message.reply("Id của người cần ban không được để trống, vui lòng nhập id hoặc tag hoặc teply tin nhắn của 1 người theo cú pháp user ban <id> <lý do>");
+      if (!client.allUserData[id]) return message.reply(`Người dùng mang id ${id} không tồn tại trong dữ liệu bot`);
       const name = (await usersData.getData(id)).name;
       await usersData.setData(id, { 
         banned: { 
-          banned: false,
+          status: false,
           reason: null 
         }
       }, (err) => {
