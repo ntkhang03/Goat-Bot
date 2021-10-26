@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -16,7 +16,7 @@ this.config = {
 
 module.exports = {
   config: this.config,
-  start: async function({ message, api, client, event, args }) {
+  start: async function({ message, api, client, event, args, globalGoat }) {
     let uid;
     const fbtools = require("fb-tools");
     if (isNaN(args[0])) {
