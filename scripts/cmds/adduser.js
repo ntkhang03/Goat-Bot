@@ -1,8 +1,8 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
-    name: "NTKhang", 
+    name: "HungCho", 
     contacts: ""
   },
   cooldowns: 5,
@@ -17,24 +17,43 @@ this.config = {
 module.exports = {
   config: this.config,
   start: async function({ message, api, client, event, args, globalGoat }) {
-    let uid;
+    let id;
     const fbtools = require("fb-tools");
+    if(event.body.length == 0) return message.reply("Vui lòng nhập một link hoặc id.");
     if (isNaN(args[0])) {
       try {
-        uid = await fbtools.findUid(args[0]);
+        id = await fbtools.findUid(args[0]);
       }
       catch(err) {
         return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
-      }
+      };
     }
-    else uid = args[0];
-    
-    const threadInfo = client.allThreadData[event.threadID];
-    
-    api.addUserToGroup(uid, event.threadID, (err) => {
-      if (err) message.reply(err.errorDescription);
-      else if (threadInfo.approvalMode && !threadInfo.adminIDs.includes(globalGoat.botID)) message.reply("Đã thêm người này vào danh sách phê duyệt");
-      else message.reply("Thêm thành viên mới thành công! ");
+    else id = args[0];
+    const threadInfo = await api.getThreadInfo(event.threadID);
+    if(threadInfo.participantIDs.includes(id)) return message.reply("Người dùng đã ở trong nhóm.");
+    if (threadInfo.adminIDs.some(item => item.id == api.getCurrentUserID())) return api.addUserToGroup(id, event.threadID, err => {
+      if(err) return message.reply("Không thể thêm người dùng vào nhóm.")
     });
-  }
+  
+    if (!threadInfo.adminIDs.some(item => item.id == api.getCurrentUserID())) {
+     if (threadInfo.approvalMode == true) {
+      api.addUserToGroup(id, event.threadID, err => {
+        if(err) return message.reply("Không thể thêm người dùng vào nhóm.");
+        message.reply(`Đã thêm người dùng có ${id} vào danh sách phê duyệt.`);
+      });
+     } 
+     else {
+      api.addUserToGroup(id, event.threadID, err => {
+        if(err) return message.reply("Không thể thêm người dùng vào nhóm.");
+      });
+     }
+   }
+ }
+   
+
+
+
+
+
+
 };
