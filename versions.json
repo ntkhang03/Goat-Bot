@@ -26,5 +26,16 @@
       "update.js": "new features (update with command)",
       "versions.json": "new features (update with command)"
     }
+  },
+  {
+    "versions": "1.0.4",
+    "info": {
+      "scripts/events/leave.js": "(v1.0.1) update default mod: on",
+      "scripts/events/welcome.js": "(v1.0.1) update default mod: on",
+      "scripts/events/logsbot.js": "(v1.0.1) no description",
+      "scripts/cmds/leavemsg.js": "new script command (on/off send a message when a member leaves the group chat",
+      "scripts/cmds/logsbot.js": "new script command (on/off logsbot event)",
+      "index.js": "edit text check update"
+    }
   }
 ]

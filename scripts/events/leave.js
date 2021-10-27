@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 module.exports = {
   config: {
     name: "leave",
-    version: "1.0.0",
+    version: "1.0.1",
     type: ["log:unsubscribe"],
     author: { 
       name: "NTKhang", 
@@ -17,7 +17,7 @@ module.exports = {
     const hours = moment.tz("Asia/Ho_Chi_Minh").format("HH");
     const { threadID } = event;
     const threadData = client.allThreadData[threadID];
-    if (!threadData.data.sendLeaveMessage) return;
+    if (threadData.data.sendLeaveMessage == false) return;
     
     const messageLeaveDefault = "{userName} đã {type} khỏi nhóm";
     let messageLeave = threadData ? threadData.data.leaveMessage || messageLeaveDefault : messageLeaveDefault;

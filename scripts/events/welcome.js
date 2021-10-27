@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 module.exports = {
   config: {
     name: "welcome",
-    version: "1.0.0",
+    version: "1.0.1",
     type: ["log:subscribe"],
     author: { 
       name: "NTKhang", 
@@ -22,7 +22,7 @@ module.exports = {
     
     // Nếu là thành viên mới:
     const threadData = client.allThreadData[threadID].data;
-    if (!threadData.sendWelcomeMessage) return;
+    if (threadData.sendWelcomeMessage == false) return;
     const boxName = client.allThreadData[threadID].name;
     const userName = [], mentions = [];
     let multiple = false;

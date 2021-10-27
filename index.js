@@ -69,7 +69,7 @@
     }, 150);
   	const vMyuse = require('./package.json').version;
   	if (vMyuse != res.data.version) {
-  	  loading(`Bạn đang sử dụng phiên bản ${chalk.blue(vMyuse)} và hiện tại đã có phiên bản mới ${chalk.hex("#ff5208")(res.data.version)} để bạn có thể cập nhật!\n`, "CHECK UPDATE");
+  	  loading(`Bạn đang sử dụng phiên bản ${chalk.blue(vMyuse)} và hiện tại đã có phiên bản mới ${chalk.hex("#ff5208")(res.data.version)} để bạn có thể cập nhật!, gõ vào cmd ${chalk.hex("#ff9b2c")(`node update`)} để tự động cập nhật\n`, "CHECK UPDATE");
   	  clearInterval(funcCheckUpdate);
   	  } else {
   	    loading("Bạn đang sử dụng phiên bản mới nhất!\n", "CHECK UPDATE");
