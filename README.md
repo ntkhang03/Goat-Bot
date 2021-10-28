@@ -12,7 +12,7 @@ How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
 ### Bên dưới là tóm tắt cách cái đặt và sử dụng bot:
 * Bước 1: cài đặt nodejs
 * Bước 2: clone project về máy
-* Bước 3: tải và cài đặt [tiện ích này](https://github.com/ntkhang03/resources-goat-bot/blob/master/c3c-fbstate-extractor.crx?raw=true) vào trình duyệt
+* Bước 3: tải và cài đặt [tiện ích này](https://github.com/ntkhang03/resources-goat-bot/blob/master/c3c-fbstate-extractor.crx?raw=true) (nếu sử dụng kiwi browser trên điện thoại) hoặc [tiện ích này](https://github.com/ntkhang03/resources-goat-bot/blob/master/c3c-fbstate-master.zip?raw=true) (nếu sử dụng trên Windows) vào trình duyệt
 * Bước 4: mở trình duyệt, đăng nhập vào tài khoản facebook dùng để treo bot (acc phụ). Sau đó mở tiện ích vừa cài ở bước trên, nhấp vào nút Export FBstate. lúc này sẽ tải 1 file fbstate.json về máy, copy file đó vào project
 * Bước 5: mở cmd di chuyển đến thư mục chứa project. Gõ npm install && npm start
 ## Lưu Ý:
