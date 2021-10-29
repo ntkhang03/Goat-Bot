@@ -56,7 +56,8 @@
     "version": "1.0.7",
     "info": {
       "index.js": "move text check version",
-      "config.json": "logEvents default true"
+      "config.json": "logEvents default true",
+      "update.js": "no description"
     }
   }
 ]

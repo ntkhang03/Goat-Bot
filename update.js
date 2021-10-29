@@ -16,7 +16,7 @@ const chalk = require("chalk");
   
   for (let data of versionsUpdate) {
     for (let location in data.info) {
-      loading.green(`Đang cập nhật file ${chalk.hex("#ff5208")(location)}`, "UPDATE");
+      loading.green(`[v${data.version}] file ${chalk.hex("#ff5208")(location)}`, "UPDATING");
       const response = (await axios.get("https://github.com/ntkhang03/Goat-Bot/raw/main/" + location, {
         responseType: "arraybuffer"
       })).data.toString();
