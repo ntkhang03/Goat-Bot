@@ -14,7 +14,7 @@
   "autoRefreshFbstate": true,
   "autoUpdateScript": false,
   "logEvents": {
-    "eventAndMessage": false,
+    "eventAndMessage": true,
     "read_receipt": false,
     "typ": false,
     "presence": false
