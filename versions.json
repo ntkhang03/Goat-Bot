@@ -45,5 +45,11 @@
       "scripts/cmds/unsend.js": "new script unsend message bot"
     },
     "note": "this is version fix can't use bot"
+  },
+  {
+    "version": "1.0.6",
+    "info": {
+      "config.json": "no description"
+    }
   }
 ]
