@@ -2,10 +2,10 @@
   {
     "version": "1.0.1",
     "info": {
-      "scripts/cmds/banner.js": "(v1.0.1) fix error when call api",
-      "scripts/cmds/banner2.js": "(v1.0.1) fix error when call api",
-      "scripts/cmds/bannerbw.js": "(v1.0.1) fix error when call api",
-      "scripts/cmds/cmd.js": "(v1.0.1) synchronized envGlobal & envConfig when load scripts",
+      "scripts/cmds/banner.js": "fix error when call api",
+      "scripts/cmds/banner2.js": "fix error when call api",
+      "scripts/cmds/bannerbw.js": "fix error when call api",
+      "scripts/cmds/cmd.js": "synchronized envGlobal & envConfig when load scripts",
       "scripts/cmds/adminonly.js": "new script command",
       "bot/loadAllScript.js": "synchronized envGlobal & envConfig when load scripts",
       "index.js": "Fix error can't use adminOnly"
@@ -15,7 +15,7 @@
     "version": "1.0.2",
     "info": {
       "scripts/cmds/user.js": "fix error",
-      "scripts/cmds/adduser.js": "(v1.0.2) Additional features",
+      "scripts/cmds/adduser.js": "Additional features",
       "bot/handler/handlerEvents.js": "no description",
       "package.json": "remove unnecessary libraries"
     }
@@ -30,9 +30,9 @@
   {
     "version": "1.0.4",
     "info": {
-      "scripts/events/leave.js": "(v1.0.1) update default mod: on",
-      "scripts/events/welcome.js": "(v1.0.1) update default mod: on",
-      "scripts/events/logsbot.js": "(v1.0.1) no description",
+      "scripts/events/leave.js": "update default mod: on",
+      "scripts/events/welcome.js": "update default mod: on",
+      "scripts/events/logsbot.js": "no description",
       "scripts/cmds/leavemsg.js": "new script command (on/off send a message when a member leaves the group chat",
       "scripts/cmds/logsbot.js": "new script command (on/off logsbot event)",
       "index.js": "edit text check update"
@@ -64,6 +64,13 @@
     "version": "1.0.8",
     "info": {
       "scripts/cmds/callad.js": "edit role 1 => 0"
+    }
+  },
+  {
+    "version": "1.0.9",
+    "info": {
+      "scripts/cmds/batslap.js": "fix error api",
+      "scripts/cmds/backupmongo": "fix error"
     }
   }
 ]
