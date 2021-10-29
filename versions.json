@@ -59,5 +59,11 @@
       "config.json": "logEvents default true",
       "update.js": "no description"
     }
+  },
+  {
+    "version": "1.0.8",
+    "info": {
+      "scripts/cmd/callad.js": "edit role 1 => 0"
+    }
   }
 ]

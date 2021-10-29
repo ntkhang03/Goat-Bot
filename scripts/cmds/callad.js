@@ -1,12 +1,12 @@
 this.config = {
   name: "callad",
-  version: "1.0.0",
+  version: "1.0.1",
   author: { 
     name: "NTKhang", 
     contacts: ""
   },
   cooldowns: 5,
-  role: 1,
+  role: 0,
   shortDescription: "gửi báo cáo về admin bot",
   longDescription: "gửi báo cáo, góp ý, báo lỗi,... của bạn về admin bot",
   category: "contacts admin",
