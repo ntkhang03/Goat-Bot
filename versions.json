@@ -28,7 +28,7 @@
     }
   },
   {
-    "versions": "1.0.4",
+    "version": "1.0.4",
     "info": {
       "scripts/events/leave.js": "(v1.0.1) update default mod: on",
       "scripts/events/welcome.js": "(v1.0.1) update default mod: on",
@@ -39,7 +39,7 @@
     }
   },
   {
-    "versions": "1.0.5",
+    "version": "1.0.5",
     "info": {
       "config.json": "no description",
       "scripts/cmds/unsend.js": "new script unsend message bot"
