@@ -70,7 +70,8 @@
     "version": "1.0.9",
     "info": {
       "scripts/cmds/batslap.js": "fix error api",
-      "scripts/cmds/backupmongo": "fix error"
+      "scripts/cmds/backupmongo": "fix error",
+      "bot/hanlder/handlerEvents.js": "fix error"
     }
   }
 ]
