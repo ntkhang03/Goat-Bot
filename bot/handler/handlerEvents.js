@@ -58,7 +58,7 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
   		// ————————————— GET THREAD INFO ————————————— //
   		const threadInfo = client.allThreadData[threadID] || {};
-  		
+  		if (threadInfo.onlyAdminBox === true && !threadInfo.adminIDs.includes(senderID)) return message.reply("Hiện tại nhóm này đã được bật chế độ chỉ quản trị viên nhóm mới có thể sử dụng bot");
   		// —————————————— CHECK BANNED —————————————— //
   		// +++++++++++     Check User     +++++++++++ //
     	const infoBannedUser = client.allUserData[senderID].banned;

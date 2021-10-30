@@ -44,7 +44,7 @@
       "config.json": "no description",
       "scripts/cmds/unsend.js": "new script unsend message bot"
     },
-    "note": "this is version fix can't use bot"
+    "notes": "this is version fix can't use bot"
   },
   {
     "version": "1.0.6",
@@ -78,6 +78,14 @@
     "version": "1.0.10",
     "info": {
       "scripts/events/autoUpdateInfoThread.js": "rename slpice => splice (line 43) :v"
+    }
+  },
+  {
+    "version": "1.1.0",
+    "info": {
+      "bot/handler/handlerEvents.js": "add features on/off only admin thread use bot",
+      "scripts/cmds/onlyadminbox.js": "new script command",
+      "scripts/cmds/notification.js": "new script command send notification to all box"
     }
   }
 ]

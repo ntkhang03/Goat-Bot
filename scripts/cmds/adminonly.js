@@ -10,8 +10,8 @@ this.config = {
   role: 2,
   shortDescription: "bật/tắt chỉ admin sử dụng bot",
   longDescription: "bật/tắt chế độ chỉ admin mới có thể sử dụng bot",
-  category: "box chat",
-  guide: "{prefix}{name} [on|help]"
+  category: "admin",
+  guide: "{prefix}{name} [on|off]"
 };
 
 module.exports = {
