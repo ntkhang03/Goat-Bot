@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 module.exports = {
   config: {
     name: "autoUpdateInfoThread",
-    version: "1.0.0",
+    version: "1.0.1",
     type: ["log:subscribe", "log:unsubscribe", "change_thread_admins", "log:thread-name", "change_thread_image", "log:thread-icon"],
     author: { 
       name: "NTKhang", 
@@ -40,7 +40,7 @@ module.exports = {
       const { adminIDs } = threadInfo;
       
       if (logMessageData.ADMIN_EVENT == "add_admin") adminIDs.push(logMessageData.TARGET_ID);
-      else adminIDs.spilce(adminIDs.findIndex(item => item == logMessageData.TARGET_ID), 1);
+      else adminIDs.splice(adminIDs.findIndex(item => item == logMessageData.TARGET_ID), 1);
       
       await threadsData.setData(threadID, {adminIDs});
     }
@@ -52,7 +52,7 @@ module.exports = {
       await threadsData.setData(threadID, { avatarbox: event.image.url });
     }
     else if (logMessageType == 'log:thread-icon') {
-      await threadsData.setData(threadsData, { emoji: logMessageData.thread_icon });
+      await threadsData.setData(threadID, { emoji: logMessageData.thread_icon });
     }
   }
 };

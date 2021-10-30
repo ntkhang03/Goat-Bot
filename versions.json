@@ -73,5 +73,11 @@
       "scripts/cmds/backupmongo.js": "fix error",
       "bot/handler/handlerEvents.js": "fix error"
     }
+  },
+  {
+    "version": "1.0.10",
+    "info": {
+      "scripts/events/autoUpdateInfoThread.js": "rename slpice => splice (line 43) :v"
+    }
   }
 ]
