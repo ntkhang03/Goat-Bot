@@ -87,5 +87,13 @@
       "scripts/cmds/onlyadminbox.js": "new script command",
       "scripts/cmds/notification.js": "new script command send notification to all box"
     }
+  },
+  {
+    "version": "1.1.1",
+    "info": {
+      "scripts/cmds/notification.js": "fix error when send multimedia & auto move mediaFile after send",
+      "scripts/cmds/setbox.js": "new script command",
+      "index.js": "np description"
+    }
   }
 ]

@@ -1,6 +1,6 @@
 this.config = {    
   name: "notification",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -29,19 +29,23 @@ module.exports = {
     const attachmentSend = [];
     
     async function getAttachments(attachments) {
+      let startFile = 0;
       for (const data of attachments) {
         const ext = data.type == "photo" ? "jpg" :
         data.type == "video" ? "mp4" : 
         data.type == "animated_image" ? "gif" : 
         "txt";
-        let startFile = 0;
         const pathSave = __dirname + `/cache/notification${startFile}.${ext}`;
+        ++startFile;
         const url = data.url;
         const res = await axios.get(url, {
           responseType: "arraybuffer"
         });
         fs.writeFileSync(pathSave, Buffer.from(res.data));
         attachmentSend.push(fs.createReadStream(pathSave));
+        setTimeout(function() {
+          fs.unlinkSync(pathSave);
+        }, 2000);
       }
     }
     
