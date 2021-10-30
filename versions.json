@@ -71,7 +71,7 @@
     "info": {
       "scripts/cmds/batslap.js": "fix error api",
       "scripts/cmds/backupmongo.js": "fix error",
-      "bot/hanlder/handlerEvents.js": "fix error"
+      "bot/handler/handlerEvents.js": "fix error"
     }
   }
 ]
