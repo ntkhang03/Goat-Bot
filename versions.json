@@ -102,5 +102,11 @@
       "package.json": "added package canvas",
       "scripts/cmds/prefix.js": "edit role 2 => 0"
     }
+  },
+  {
+    "version": "1.1.3",
+    "info": {
+      "scripts/cmds/thread.js": "fix error"
+    }
   }
 ]

@@ -1,6 +1,6 @@
 this.config = {    
   name: "thread",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -42,7 +42,7 @@ module.exports = {
     }
     else if (["ban", "-b"].includes(type)) {
       var id, reason;
-      if (client.allThread.includes(args[1])) {
+      if (!isNaN(args[1])) {
         id = args[1];
         reason = args.slice(2).join(" ");
       }
@@ -52,7 +52,7 @@ module.exports = {
       };
       if (!id || !reason) return message.SyntaxError();
       reason = reason.replace(/\s+/g, ' ');
-      if (!client.allThread.includes(id)) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
+      if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
       const threadData = (await threadsData.getData(id));
       const name = threadData.name;
       
@@ -69,14 +69,14 @@ module.exports = {
     }
     else if (["unban", "-u"].includes(type)) {
       var id;
-      if (client.allThread.includes(args[1])) {
+      if (!isNaN(args[1])) {
         id = args[1];
       }
       else {
         id = event.threadID;
       };
-      if (!id) return message.SyntaxError(require(module.filename).name);
-      if (!client.allThread.includes(id)) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
+      if (!id) return message.SyntaxError();
+      if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
       const threadData = await threadsData.getData(id);
       const name = threadData.name;
       const { banned } = threadData;
