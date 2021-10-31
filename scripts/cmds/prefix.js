@@ -6,7 +6,7 @@ this.config = {
     contacts: ""
   },
   cooldowns: 5,
-  role: 2,
+  role: 0,
   shortDescription: "Xem hoặc đổi prefix",
   longDescription: "Xem hoặc đổi prefix của nhóm bạn",
   category: "custom",

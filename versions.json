@@ -95,5 +95,12 @@
       "scripts/cmds/setbox.js": "new script command",
       "index.js": "no description"
     }
+  },
+  {
+    "version": "1.1.2",
+    "info": {
+      "package.json": "added package canvas",
+      "scripts/cmds/prefix.js": "edit role 2 => 0"
+    }
   }
 ]
