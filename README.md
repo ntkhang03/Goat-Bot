@@ -6,7 +6,8 @@
 
 ## HOW TO INSTALL
 ### Video
-How to install in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
+Installation Instructions in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
+Installation Instructions in VPS: [click here](https://youtu.be/wo8Pz_5N-ug)
 [![IMAGE_ALT](https://i.imgur.com/n4svD1I.png)](https://youtu.be/PIjtrHXLakE)
 
 ### Bên dưới là tóm tắt cách cái đặt và sử dụng bot:
