@@ -108,5 +108,11 @@
     "info": {
       "scripts/cmds/thread.js": "fix error"
     }
+  },
+  {
+    "version": "1.1.4",
+    "info": {
+      "database/dataProcessing/handlerData.js": "auto write file threadsData.json & usersData.json if does not exist"
+    }
   }
 ]

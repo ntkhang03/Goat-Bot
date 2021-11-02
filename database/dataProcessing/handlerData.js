@@ -29,6 +29,7 @@ module.exports = async function({ globalGoat, client, api }) {
       loading.err("Kết nối cơ sở dữ liệu Mongodb thất bại với lỗi: "+err.stack+"\n", "MONGODB");
       clearInterval(loadmongo);
     });
+    
     if ((await dataModels.find({ type: "thread" })).length == 0) await dataModels.create({ 
       type: "thread",
       data: {}
@@ -46,11 +47,15 @@ module.exports = async function({ globalGoat, client, api }) {
   */
   async function threadsData () {
     let Threads = {};
-	  databaseType == 'mongodb' ?
-	  Threads = (await dataModels.find({ type: "thread"}))[0].data || {} :
-	  Threads = require("../threadsData.json");
+    if (databaseType == "mongodb") {
+      Threads = (await dataModels.find({ type: "thread"}))[0].data || {};
+    }
+    else {
+      if (!fs.existsSync(__dirname + "/../threadsData.json")) fs.writeFileSync(__dirname + "/../threadsData.json", "{}");
+      Threads = require("../threadsData.json");
+    }
+	  
     client.allThreadData = Threads;
-    
     
   	async function saveData(Tid) {
   	  client.allThreadData = Threads;
@@ -245,9 +250,13 @@ module.exports = async function({ globalGoat, client, api }) {
   async function usersData() {
     let Users = {}; 
     
-  	databaseType == 'mongodb' ?
-  	Users = (await dataModels.find({ type: 'user' }))[0].data || {} :
-  	Users = require("../usersData.json");
+  	if (databaseType == 'mongodb') {
+  	  Users = (await dataModels.find({ type: 'user' }))[0].data || {};
+  	}
+  	else {
+  	  if (!fs.existsSync(__dirname + "/../usersData.json")) fs.writeFileSync(__dirname + "/../usersData.json", "{}");
+  	  Users = require("../usersData.json");
+  	}
     client.allUserData = Users;
   	
     async function saveData(Uid) {
