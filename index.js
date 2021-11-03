@@ -15,6 +15,7 @@
     print,
     loading,
   	commands: new Map(),
+  	shortName: new Map(),
   	events: new Map(),
   	whenChat: [],
   	whenReply: {},
