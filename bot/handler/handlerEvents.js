@@ -54,7 +54,7 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		const args = body.slice(prefix.length).trim().split(/ +/);
   		// ————————————  CHECK HAS COMMAND ——————————— //
   		const commandName = args.shift().toLowerCase();
-  		const command = globalGoat.commands.get(commandName);
+  		const command = globalGoat.commands.get(commandName) || globalGoat.commands.get(globalGoat.shortName.get(commandName));
   		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
   		// ————————————— GET THREAD INFO ————————————— //
   		const threadInfo = client.allThreadData[threadID] || {};

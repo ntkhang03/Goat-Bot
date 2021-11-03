@@ -114,5 +114,13 @@
     "info": {
       "database/dataProcessing/handlerData.js": "auto write file threadsData.json & usersData.json if does not exist"
     }
+  },
+  {
+    "version": "1.1.5",
+    "info": {
+      "bot/loadAllScript.js": "Short command name feature update",
+      "bot/handler/handlerEvents.js": "Short command name feature update",
+      "scripts/cmds/help.js": "Short command name feature update"
+    }
   }
 ]

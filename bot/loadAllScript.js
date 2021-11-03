@@ -37,6 +37,15 @@ module.exports = async (globalGoat, configCommands) => {
         if (!configCommand.name) throw new Error(`Tên Command không được để trống!`);
     		const commandName = configCommand.name;
     		if (globalGoat[setMap].has(commandName)) throw new Error("Tên Command bị trùng lặp với một Command khác");
+// ——————————————— CHECK SHORT NAME ———————————————— //
+        if (configCommand.shortName) {
+          let { shortName } = configCommand;
+          if (typeof shortName == "string") shortName = [shortName];
+          for (const aliases of shortName) {
+            if (globalGoat.shortName.has(aliases)) throw new Error(`Short Name ${aliases} bị trùng lặp với short name của command ${chalk.hex("#ff5208")(globalGoat.shortName.get(aliases))}`);
+            else globalGoat.shortName.set(aliases, configCommand.name);
+          }
+        }
 // ————————————————— CHECK PACKAGE ————————————————— //
     		if (configCommand.packages) {
     		  const packages = (typeof configCommand.packages == "string") ? configCommand.packages.trim().replace(/\s/g, '').split(',') : configCommand.packages;

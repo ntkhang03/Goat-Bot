@@ -1,6 +1,6 @@
 this.config = {    
   name: "help",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -84,6 +84,8 @@ module.exports = {
       const title = `╭${characters}╮\n   ${nameUpperCase}\n╰${characters}╯`;
       
       let msg = `${title}\n📜Mô tả: ${configCommand.longDescription || "Không có"}` +
+      `\n\n» Tên lệnh: ${configCommand.name}` +
+      configCommand.shortName ? `» Tên gọi khác: ${configCommand.shortName.join(", ")}` : "" +
       `\n\n» 👥Role: ${((configCommand.role == 0) ? "Tất cả người dùng" : (configCommand.role == 1) ? "Quản trị viên nhóm" : "Admin bot" )}` +
       `\n» ⏱Thời gian mỗi lần dùng lệnh: ${configCommand.cooldowns || 1}s` +
       `\n» ✳️Phân loại: ${configCommand.category || "Không có phân loại"}` +
