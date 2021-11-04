@@ -10,7 +10,7 @@ this.config = {
   shortDescription: "Xem cách dùng lệnh",
   longDescription: "Xem cách sử dụng của các lệnh",
   category: "info",
-  guide: "{p}{n} [để trống|số trang|<tên lệnh>]",
+  guide: "{p}{n} [để trống|<số trang>|<tên lệnh>]",
   priority: 1,
   packages: "moment-timezone"
 };
