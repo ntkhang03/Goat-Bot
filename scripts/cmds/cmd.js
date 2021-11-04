@@ -1,6 +1,6 @@
 this.config = {    
   name: "cmd",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -35,6 +35,12 @@ module.exports = {
         const oldEnvConfig = oldCommand.config.envConfig || {};
         const oldEnvGlobal = oldCommand.config.envGlobal || {};
         
+        if (oldCommand.config.shortName) {
+          let oldShortName = oldCommand.config.shortName;
+          if (typeof oldShortName == "string") oldShortName = [oldShortName];
+          for (let aliases of oldShortName) globalGoat.shortName.delete(aliases);
+        }
+        
         // delete old command
         delete require.cache[require.resolve(pathCommand)];
         
@@ -48,6 +54,14 @@ module.exports = {
         if (indexWhenChat != -1) allWhenChat[indexWhenChat] = null;
         if (command.whenChat) allWhenChat.push(nameScript);
         // -------------
+        if (configCommand.shortName) {
+          let { shortName } = configCommand;
+          if (typeof shortName == "string") shortName = [shortName];
+          for (const aliases of shortName) {
+            if (globalGoat.shortName.has(aliases)) throw new Error(`Short Name ${aliases} bị trùng lặp với short name của command ${chalk.hex("#ff5208")(globalGoat.shortName.get(aliases))}`);
+            else globalGoat.shortName.set(aliases, configCommand.name);
+          }
+        }
         var { packages, envGlobal, envConfig } = configCommand;
         const { configCommands } = globalGoat;
         if (!command.start) throw new Error(`Command không được thiếu function start!`);

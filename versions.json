@@ -123,5 +123,13 @@
       "bot/handler/handlerEvents.js": "Short command name feature update",
       "scripts/cmds/help.js": "Short command name feature update"
     }
+  },
+  {
+    "version": "1.1.6",
+    "info": {
+      "scripts/cmds/cmd.js": "Short command name feature update",
+      "scripts/cmds/help.js": "fix error",
+      "scripts/cmds/qrcode.js": "new script command"
+    }
   }
 ]
