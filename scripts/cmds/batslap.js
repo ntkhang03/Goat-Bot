@@ -1,6 +1,6 @@
 this.config = {    
   name: "batslap",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -31,7 +31,7 @@ module.exports = {
     const targetId = Object.keys(mentions).length > 0 ? Object.keys(mentions)[0] : senderID;
     let imgBuffer;
     try {
-      imgBuffer = (await axios.get(`https://goatbot.tk/taoanhdep/batslap?author=${linkAvatar(senderID)}&target=${linkAvatar(targetId)}`, {
+      imgBuffer = (await axios.get(`https://goatbot.tk/taoanhdep/batslap?apikey=ntkhang&author=${linkAvatar(senderID)}&target=${linkAvatar(targetId)}`, {
         responseType: "arraybuffer"
       })).data;
     }
