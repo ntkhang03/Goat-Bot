@@ -1,6 +1,6 @@
 this.config = {    
   name: "jail",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -28,7 +28,8 @@ module.exports = {
     const avatar = `https://graph.facebook.com/${uid}/picture?type=large&width=500&height=500&access_token=${tokenFacebook}`;
     axios.get(`https://goatbot.tk/taoanhdep/jail`, {
       params: {
-        image: avatar
+        image: avatar,
+        apikey: "ntkhang"
       },
       responseType: "arraybuffer"
     })
