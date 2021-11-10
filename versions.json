@@ -143,5 +143,11 @@
     "info": {
       "scripts/cmds/jail.js": "fix invalid apikey"
     }
+  },
+  {
+    "version": "1.1.9",
+    "info": {
+      "scripts/cmds/rank.js": "no description"
+    }
   }
 ]

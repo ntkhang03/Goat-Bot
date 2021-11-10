@@ -1,6 +1,6 @@
 this.config = {    
   name: "rank",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -92,7 +92,7 @@ module.exports = {
         }, (e, i) => unlinkSync("./rank.png"));
       })
       .catch(err => {
-        console.log(Buffer.from(err.response));
+        console.log(err.response.data.toString());
       });
     }
     
