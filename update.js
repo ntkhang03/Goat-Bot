@@ -15,6 +15,12 @@ const chalk = require("chalk");
   const versionsUpdate = allVersion.slice(indexCurrentVersion + 1);
   
   for (let data of versionsUpdate) {
+    if (data.del) {
+      for (let path of data.del) {
+        fs.unlinkSync(path);
+      }
+    }
+    
     for (let location in data.info) {
       loading.green(`[v${data.version}] file ${chalk.hex("#ff5208")(location)}`, "UPDATING");
       const response = (await axios.get("https://github.com/ntkhang03/Goat-Bot/raw/main/" + location, {
