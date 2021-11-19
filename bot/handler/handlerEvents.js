@@ -15,10 +15,10 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
     const contentSyntaxError = `Lệnh bạn đang sử dụng sai cú pháp, vui lòng gõ ${prefix}help {nameCmd} để xem chi tiết cách sử dụng lệnh này`;
     
     const parameters = { api, globalGoat, client, usersData, threadsData, message, event, download, usersModel, threadsModel };
-    /*
+    
     if (!isNaN(senderID) && !Object.keys(client.allUserData).includes(senderID)) await usersData.createData(senderID);
     if (!isNaN(threadID) && !Object.keys(client.allThreadData).includes(threadID) && isGroup) await threadsData.createData(threadID);
-    */
+    
     //===============================================//
     //                   WHEN CHAT                   //
     //===============================================//
@@ -52,10 +52,13 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
       // —————————————— CHECK USE BOT —————————————— //
   		if (body && !body.startsWith(prefix) || !body) return;
   		const args = body.slice(prefix.length).trim().split(/ +/);
+  		// —————————  CHECK HAS IN DATABASE  ————————— //
+  		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
+  		if (!client.allUserData[senderID]) await usersData.createData(senderID);
   		// ————————————  CHECK HAS COMMAND ——————————— //
   		const commandName = args.shift().toLowerCase();
   		const command = globalGoat.commands.get(commandName) || globalGoat.commands.get(globalGoat.shortName.get(commandName));
-  		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
+  		
   		// ————————————— GET THREAD INFO ————————————— //
   		const threadInfo = client.allThreadData[threadID] || {};
   		if (threadInfo.onlyAdminBox === true && !threadInfo.adminIDs.includes(senderID)) return message.reply("Hiện tại nhóm này đã được bật chế độ chỉ quản trị viên nhóm mới có thể sử dụng bot");
