@@ -5,7 +5,7 @@ module.exports = function({ globalGoat, usersData, threadsData, client, api, mes
 		  const { threadID, isGroup } = event;
 		  const senderID = event.senderID || event.author || event.userID;
 // —————————————— CREATE THREAD DATA —————————————— //
-			if (!Object.keys(client.allThreadData).includes(threadID) && isGroup && !isNaN(threadID)) {
+			if (!client.allThreadData[threadID] && isGroup && !isNaN(threadID) && threadID != 0) {
 				try {
 					await threadsData.createData(threadID);
 					print(`New Thread: ${threadID} | ${client.allThreadData[threadID].name} | ${globalGoat.config.database.type}`, "DATABASE");
@@ -15,7 +15,7 @@ module.exports = function({ globalGoat, usersData, threadsData, client, api, mes
 				}
 			}
 // ——————————————— CREATE USER DATA ——————————————— //
-			if (!Object.keys(client.allUserData).includes(senderID) && !isNaN(senderID)) {
+			if (!client.allUserData[senderID] && !isNaN(senderID) && senderID != 0) {
 				try {
 					await usersData.createData(senderID);
 					print(`New User: ${senderID} | ${client.allUserData[senderID].name} | ${globalGoat.config.database.type}`, "DATABASE");
