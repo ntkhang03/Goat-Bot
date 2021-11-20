@@ -6,7 +6,7 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
 	const moment = require("moment-timezone");
 	
   return async function ({ event, message }) {
-    const { body, messageID, threadID } = event;
+    const { body, messageID, threadID, isGroup } = event;
     const senderID = event.senderID || event.author || event.userID;
     
     let prefix = globalGoat.config.prefix;
@@ -16,8 +16,8 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
     
     const parameters = { api, globalGoat, client, usersData, threadsData, message, event, download, usersModel, threadsModel };
     
-    if (!isNaN(senderID) && !Object.keys(client.allUserData).includes(senderID)) await usersData.createData(senderID);
-    if (!isNaN(threadID) && !Object.keys(client.allThreadData).includes(threadID) && isGroup) await threadsData.createData(threadID);
+    if (!isNaN(senderID) && !client.allUserData[senderID]) await usersData.createData(senderID);
+    if (!isNaN(threadID) && !client.allThreadData[threadID]) await threadsData.createData(threadID);
     
     //===============================================//
     //                   WHEN CHAT                   //

@@ -162,5 +162,11 @@
       "bot/handler/handlerCreateDB.js": "check id != 0",
       "bot/handler/handlerEvents.js": "check has database"
     }
+  },
+  {
+    "version": "1.1.12",
+    "info": {
+      "bot/handler/handlerEvents.js": "fix error"
+    }
   }
 ]
