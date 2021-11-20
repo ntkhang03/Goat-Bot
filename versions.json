@@ -173,7 +173,7 @@
     "version": "1.1.13",
     "info": {
       "index.js": "added listenMqtt restart feature",
-      "config.js": "added listenMqtt restart feature",
+      "config.json": "added listenMqtt restart feature",
       "bot/login.js": "added listenMqtt restart feature"
     }
   }
