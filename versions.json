@@ -168,5 +168,13 @@
     "info": {
       "bot/handler/handlerEvents.js": "fix error"
     }
+  },
+  {
+    "version": "1.1.13",
+    "info": {
+      "index.js": "added listenMqtt restart feature",
+      "config": "added listenMqtt restart feature",
+      "bot/login.js": "added listenMqtt restart feature"
+    }
   }
 ]

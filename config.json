@@ -13,6 +13,7 @@
   "SERVER_UPTIME": true,
   "autoRefreshFbstate": true,
   "autoUpdateScript": false,
+  "restartListenMqtt": 3600000,
   "logEvents": {
     "eventAndMessage": true,
     "read_receipt": false,
@@ -21,7 +22,6 @@
   },
   "logsbot": true,
   "OptionsApi": {
-    "online": true,
     "forceLogin": true,
     "listenEvents": true,
     "updatePresence": true,
