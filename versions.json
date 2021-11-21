@@ -176,5 +176,11 @@
       "config.json": "added listenMqtt restart feature",
       "bot/login.js": "added listenMqtt restart feature"
     }
+  },
+  {
+    "version": "1.1.14",
+    "info": {
+      "scripts/cmds/cmd.js": ""
+    }
   }
 ]
