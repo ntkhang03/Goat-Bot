@@ -29,6 +29,11 @@ or
 
 > npm update
 
+## DEMO
+![image](https://i.ibb.co/NZpRk31/Screenshot-2021-12-12-16-01-59-14.png)
+![image](https://i.ibb.co/d4ccbJd/Screenshot-2021-12-12-15-55-32-66.png)
+![image](https://i.ibb.co/jZ7F74c/IMG-20211212-160006.jpg)
+
 ## FEEDBACK & REPORT BUGS
 * https://github.com/ntkhang03/Goat-Bot/issues
 * https://www.facebook.com/groups/399521505099456/?ref=share
