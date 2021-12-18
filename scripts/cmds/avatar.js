@@ -1,6 +1,6 @@
 this.config = {
   name: "avatar",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang",
     contacts: ""
@@ -29,32 +29,33 @@ module.exports = {
   		  let idNhanVat, tenNhanvat;
   		  const chu_nen = content[1];
         const chu_ky  = content[2];
-        const mau_nen = content[3];
-  		  const dataChracter = (await axios.get("https://taoanhdep.kaysil.dev/v1/wibu/list")).data.data;
+        const colorBg = content[3];
+  		  const dataChracter = (await axios.get("https://goatbot.tk/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
   		  
         if (!isNaN(content[0])) {
           idNhanVat = parseInt(content[0]);
-          tenNhanvat = dataChracter[idNhanVat].characterName;
+          tenNhanvat = dataChracter[idNhanVat].name;
         }
         else {
-          findChracter = dataChracter.find(item => item.characterName.toLowerCase() == content[0].toLowerCase());
+          findChracter = dataChracter.find(item => item.name.toLowerCase() == content[0].toLowerCase());
           if (findChracter) {
-            idNhanVat = findChracter.characterId;
+            idNhanVat = findChracter.stt;
             tenNhanvat = content[0];
           }
           else return message.reply("Không tìm thấy nhân vật mang tên " + content[0] + " trong danh sách nhân vật");
         }
         
         const path = __dirname + "/cache/avatarAnime.jpg";
-        let linkapi = encodeURI(`https://taoanhdep.kaysil.dev/v1/wibu/create?id_nhanvat=${idNhanVat}&chu_nen=${chu_nen}&chu_ky=${chu_ky}`);
-        mau_nen ? linkapi += `&mau_nen=${encodeURIComponent(mau_nen)}` : "";
+        let linkapi = encodeURI(`https://goatbot.tk/taoanhdep/avataranime?id=${idNhanVat}&chu_Nen=${chu_nen}&chu_Ky=${chu_ky}&apikey=ntkhangUabavCaipNlapavdh`);
+        colorBg ? linkapi += `&colorBg=${encodeURIComponent(colorBg)}` : "";
         await download(linkapi, path);
         message.reply({
-          body: `Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_nen}\nChữ ký: ${chu_ky}\nMàu: ${mau_nen || "mặc định"}`, 
+          body: `Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_nen}\nChữ ký: ${chu_ky}\nMàu: ${colorBg || "mặc định"}`, 
           attachment: fs.createReadStream(path)
         }, () => fs.unlinkSync(path));
   		}
   		catch(err) {
+  		  console.log(err.stack); 
         return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
 		  }
 	  }
