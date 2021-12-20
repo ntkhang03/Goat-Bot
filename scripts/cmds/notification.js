@@ -35,6 +35,7 @@ module.exports = {
         const ext = data.type == "photo" ? "jpg" :
         data.type == "video" ? "mp4" : 
         data.type == "animated_image" ? "gif" : 
+        data.type == "audio" ? "mp3" : 
         "txt";
         const pathSave = __dirname + `/cache/notification${startFile}.${ext}`;
         ++startFile;
