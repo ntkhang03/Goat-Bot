@@ -1,6 +1,6 @@
 this.config = {    
   name: "notification",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -27,6 +27,7 @@ module.exports = {
       body: "Thông báo từ admin bot\n────────────────\n" + args.join(" ")
     };
     const attachmentSend = [];
+    const arrPathSave = [];
     
     async function getAttachments(attachments) {
       let startFile = 0;
@@ -43,9 +44,7 @@ module.exports = {
         });
         fs.writeFileSync(pathSave, Buffer.from(res.data));
         attachmentSend.push(fs.createReadStream(pathSave));
-        setTimeout(function() {
-          fs.unlinkSync(pathSave);
-        }, 2000);
+        arrPathSave.push(pathSave);
       }
     }
     
@@ -66,17 +65,18 @@ module.exports = {
     
     for (let tid of allThreadID) {
       let errorWhenSend = false;
-      api.sendMessage(formSend, tid, function (err) {
+      api.sendMessage(formSend, tid, async function (err) {
         if (err) {
           sendError.push(tid);
           errorWhenSend = true;
         }
+        await new Promise(resolve => setTimeout(resolve, delayPerGroup));
       });
-      await new Promise(resolve => setTimeout(resolve, delayPerGroup));
       if (errorWhenSend === true) continue;
       ++sendSucces;
     }
     
-    return message.reply(`Đã gửi thông báo đến ${sendSucces} nhóm thành công\n${sendError.length > 0 ? `Có lỗi xảy ra khi gửi đến ${sendError.length} nhóm` : ""}`);
+    message.reply(`Đã gửi thông báo đến ${sendSucces} nhóm thành công\n${sendError.length > 0 ? `Có lỗi xảy ra khi gửi đến ${sendError.length} nhóm` : ""}`);
+    for (const pathSave of arrPathSave) fs.unlinkSync(pathSave);
   }
 };

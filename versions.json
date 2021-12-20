@@ -184,9 +184,15 @@
     }
   },
   {
-     "version": "1.1.15",
-     "info": {
-        "scripts/cmds/avatar.js": "fix api error"
-     }
+    "version": "1.1.15",
+    "info": {
+      "scripts/cmds/avatar.js": "fix api error"
+    }
+  },
+  {
+    "version": "1.1.16",
+    "info": {
+      "scripts/cmds/notification.js": "fix error 408"
+    }
   }
 ]
