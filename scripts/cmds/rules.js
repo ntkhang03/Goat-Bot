@@ -1,6 +1,6 @@
 this.config = {    
   name: "rules",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -25,28 +25,26 @@ this.config = {
 module.exports = {
   config: this.config,
   start: async function({ api, globalGoat, args, download, message, event, threadsData }) {
-    const axios = require("axios");
-    const fs = require("fs-extra");
-    
     const nameCommand = require(module.filename).name;
     const { senderID, threadID, messageID } = event;
     
-    const pathImgRules = __dirname + "/database/rules.png";
-    if (!fs.existsSync(pathImgRules)) await download("https://github.com/ntkhang03/resources-goat-bot/raw/master/image/rule.png", pathImgRules);
     var type = args[0];
     var dataOfThread = (await threadsData.getData(threadID)).data;
+    
     if (!dataOfThread.rules) {
       dataOfThread.rules = [];
-      await threadsData.setData(threadID, {data: dataOfThread})
+      await threadsData.setData(threadID, {data: dataOfThread});
     }
-    var rulesOfThread = dataOfThread.rules || [];
+    
+    let rulesOfThread = dataOfThread.rules || [];
+    
     if (!type) {
       var msg = "";
       var i = 1;
       for (let rules of rulesOfThread) {
         msg += `${i++}. ${rules}\n`;
       }
-      message.reply({ body: msg || "Nhóm này chưa tạo bất kỳ nội quy nào", attachment: fs.createReadStream(pathImgRules)});
+      message.reply(msg || "Nhóm này chưa tạo bất kỳ nội quy nào");
     }
     else if (type == "add" || type == "-a") {
       if (!args[1]) return message.SyntaxError(nameCommand);
@@ -56,20 +54,20 @@ module.exports = {
         message.reply(`Đã thêm nội quy mới cho nhóm`);
       });
     }
-    else if (type == "delete" || type == "-d") {
+    else if (type == "delete" || type == "-d" || type == "del") {
       if (!args[1] || args[1] != "number") return message.SyntaxError(nameCommand);
       rulesOfThread.splice(args[1] - 1, 1);
       return await threadsData.setData(threadID, { data: dataOfThread }, (err) => {
         if (err) return message.reply(err.name + "\n" + err.message);
         message.reply(`Đã xóa nội quy thứ ${args[1]} của nhóm`);
-      })
+      });
     }
     else if (type == "remove" || type == "-r") {
-      rulesOfThread = [];
+      dataOfThread.rules = [];
       return await threadsData.setData(threadID, { data: dataOfThread }, (err) => {
         if (err) return message.reply(err.name + "\n" + err.message);
         message.reply(`Đã xóa toàn bộ nội quy của nhóm`);
-      })
+      });
     }
   }
 };

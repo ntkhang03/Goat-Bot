@@ -194,5 +194,11 @@
     "info": {
       "scripts/cmds/notification.js": "fix error 408"
     }
+  },
+  {
+    "version": "1.1.17",
+    "info": {
+      "scripts/cmds/rules.js": "fix lỗi remove"
+    }
   }
 ]
