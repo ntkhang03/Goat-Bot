@@ -1,6 +1,6 @@
 this.config = {    
   name: "thread",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -57,7 +57,7 @@ module.exports = {
       const name = threadData.name;
       
       const { banned } = threadData;
-      banned.usebot = {
+      banned = {
         status: true,
     	  reason,
     	  date: moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss")
