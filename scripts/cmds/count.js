@@ -1,6 +1,6 @@
 this.config = {    
   name: "count",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -21,32 +21,36 @@ module.exports = {
     const { threadID, senderID, messageID } = event;
     const threadData = await threadsData.getData(threadID);
     const { members } = threadData;
+    const arraySort = [];
+    
+    for (let id in members) {
+      const count = members[id].count;
+      const name = members[id].name;
+      arraySort.push({ name, count, uid: id });
+    }
+    arraySort.sort((a, b) => b.count - a.count);
+    let stt = 1;
+    arraySort.map(item => item.stt = stt++);
     
     if (args[0]) {
-      let target;
-      if (args[0].toLowerCase() == "all") target = members;
-      else if (event.mentions) target = event.mentions;
-      const arraySort = [];
-      for (let id in target) {
-        const count = members[id] ? members[id].count : 0;
-        if (count == 0) continue;
-        const name = members[id] ? members[id].name : "Người dùng facebook";
-        arraySort.push({ name, count });
+      if (args[0].toLowerCase() == "all") {
+				let msg = "";
+        for (const item of arraySort) {
+          if (item.count > 0) msg += `\n${item.stt}/ ${item.name}: ${item.count} tin nhắn`;
+        };
+        message.reply(msg + "\n\nNhững người không có tên trong danh sách là chưa gửi tin nhắn nào");
       }
-      arraySort.sort((a, b) => b.count - a.count);
-      
-      const msg = arraySort.reduce((i, item) => i += `\n${item.name}: ${item.count} tin nhắn`, "");
-      
-      message.reply({
-        body: msg,
-        mentions: [{
-          id: senderID,
-          tag: members[senderID].name
-        }]
-      });
+      else if (event.mentions) {
+        let msg = "";
+        for (const id in event.mentions) {
+          const findUser = arraySort.find(item => item.uid == id);
+          msg += `${findUser.name} hạng ${findUser.stt} với ${findUser.count} tin nhắn\n`;
+        }
+        message.reply(msg);
+      }
     }
     else {
-      return message.reply(`Bạn đã gửi ${members[senderID].count} tin nhắn trong nhóm này`);
+      return message.reply(`Bạn đứng hạng ${arraySort.find(item => item.uid == senderID).stt} và đã gửi ${members[senderID].count} tin nhắn trong nhóm này`);
     }
   },
   
