@@ -1,6 +1,6 @@
 this.config = {    
   name: "thread",
-  version: "1.0.2",
+  version: "1.0.3",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -32,13 +32,15 @@ module.exports = {
       var msg = "";
       var length = 0;
       const keyword = args.slice(1).join(" ");
-      for (let i in allThread) {
-        if (allThread[i].name.toLowerCase().includes(keyword.toLowerCase())) {
+			
+      for (let thread of allThread) {
+				if (!thread.name) continue;
+        if (thread.name.toLowerCase().includes(keyword.toLowerCase())) {
           length++;
-          msg += `\n╭Name: ${allThread[i].name}\n╰ID: ${i}`;
+          msg += `\n╭Name: ${thread.name}\n╰ID: ${thread.id}`;
         }
-      };
-      message.reply(length == 0 ? `❌Không có kết quả tìm kiếm nào phù hợp với từ khóa ${keyword}` : `🔎Có ${length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
+      }
+      message.reply(length == 0 ? `❌ Không tìm thấy nhóm nào có tên khớp với từ khoá: ${keyword}` : `🔎Có ${length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
     }
     else if (["ban", "-b"].includes(type)) {
       var id, reason;
@@ -49,7 +51,7 @@ module.exports = {
       else {
         id = event.threadID;
         reason = args.slice(1).join(" ");
-      };
+      }
       if (!id || !reason) return message.SyntaxError();
       reason = reason.replace(/\s+/g, ' ');
       if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
@@ -74,7 +76,7 @@ module.exports = {
       }
       else {
         id = event.threadID;
-      };
+      }
       if (!id) return message.SyntaxError();
       if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
       const threadData = await threadsData.getData(id);

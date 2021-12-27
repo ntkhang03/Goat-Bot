@@ -1,6 +1,6 @@
 this.config = {    
   name: "user",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -23,18 +23,18 @@ module.exports = {
     const moment = require("moment-timezone");
     const type = args[0];
     if (["find", "search", "-f", "-s"].includes(type)) {
-      var allUser = await usersData.getAllData(["name"]);
+      var allUser = await usersData.getAll(["name"]);
       var arrayreturn = [];
       var msg = "";
       var length = 0;
       const keyword = args[1];
-      for (let i in allUser) {
-        if (allUser[i].name.toLowerCase().includes(keyword.toLowerCase())) {
+      for (let user of allUser) {
+        if (user.name.toLowerCase().includes(keyword.toLowerCase())) {
           length++;
-          msg += `\n╭Name: ${allUser[i].name}\n╰ID: ${i}`;
+          msg += `\n╭Name: ${user.name}\n╰ID: ${user.id}`;
         }
       }
-      message.reply(length == 0 ? `❌Không có kết quả tìm kiếm nào phù hợp với từ khóa ${keyword}` : `🔎Có ${length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
+      message.reply(length == 0 ? `❌ Không tìm thấy người dùng nào có tên khớp với từ khóa: ${keyword}` : `🔎Có ${length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
     }
     else if (["ban", "-b"].includes(type)) {
       let id, reason;

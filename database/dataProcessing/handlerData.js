@@ -88,6 +88,7 @@ module.exports = async function({ globalGoat, client, api }) {
   			  const dataUser = {
   			    id: userID,
   			    name: user.name,
+  			    gender: user.gender,
   			    nickname: threadInfo.nicknames[userID] || null,
   			    inGroup: true,
   			    count: 0
@@ -138,6 +139,7 @@ module.exports = async function({ globalGoat, client, api }) {
     		  const oldDataUser = oldMembers[userID];
     		  const data = {
     		    name: user.name,
+    		    gender: user.gender,
     			  nickname: newThreadInfo.nicknames[userID],
       		  count: oldMembers[userID] ? oldMembers[userID].count : 0
     		  };
