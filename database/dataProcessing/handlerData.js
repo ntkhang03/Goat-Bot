@@ -316,9 +316,9 @@ module.exports = async function({ globalGoat, client, api }) {
   		  const updateInfoUser = (await api.getUserInfo(userID))[userID];
   		  const newData = {
   		    name: updateInfoUser.name,
-  		    vanity: updateInfoUser.vanity;
-  	      gender: updateInfoUser.gender;
-  	      isFriend: updateInfoUser.isFriend;
+  		    vanity: updateInfoUser.vanity,
+  	      gender: updateInfoUser.gender,
+  	      isFriend: updateInfoUser.isFriend
   		  }
   	    
   		  Users[userID] = {...InfoUser,...newData};
