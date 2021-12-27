@@ -170,7 +170,7 @@ module.exports = async function({ globalGoat, client, api }) {
   	
   	async function getAll(keys, callback) {
   	  try {
-    	  if (!keys) return Threads;
+    	  if (!keys) return Object.values(Threads);
     	  if (!Array.isArray(keys)) throw new Error("Tham số truyền vào phải là 1 array");
     	  const data = [];
       	for (let threadID in Threads) {
@@ -312,14 +312,16 @@ module.exports = async function({ globalGoat, client, api }) {
   	async function refreshInfo(userID, callback) {
   		try {
   		  if (!Users[userID]) throw new Error(`Người dùng mang id ${userID} không tồn tại trong database`);
-  		  const InfoUser = getData(userID);
+  		  const InfoUser = await getData(userID);
   		  const updateInfoUser = (await api.getUserInfo(userID))[userID];
-  	    InfoUser.name     = updateInfoUser.name;
-  	    InfoUser.vanity   = updateInfoUser.vanity;
-  	    InfoUser.gender   = updateInfoUser.gender;
-  	    InfoUser.isFriend = updateInfoUser.isFriend;
+  		  const newData = {
+  		    name: updateInfoUser.name,
+  		    vanity: updateInfoUser.vanity;
+  	      gender: updateInfoUser.gender;
+  	      isFriend: updateInfoUser.isFriend;
+  		  }
   	    
-  		  Users[userID] = InfoUser;
+  		  Users[userID] = {...InfoUser,...newData};
   		  
   			await saveData(userID);
   			if (callback && typeof callback == "function") callback(null, InfoUser);
@@ -334,7 +336,7 @@ module.exports = async function({ globalGoat, client, api }) {
   	
   	async function getAll(keys, callback) {
   	  try {
-    	  if (!keys) return Users;
+    	  if (!keys) return Object.values(Users);
     	  if (!Array.isArray(keys)) throw new Error("Tham số truyền vào phải là 1 array");
     	  const data = [];
         for (let userID in Users) {
