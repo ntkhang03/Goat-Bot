@@ -24,12 +24,12 @@ module.exports = {
     }
     async function refreshThreads() {
       const allThread = await threadsData.getAll();
-      for (const thread of allThread) await threadsData.refreshInfo(user.id);
+      for (const thread of allThread) await threadsData.refreshInfo(thread.id);
       return message.reply(`Đã cập nhật dữ liệu của ${allThread.length} nhóm`);
     }
     
     if (args[0] == "user") await refreshUsers();
-    else if (args[0] == "thread") await refreshThreads;
+    else if (args[0] == "thread") await refreshThreads();
     else if (args[0] == "all") {
       await refreshUsers();
       await refreshThreads();
