@@ -1,6 +1,6 @@
 this.config = {    
   name: "unsend",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -16,8 +16,8 @@ this.config = {
 module.exports = {
   config: this.config,
   start: async function({ message, api, event, args, globalGoat }) {
+		if (event.type != "message_reply") return message.reply('Vui lòng reply tin nhắn của bot cần gỡ');
     if (event.messageReply.senderID != globalGoat.botID) return message.reply('Không thể gỡ tin nhắn của người khác!!');
-	  if (event.type != "message_reply") return message.reply('Vui lòng reply tin nhắn của bot cần gỡ');
 	  return api.unsendMessage(event.messageReply.messageID);
   }
 };

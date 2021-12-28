@@ -222,5 +222,11 @@
       "scripts/cmds/user.js": "fix lỗi tìm kiếm người dùng",
       "scripts/cmds/thread.js": "fix lỗi tìm kiếm nhóm"
     }
+  },
+  {
+    "version": "1.1.21",
+    "info": {
+      "scripts/cmds/unsend.js": ""
+    }
   }
 ]
