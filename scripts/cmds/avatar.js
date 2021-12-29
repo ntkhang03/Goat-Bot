@@ -1,6 +1,6 @@
 this.config = {
   name: "avatar",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang",
     contacts: ""
@@ -25,7 +25,7 @@ module.exports = {
     else {
   		try {
   		  message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
-  		  const content = args.join(" ").trim().replace(/\s+/g, " ").replace(/(\s+\|)/g, "|").replace(/\|\s+/g,  "|").split("|");
+  		  const content = args.join(" ").trim().split("|").map(item => item = item.trim());
   		  let idNhanVat, tenNhanvat;
   		  const chu_nen = content[1];
         const chu_ky  = content[2];
@@ -34,6 +34,8 @@ module.exports = {
   		  
         if (!isNaN(content[0])) {
           idNhanVat = parseInt(content[0]);
+          const totalCharacter = dataChracter.length - 1;
+          if (idNhanVat > totalCharacter) return message.reply(`Hiện tại chỉ có ${totalCharacter} nhân vật trên hệ thống, vui lòng nhập id nhân vật nhỏ hơn`);
           tenNhanvat = dataChracter[idNhanVat].name;
         }
         else {
@@ -50,7 +52,7 @@ module.exports = {
         colorBg ? linkapi += `&colorBg=${encodeURIComponent(colorBg)}` : "";
         await download(linkapi, path);
         message.reply({
-          body: `Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_nen}\nChữ ký: ${chu_ky}\nMàu: ${colorBg || "mặc định"}`, 
+          body: `✅ Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_nen}\nChữ ký: ${chu_ky}\nMàu: ${colorBg || "mặc định"}`, 
           attachment: fs.createReadStream(path)
         }, () => fs.unlinkSync(path));
   		}

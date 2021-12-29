@@ -228,5 +228,11 @@
     "info": {
       "scripts/cmds/unsend.js": ""
     }
+  },
+  {
+    "version": "1.1.22",
+    "info": {
+      "scripts/cmds/avatar.js": ""
+    }
   }
 ]
