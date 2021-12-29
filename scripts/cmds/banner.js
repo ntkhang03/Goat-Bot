@@ -46,9 +46,7 @@ module.exports = {
       imageBuffer = response.data;
     }
     catch(error) {
-      let err;
-      if (error.response) err = JSON.parse(error.response.data.toString());
-      else err = error;
+      const err = error.response ? JSON.parse(error.response.data.toString()) : error;
       return message.reply(`Đã xảy ra lỗi ${err.error} ${err.message}`);
     }
     fs.writeFileSync(pathsave, Buffer.from(imageBuffer));

@@ -234,5 +234,11 @@
     "info": {
       "scripts/cmds/avatar.js": ""
     }
+  },
+  {
+    "version": "1.1.23",
+    "info": {
+      "scripts/cmds/avatar.js": "hiển thị lỗi khi tải thất bại"
+    }
   }
 ]

@@ -1,6 +1,6 @@
 this.config = {
   name: "avatar",
-  version: "1.0.2",
+  version: "1.0.3",
   author: {
     name: "NTKhang",
     contacts: ""
@@ -27,8 +27,8 @@ module.exports = {
   		  message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
   		  const content = args.join(" ").trim().split("|").map(item => item = item.trim());
   		  let idNhanVat, tenNhanvat;
-  		  const chu_nen = content[1];
-        const chu_ky  = content[2];
+  		  const chu_Nen = content[1];
+        const chu_Ky  = content[2];
         const colorBg = content[3];
   		  const dataChracter = (await axios.get("https://goatbot.tk/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
   		  
@@ -47,17 +47,29 @@ module.exports = {
           else return message.reply("Không tìm thấy nhân vật mang tên " + content[0] + " trong danh sách nhân vật");
         }
         
-        const path = __dirname + "/cache/avatarAnime.jpg";
-        let linkapi = encodeURI(`https://goatbot.tk/taoanhdep/avataranime?id=${idNhanVat}&chu_Nen=${chu_nen}&chu_Ky=${chu_ky}&apikey=ntkhangUabavCaipNlapavdh`);
-        colorBg ? linkapi += `&colorBg=${encodeURIComponent(colorBg)}` : "";
-        await download(linkapi, path);
+        const pathSave = __dirname + "/cache/avatarAnime.jpg";
+        
+        let endpoint = `https://goatbot.tk/taoanhdep/avataranime`;
+        const params = {
+          id: idNhanVat,
+          chu_Nen,
+          chu_Ky,
+          apikey: "ntkhangUabavCaipNlapavdh"
+        };
+        if (colorBg) params.colorBg = colorBg;
+        
+        const response = await axios.get(endpoint, {
+         params,
+         responseType: "arraybuffer"
+        });
+        fs.writeFileSync(pathSave, Buffer.from(response.data));
         message.reply({
-          body: `✅ Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_nen}\nChữ ký: ${chu_ky}\nMàu: ${colorBg || "mặc định"}`, 
-          attachment: fs.createReadStream(path)
-        }, () => fs.unlinkSync(path));
+          body: `✅ Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_Nen}\nChữ ký: ${chu_Ky}\nMàu: ${colorBg || "mặc định"}`, 
+          attachment: fs.createReadStream(pathSave)
+        }, () => fs.unlinkSync(pathSave));
   		}
-  		catch(err) {
-  		  console.log(err.stack); 
+  		catch(error) {
+  		  const err = error.response ? JSON.parse(error.response.data.toString()) : error;
         return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
 		  }
 	  }
