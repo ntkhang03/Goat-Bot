@@ -240,5 +240,13 @@
     "info": {
       "scripts/cmds/avatar.js": "hiển thị lỗi khi tải thất bại"
     }
+  },
+  {
+    "version": "1.1.24",
+    "info": {
+      "bot/handler/handlerEvents.js": "",
+      "scripts/cmds/thread.js": "fiz lỗi ban thread",
+      "scripts/cmds/bannedlist": "lệnh mới - xem danh sách nhóm/người dùng bị cấm"
+    }
   }
 ]

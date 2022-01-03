@@ -1,6 +1,6 @@
 this.config = {    
   name: "thread",
-  version: "1.0.3",
+  version: "1.0.4",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -58,7 +58,7 @@ module.exports = {
       const threadData = (await threadsData.getData(id));
       const name = threadData.name;
       
-      const { banned } = threadData;
+      let { banned } = threadData;
       banned = {
         status: true,
     	  reason,

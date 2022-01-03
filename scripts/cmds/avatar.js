@@ -25,7 +25,7 @@ module.exports = {
     else {
   		try {
   		  message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
-  		  const content = args.join(" ").trim().split("|").map(item => item = item.trim());
+  		  const content = args.join(" ").split("|").map(item => item = item.trim());
   		  let idNhanVat, tenNhanvat;
   		  const chu_Nen = content[1];
         const chu_Ky  = content[2];
@@ -59,8 +59,8 @@ module.exports = {
         if (colorBg) params.colorBg = colorBg;
         
         const response = await axios.get(endpoint, {
-         params,
-         responseType: "arraybuffer"
+          params,
+          responseType: "arraybuffer"
         });
         fs.writeFileSync(pathSave, Buffer.from(response.data));
         message.reply({

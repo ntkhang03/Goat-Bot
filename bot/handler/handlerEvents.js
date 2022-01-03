@@ -65,11 +65,11 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		// —————————————— CHECK BANNED —————————————— //
   		// +++++++++++     Check User     +++++++++++ //
     	const infoBannedUser = client.allUserData[senderID].banned;
-  		if (infoBannedUser.status == true) return message.reply(`Bạn đã bị Admin cấm sử dụng bot\n> Lý do: ${infoBannedUser.reason}\n> Thời gian: ${infoBannedUser.date}`);
+  		if (infoBannedUser.status == true) return message.reply(`Bạn đã bị Admin cấm sử dụng bot\n> Lý do: ${infoBannedUser.reason}\n> Thời gian: ${infoBannedUser.date}\n> User ID: ${senderID}`);
   		// +++++++++++    Check Thread    +++++++++++ //
   		if (isGroup == true) {
     		const infoBannedThread = threadInfo.banned;
-    		if (infoBannedThread.status == true) return message.reply(`Nhóm của bạn đã bị Admin bot cấm dùng bot\n> Lý do: ${infoBannedThread.reason}\n> Ngày: ${infoBannedThread.date}`);
+    		if (infoBannedThread.status == true) return message.reply(`Nhóm của bạn đã bị Admin bot cấm dùng bot\n> Lý do: ${infoBannedThread.reason}\n> Thời gian: ${infoBannedThread.date}\n> Thread ID: ${threadID}`);
   		}
   		if (!command) return message.reply("Lệnh bạn sử dụng không tồn tại");
   		//============================================//
