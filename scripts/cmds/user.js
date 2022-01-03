@@ -63,7 +63,8 @@ module.exports = {
           status: true,
           reason,
           date: moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss")
-      }}, (err) => {
+        }
+      }, (err) => {
         if (err) return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
         else return message.reply(`Đã cấm người dùng mang id ${id} | ${name} sử dụng bot với lý do: ${reason}`);
       });

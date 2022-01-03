@@ -58,13 +58,13 @@ module.exports = {
       const threadData = (await threadsData.getData(id));
       const name = threadData.name;
       
-      let { banned } = threadData;
-      banned = {
-        status: true,
-    	  reason,
-    	  date: moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss")
-      };
-      await threadsData.setData(id, { banned }, (err) => {
+      await threadsData.setData(id, {
+        banned: {
+          status: true,
+      	  reason,
+      	  date: moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss")
+        }
+      }, (err) => {
         if (err) return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
         else return message.reply(`Đã cấm nhóm mang id ${id} | ${name} sử dụng bot với lý do: ${reason}`);
       });
@@ -81,12 +81,13 @@ module.exports = {
       if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
       const threadData = await threadsData.getData(id);
       const name = threadData.name;
-      const { banned } = threadData;
-      banned.usebot = {
-        status: false,
-    	  reason: null
-      };
-      await threadsData.setData(id, { banned }, (err, data) => {
+      
+      await threadsData.setData(id, {
+        banned: {
+          status: false,
+      	  reason: null
+        }
+      }, (err, data) => {
         if (err) return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
         else message.reply(`Đã bỏ cấm nhóm mang id ${id} | ${name}, hiện tại nhóm này có thể sử dụng bot`);
       });
