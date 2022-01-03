@@ -246,7 +246,7 @@
     "info": {
       "bot/handler/handlerEvents.js": "",
       "scripts/cmds/thread.js": "fiz lỗi ban thread & unban",
-      "scripts/cmds/bannedlist": "lệnh mới - xem danh sách nhóm/người dùng bị cấm"
+      "scripts/cmds/bannedlist.js": "lệnh mới - xem danh sách nhóm/người dùng bị cấm"
     }
   }
 ]
