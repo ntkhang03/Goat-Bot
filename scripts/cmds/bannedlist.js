@@ -27,7 +27,7 @@ module.exports = {
     }
     else return message.SyntaxError();
     
-    const bannedList = allThread.filter(item => item.banned.status);
+    const bannedList = target.filter(item => item.banned.status);
     const msg = bannedList.reduce((i, item) => i += `Name: ${item.name}`
       + `\nID: ${item.id}`
       + `\nReason: ${item.banned.reason}`
