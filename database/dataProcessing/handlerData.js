@@ -58,6 +58,7 @@ module.exports = async function({ globalGoat, client, api }) {
     client.allThreadData = Threads;
     
   	async function saveData(Tid) {
+  	  Threads[Tid].lastUpdate = Date.now();
   	  client.allThreadData = Threads;
   	  if (databaseType == "local") {
 	      fs.writeFileSync(__dirname + "/../threadsData.json", JSON.stringify(Threads, null, 2));
@@ -143,7 +144,10 @@ module.exports = async function({ globalGoat, client, api }) {
     			  nickname: newThreadInfo.nicknames[userID],
       		  count: oldMembers[userID] ? oldMembers[userID].count : 0
     		  };
-    		  newMembers[userID] = { ...oldDataUser, ...data };
+    		  newMembers[userID] = { 
+    		    ...oldDataUser,
+    		    ...data
+          };
     		}
     		
     		const newadminsIDs = [];
@@ -164,8 +168,8 @@ module.exports = async function({ globalGoat, client, api }) {
   	  catch (err) {
   	    if (callback && typeof callback == "function") callback(err, null);
     	  return err;
-  	  };
-  	};
+  	  }
+  	}
   	
   	
   	async function getAll(keys, callback) {
@@ -174,7 +178,9 @@ module.exports = async function({ globalGoat, client, api }) {
     	  if (!Array.isArray(keys)) throw new Error("Tham số truyền vào phải là 1 array");
     	  const data = [];
       	for (let threadID in Threads) {
-      	  const db = {id: threadID};
+      	  const db = {
+      	    id: threadID
+          };
       	  const dataT = Threads[threadID];
       	  for (let key of keys) db[key] = dataT[key];
       	  data.push(db);
@@ -207,7 +213,7 @@ module.exports = async function({ globalGoat, client, api }) {
   	    if (isNaN(threadID)) throw new Error("threadID không hợp lệ");
     		if (typeof options != 'object') throw new Error("Tham số options truyền vào phải là 1 object");
     		Threads[threadID] = {...Threads[threadID], ...options};
-    		await saveData(Threads);
+    		await saveData(threadID);
     		if (callback && typeof callback == "function") callback(null, Threads[threadID]);
   			return Threads[threadID];
   	  }
@@ -262,6 +268,7 @@ module.exports = async function({ globalGoat, client, api }) {
     client.allUserData = Users;
   	
     async function saveData(Uid) {
+      Users[Uid].lastUpdate = Date.now();
       client.allUserData = Users;
   	  if (databaseType == 'local') {
   	    fs.writeFileSync(__dirname + "/../usersData.json", JSON.stringify(Users, null, 2));

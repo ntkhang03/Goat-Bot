@@ -256,5 +256,11 @@
       "scripts/cmds/user.js": "tối ưu hoá code",
       "scripts/cmds/bannedlist.js": "tối ưu hoá code"
     }
+  },
+  {
+    "version": "1.2.0",
+    "info": {
+      "database/dataProcessing/handlerData.js": "add lastUpdate to data"
+    }
   }
 ]
