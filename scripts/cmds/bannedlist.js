@@ -1,6 +1,6 @@
 this.config = {    
   name: "bannedlist",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -16,34 +16,23 @@ this.config = {
 module.exports = {
   config: this.config,
   start: async function({ message, args, usersData, threadsData }) {
+    let target, type;
     if (["thread", "-t"].includes(args[0])) {
-      const allThread = await threadsData.getAll();
-      let msg = [];
-      for (const thread of allThread) {
-        const dataBanned = thread.banned;
-        if (dataBanned.status) {
-          msg.push(`Name: ${thread.name}`
-               + `\nID: ${thread.id}`
-               + `\nReason: ${dataBanned.reason}`
-               + `\nTime: ${dataBanned.date}`);
-        }
-      }
-      message.reply(msg.length > 0 ? `Hiện tại có ${msg.length} nhóm đã bị cấm sử dụng bot:\n\n${msg.join("\n\n")}` : "Hiện tại chưa có nhóm nào bị cấm sử dụng bot");
+      target = await threadsData.getAll();
+      type = "nhóm";
     }
     else if (["user", "-u"].includes(args[0])) {
-      const allUser = await usersData.getAll();
-      let msg = [];
-      for (const thread of allUser) {
-        const dataBanned = thread.banned;
-        if (dataBanned.status) {
-          msg.push(`Name: ${thread.name}`
-               + `\nID ${thread.id}`
-               + `\nReason: ${dataBanned.reason}`
-               + `\nTime: ${dataBanned.date}`);
-        }
-      }
-      message.reply(msg.length > 0 ? `Hiện tại có ${msg.length} người dùng đã bị cấm sử dụng bot:\n\n${msg.join("\n\n")}` : "Hiện tại chưa có người dùng nào bị cấm sử dụng bot");
+      target = await usersData.getAll();
+      type = "người dùng";
     }
-    else message.SyntaxError();
+    else return message.SyntaxError();
+    
+    const bannedList = allThread.filter(item => item.banned.status);
+    const msg = bannedList.reduce((i, item) => i += `Name: ${item.name}`
+      + `\nID: ${item.id}`
+      + `\nReason: ${item.banned.reason}`
+      + `\nTime: ${item.banned.date}\n\n`, "");
+      
+    message.reply(msg ? `Hiện tại có ${bannedList.length} ${type} đã bị cấm sử dụng bot:\n\n${msg}` : `Hiện tại chưa có ${type} nào bị cấm sử dụng bot`);
   }
 };

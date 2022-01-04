@@ -1,6 +1,6 @@
 this.config = {    
   name: "thread",
-  version: "1.0.4",
+  version: "1.0.5",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -27,23 +27,14 @@ module.exports = {
     const moment = require("moment-timezone");
     const type = args[0];
     if (["find", "search", "-f", "-s"].includes(type)) {
-      var allThread = await threadsData.getAll(["name"]);
-      var arrayreturn = [];
-      var msg = "";
-      var length = 0;
+      const allThread = await threadsData.getAll(["name"]);
       const keyword = args.slice(1).join(" ");
-			
-      for (let thread of allThread) {
-				if (!thread.name) continue;
-        if (thread.name.toLowerCase().includes(keyword.toLowerCase())) {
-          length++;
-          msg += `\n╭Name: ${thread.name}\n╰ID: ${thread.id}`;
-        }
-      }
-      message.reply(length == 0 ? `❌ Không tìm thấy nhóm nào có tên khớp với từ khoá: ${keyword}` : `🔎Có ${length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
+			const result = allThread.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase()));
+			const msg = result.reduce((i, user) => i += `\n╭Name: ${user.name}\n╰ID: ${user.id}`, "");
+      message.reply(result.length == 0 ? `❌ Không tìm thấy nhóm nào có tên khớp với từ khoá: ${keyword}` : `🔎Có ${result.length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
     }
     else if (["ban", "-b"].includes(type)) {
-      var id, reason;
+      let id, reason;
       if (!isNaN(args[1])) {
         id = args[1];
         reason = args.slice(2).join(" ");
@@ -55,22 +46,26 @@ module.exports = {
       if (!id || !reason) return message.SyntaxError();
       reason = reason.replace(/\s+/g, ' ');
       if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
-      const threadData = (await threadsData.getData(id));
+      const threadData = await threadsData.getData(id);
       const name = threadData.name;
+      const status = threadData.banned.status;
+      
+      if (status) return message.reply(`Nhóm mang id [${id} | ${name}] đã bị cấm từ trước:\n> Lý do: ${threadData.banned.reason}\n> Thời gian: ${threadData.banned.date}`);
+      const time = moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss");
       
       await threadsData.setData(id, {
         banned: {
           status: true,
       	  reason,
-      	  date: moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss")
+      	  date: time
         }
       }, (err) => {
         if (err) return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
-        else return message.reply(`Đã cấm nhóm mang id ${id} | ${name} sử dụng bot với lý do: ${reason}`);
+        else return message.reply(`Đã cấm nhóm mang id [${id} | ${name}] sử dụng bot.\n> Lý do: ${reason}\n> Thời gian: ${time}`);
       });
     }
     else if (["unban", "-u"].includes(type)) {
-      var id;
+      let id;
       if (!isNaN(args[1])) {
         id = args[1];
       }
@@ -79,9 +74,12 @@ module.exports = {
       }
       if (!id) return message.SyntaxError();
       if (!client.allThreadData[id]) return message.reply(`Nhóm mang id ${id} không tồn tại trong dữ liệu bot`);
+      
       const threadData = await threadsData.getData(id);
       const name = threadData.name;
+      const status = threadData.banned.status;
       
+      if (!status) return message.reply(`Hiện tại nhóm mang id [${id} | ${name}] không bị cấm sử dụng bot`);
       await threadsData.setData(id, {
         banned: {
           status: false,
@@ -89,7 +87,7 @@ module.exports = {
         }
       }, (err, data) => {
         if (err) return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
-        else message.reply(`Đã bỏ cấm nhóm mang id ${id} | ${name}, hiện tại nhóm này có thể sử dụng bot`);
+        else message.reply(`Đã bỏ cấm nhóm mang id [${id} | ${name}], hiện tại nhóm này có thể sử dụng bot`);
       });
     }
     else return message.SyntaxError();
