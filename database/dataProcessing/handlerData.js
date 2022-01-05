@@ -212,7 +212,10 @@ module.exports = async function({ globalGoat, client, api }) {
   	    if (!threadID) throw new Error("threadID không được để trống");
   	    if (isNaN(threadID)) throw new Error("threadID không hợp lệ");
     		if (typeof options != 'object') throw new Error("Tham số options truyền vào phải là 1 object");
-    		Threads[threadID] = {...Threads[threadID], ...options};
+    		Threads[threadID] = {
+    		  ...Threads[threadID],
+    		  ...options
+        };
     		await saveData(threadID);
     		if (callback && typeof callback == "function") callback(null, Threads[threadID]);
   			return Threads[threadID];

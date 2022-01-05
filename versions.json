@@ -262,5 +262,11 @@
     "info": {
       "database/dataProcessing/handlerData.js": "add lastUpdate to data"
     }
+  },
+  {
+    "version": "1.2.1",
+    "info": {
+      "scripts/cmds/rules.js": "tối ưu hoá code & fix bugs"
+    }
   }
 ]
