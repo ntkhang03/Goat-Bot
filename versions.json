@@ -273,7 +273,7 @@
     "version": "1.2.2",
     "info": {
       "scripts/cmds/avatar.js": "code optimization",
-      "scripts/cmds/banner1.js": "code optimization",
+      "scripts/cmds/banner.js": "code optimization",
       "scripts/cmds/banner2.js": "code optimization",
       "scripts/cmds/bannerbw.js": "code optimization"
     }
