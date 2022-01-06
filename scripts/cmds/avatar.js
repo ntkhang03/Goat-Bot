@@ -1,6 +1,6 @@
 this.config = {
   name: "avatar",
-  version: "1.0.3",
+  version: "1.0.4",
   author: {
     name: "NTKhang",
     contacts: ""
@@ -23,15 +23,14 @@ module.exports = {
     const axios = require("axios");
     if (!args[0] || args[0] == "help") message.guideCmd();
     else {
-  		try {
-  		  message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
-  		  const content = args.join(" ").split("|").map(item => item = item.trim());
-  		  let idNhanVat, tenNhanvat;
-  		  const chu_Nen = content[1];
-        const chu_Ky  = content[2];
-        const colorBg = content[3];
+		  message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
+		  const content = args.join(" ").split("|").map(item => item = item.trim());
+		  let idNhanVat, tenNhanvat;
+		  const chu_Nen = content[1];
+      const chu_Ky  = content[2];
+      const colorBg = content[3];
+      try {
   		  const dataChracter = (await axios.get("https://goatbot.tk/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
-  		  
         if (!isNaN(content[0])) {
           idNhanVat = parseInt(content[0]);
           const totalCharacter = dataChracter.length - 1;
@@ -46,31 +45,36 @@ module.exports = {
           }
           else return message.reply("Không tìm thấy nhân vật mang tên " + content[0] + " trong danh sách nhân vật");
         }
-        
-        const pathSave = __dirname + "/cache/avatarAnime.jpg";
-        
-        let endpoint = `https://goatbot.tk/taoanhdep/avataranime`;
-        const params = {
-          id: idNhanVat,
-          chu_Nen,
-          chu_Ky,
-          apikey: "ntkhangUabavCaipNlapavdh"
-        };
-        if (colorBg) params.colorBg = colorBg;
-        
+      }
+      catch(error) {
+        const err = error.response.data;
+        return message.reply(`Đã xảy ra lỗi lấy dữ liệu nhân vật:\n${err.name}: ${err.message}`);
+      }
+      
+      const endpoint = `https://goatbot.tk/taoanhdep/avataranime`;
+      const params = {
+        id: idNhanVat,
+        chu_Nen,
+        chu_Ky,
+        apikey: "ntkhangGoatBot"
+      };
+      if (colorBg) params.colorBg = colorBg;
+      
+      try {
         const response = await axios.get(endpoint, {
           params,
-          responseType: "arraybuffer"
+          responseType: "stream"
         });
-        fs.writeFileSync(pathSave, Buffer.from(response.data));
         message.reply({
           body: `✅ Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_Nen}\nChữ ký: ${chu_Ky}\nMàu: ${colorBg || "mặc định"}`, 
-          attachment: fs.createReadStream(pathSave)
-        }, () => fs.unlinkSync(pathSave));
+          attachment: response.data
+        });
   		}
   		catch(error) {
-  		  const err = error.response ? JSON.parse(error.response.data.toString()) : error;
-        return message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
+  		  error.response.data.on("data", function(e) {
+          const err = JSON.parse(e);
+          message.reply(`Đã xảy ra lỗi ${err.name}: ${err.message}`);
+        });
 		  }
 	  }
   }

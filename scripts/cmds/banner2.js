@@ -1,6 +1,6 @@
 this.config = {    
   name: "banner2",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -18,11 +18,10 @@ module.exports = {
   start: async function({ api, message, event, args, help }) {
     const axios = require("axios");
     const fs = require("fs-extra");
-    const qs = require("querystring");
     
     const content = args.join(" ").split("|").map(item => item = item.trim());
     
-    const apikey = "ntkhang";
+    const apikey = "ntkhangGoatBot";
     const name  = content[0],
     description = content[1],
     facebook    = content[2],
@@ -32,25 +31,25 @@ module.exports = {
     
     avatarurl     = event.messageReply ? ((event.messageReply.attachments.length > 0) ? event.messageReply.attachments[0].url : content[6]) : content[6];
     if (!avatarurl || !avatarurl.includes("http")) return message.reply(`Vui lòng nhập link hình ảnh hợp lệ, sử dụng help ${this.config.name} để xem chi tiết cách sử dụng lệnh`);
-    let params = { apikey, name, description, facebook, instagram, phone, location, avatarurl };
-    for (let i in params) if (!params[i]) return message.SyntaxError();
-    params = qs.stringify(params);
+    const params = { apikey, name, description, facebook, instagram, phone, location, avatarurl };
+    for (const i in params) if (!params[i]) return message.SyntaxError();
     message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
-    const pathsave = __dirname + `/cache/banner2${Date.now()}.png`;
-    let imageBuffer;
-    axios.get("https://goatbot.tk/taoanhdep/banner2?"+params, {
+    const pathSave = __dirname + `/cache/banner2${Date.now()}.png`;
+    
+    axios.get("https://goatbot.tk/taoanhdep/banner2", {
+      params,
       responseType: "arraybuffer"
     })
     .then(data => {
       const imageBuffer = data.data;
-      fs.writeFileSync(pathsave, Buffer.from(imageBuffer));
-      message.reply({ attachment: fs.createReadStream(pathsave) }, () => fs.unlinkSync(pathsave));
+      fs.writeFileSync(pathSave, Buffer.from(imageBuffer));
+      message.reply({
+        attachment: fs.createReadStream(pathSave)
+      }, () => fs.unlinkSync(pathSave));
     })
     .catch(error => {
-      let err;
-      if (error.response) err = JSON.parse(error.response.data.toString());
-      else err = error;
-      return message.reply(`Đã xảy ra lỗi ${err.error} ${err.message}`);
+      const err = error.response ? JSON.parse(error.response.data.toString()) : error;
+      return message.reply(`Đã xảy ra lỗi ${err.name} ${err.message}`);
     });
   }
 };
