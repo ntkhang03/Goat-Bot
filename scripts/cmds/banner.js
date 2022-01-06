@@ -41,6 +41,7 @@ module.exports = {
     })
     .then(data => {
       const imageBuffer = data.data;
+      const pathSave = __dirname + "/cache/banner.jpg";
       fs.writeFileSync(pathSave, Buffer.from(imageBuffer));
       message.reply({
         attachment: fs.createReadStream(pathSave)
