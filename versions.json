@@ -277,5 +277,12 @@
       "scripts/cmds/banner2.js": "code optimization",
       "scripts/cmds/bannerbw.js": "code optimization"
     }
+  },
+  {
+    "version": "1.2.3",
+    "info": {
+      "scripts/cmds/moon.js": "get image moon on date of birth",
+      "scripts/cmds/src/font/Kanit-SemiBoldItalic.ttf": "new font"
+    }
   }
 ]
