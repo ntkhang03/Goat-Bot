@@ -290,5 +290,11 @@
     "info": {
       "scripts/cmds/moon.js": "fix bugs"
     }
+  },
+  {
+    "version": "1.2.5",
+    "info": {
+      "scripts/events/logsbot.js": "automatically change the bot's nickname when entering a new box"
+    }
   }
 ]

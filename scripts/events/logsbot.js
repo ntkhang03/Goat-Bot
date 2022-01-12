@@ -6,13 +6,12 @@ module.exports = {
     type: ["log:subscribe", "log:unsubscribe"],
     condition: `(event.logMessageType == "log:subscribe" && event.logMessageData.addedParticipants.some(item => item.userFbId == globalGoat.botID)) || (event.logMessageType == "log:unsubscribe" && event.logMessageData.leftParticipantFbId == globalGoat.botID)`,
     isBot: true,
-    version: "1.0.1",
+    version: "1.0.2",
     author: { 
       name: "NTKhang", 
       contacts: ""
     },
     cooldowns: 5,
-    role: 1,
     envConfig: {
       logsbot: true
     }
@@ -27,6 +26,7 @@ module.exports = {
     
     if (event.logMessageType == "log:subscribe") {
       if (!event.logMessageData.addedParticipants.some(item => item.userFbId == globalGoat.botID)) return;
+      if (globalGoat.config.nickNameBot) api.changeNickname(globalGoat.config.nickNameBot, event.threadID, globalGoat.botID);
       threadName = (await api.getThreadInfo(threadID)).threadName;
       const authorName = client.allUserData[author] ? client.allUserData[author].name : await api.getUserInfo(author)[author].name;
       msg += `\n✅\nHoạt động: bot được thêm vào nhóm mới` +
