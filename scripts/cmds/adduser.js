@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.2",
+  version: "1.0.3",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -35,8 +35,8 @@ module.exports = {
     
     api.addUserToGroup(uid, event.threadID, (err) => {
       if (err) message.reply(err.errorDescription);
-      else if (threadInfo.approvalMode && !threadInfo.adminIDs.includes(globalGoat.botID)) message.reply("Đã thêm người này vào danh sách phê duyệt");
-      else message.reply("Thêm thành viên mới thành công! ");
+      else if (threadInfo.approvalMode && !threadInfo.adminIDs.some(item => item.id == globalGoat.botID)) message.reply("Đã thêm người này vào danh sách phê duyệt");
+      else message.reply("Thêm thành viên mới thành công!");
     });
   }
 };

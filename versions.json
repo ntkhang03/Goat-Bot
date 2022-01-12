@@ -296,5 +296,11 @@
     "info": {
       "scripts/events/logsbot.js": "automatically change the bot's nickname when entering a new box"
     }
+  },
+  {
+    "version": "1.2.6",
+    "info": {
+      "scripts/cmds/adduser.js": "fix bugs"
+    }
   }
 ]
