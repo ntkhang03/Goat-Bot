@@ -310,7 +310,8 @@
       "scripts/cmds/backupmongo.js": "update",
       "scripts/cmds/help.js": "simplify code",
       "scripts/cmds/reload.js": "add guide to config",
-      "scripts/cmds/uptime.js": "change category \"system-bot\" => \"info\""
+      "scripts/cmds/uptime.js": "change category \"system-bot\" => \"info\"",
+      "scripts/cmds/setbox.js": "fix bugs when set img"
     }
   }
 ]

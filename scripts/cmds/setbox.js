@@ -1,6 +1,6 @@
 this.config = {    
   name: "setbox",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -24,7 +24,7 @@ module.exports = {
     const axios = require("axios");
     
     if (args[0] == "name") {
-      const newName = args[1];
+      const newName = args.slice(1).join(" ");
       api.setTitle(newName, event.threadID, async function (err) {
         if (err) return message.reply("Rất tiếc, đã xảy ra lỗi");
         message.reply("Đã đổi tên nhóm thành: " + newName);
@@ -44,7 +44,7 @@ module.exports = {
       }); 
     }
     else if (["avatar", "avt", "img"].includes(args[0])) {
-      const urlImage = (event.messageReply && event.messageReply.attachments[0] && event.messageReply.attachments[0].type != share) ? event.messageReply.attachments[0].url : (event.attachments[0] && event.attachments[0].type != "share") ? event.attachments[0].url : args[1];
+      const urlImage = (event.messageReply && event.messageReply.attachments[0] && event.messageReply.attachments[0].type != "share") ? event.messageReply.attachments[0].url : (event.attachments[0] && event.attachments[0].type != "share") ? event.attachments[0].url : args[1];
       
       if (!urlImage) return message.reply("Vui lòng gửi kèm hoặc reply một hình ảnh hoặc nhập vào link");
       const pathSave = __dirname + `/avatar${event.threadID}.png`;
