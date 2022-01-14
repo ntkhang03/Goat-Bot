@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.3",
+  version: "1.0.4",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "Thêm thành viên vào box chat",
   longDescription: "Thêm thành viên vào box chat của bạn",
-  category: "info",
+  category: "box chat",
   guide: "{p}{n} [link profile|uid]",
   packages: "fb-tools"
 };

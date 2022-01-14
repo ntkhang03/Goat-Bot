@@ -9,7 +9,7 @@ this.config = {
   role: 2,
   shortDescription: "Gửi thông báo từ admin đến all box",
   longDescription: "Gửi thông báo từ admin đến all box",
-  category: "admin",
+  category: "owner",
   guide: "{p}{n} <tin nhắn>",
   envConfig: {
     delayPerGroup: 250

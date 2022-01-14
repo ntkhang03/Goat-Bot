@@ -1,6 +1,6 @@
 this.config = {    
   name: "help",
-  version: "1.0.2",
+  version: "1.0.3",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -38,7 +38,10 @@ module.exports = {
         let i = 0;
         for (var [name, value] of (globalGoat.commands)) {
           value.config.shortDescription && value.config.shortDescription.length < 40 ? name += ` → ${value.config.shortDescription.charAt(0).toUpperCase() + value.config.shortDescription.slice(1)}` : "";
-          arrayInfo.push({ data: name, priority: value.priority || 0 });
+          arrayInfo.push({
+            data: name, 
+            priority: value.priority || 0
+          });
         }
         arrayInfo.sort((a, b) => a.data - b.data);
         arrayInfo.sort((a, b) => (a.priority > b.priority ?  -1 : 1));
@@ -47,23 +50,26 @@ module.exports = {
         const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
         const characters = "──────────────────";
         
-        for (let item of returnArray) {
-          msg += `【${++i}】 ${item.data}\n`;
-        }
+        for (let item of returnArray) msg += `【${++i}】 ${item.data}\n`;
         const doNotDelete = "[ 🐐 | Project Goat Bot ]";
         message.reply(`⊱ ⋅ ${characters}\n${msg}${characters} ⋅ ⊰\nTrang [ ${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)} ]\nHiện tại bot có ${globalGoat.commands.size} lệnh có thể sử dụng\n» Gõ ${prefix}help <số trang> để xem danh sách lệnh\n» Gõ ${prefix}help <tên lệnh> để xem chi tiết cách sử dụng lệnh đó\n${characters} ⋅ ⊰\n${doNotDelete}`);
       }
       else if (sortHelp == "category") {
-        for (let [name, value] of globalGoat.commands) arrayInfo.some(item => item.category == value.config.category.toLowerCase()) ? arrayInfo[arrayInfo.findIndex(item => item.category == value.config.category.toLowerCase())].names.push(value.config.name) : arrayInfo.push({ category: value.config.category.toLowerCase(), names: [value.config.name]});
+        for (const [name, value] of globalGoat.commands) { if (arrayInfo.some(item => item.category == value.config.category.toLowerCase())) arrayInfo[arrayInfo.findIndex(item => item.category == value.config.category.toLowerCase())].names.push(value.config.name);
+          else arrayInfo.push({
+            category: value.config.category.toLowerCase(),
+            names: [value.config.name]
+          });
+        }
         arrayInfo.sort((a, b) => (a.category < b.category ?  -1 : 1));
-        for (let data of arrayInfo) {
-          let categoryUpcase = "______ " + data.category.toUpperCase() + " ______";
+        for (const data of arrayInfo) {
+          let categoryUpcase = "- " + data.category.toUpperCase() + ":";
           data.names.sort();
-          msg += `${categoryUpcase}\n${data.names.join(", ")}\n`;
+          msg += `${categoryUpcase}\n${data.names.join(", ")}\n\n`;
         }
         const characters = "───────────────";
         const doNotDelete = "[ 🐐 | Project Goat Bot ]";
-        message.reply(`${msg}\n⊱ ⋅ ${characters} ⋅ ⊰\n» Hiện tại bot có ${globalGoat.commands.size} lệnh có thể sử dụng, gõ ${prefix}help <tên lệnh> để xem chi tiết cách sử dụng lệnh đó\n${characters} ⋅ ⊰\n${doNotDelete}`);
+        message.reply(`${msg}⊱ ⋅ ${characters} ⋅ ⊰\n» Hiện tại bot có ${globalGoat.commands.size} lệnh có thể sử dụng, gõ ${prefix}help <tên lệnh> để xem chi tiết cách sử dụng lệnh đó\n${characters} ⋅ ⊰\n${doNotDelete}`);
       }
     }
 // ———————————— COMMAND DOES NOT EXIST ———————————— //
@@ -74,35 +80,46 @@ module.exports = {
     else {
       const configCommand = command.config;
       let author = "", contacts = "";
-      if (configCommand.author) {
+      if (
+        configCommand.author
+        && typeof(configCommand.author) == "object"
+        && !Array.isArray(configCommand.author)
+      ) {
         author = configCommand.author.name || "";
         contacts = configCommand.author.contacts || "";
       }
+      else if (
+        configCommand.author
+        && typeof(configCommand.author) == "object"
+        && Array.isArray(configCommand.author)
+      ) {
+        author = configCommand.author[0];
+        contacts = configCommand.author[1];
+      }
+      else if (typeof(configCommand.author) == "string") author = configCommand.author;
       
       const nameUpperCase = configCommand.name.toUpperCase();
       const characters = Array.from('─'.repeat(nameUpperCase.length)).join("");
-      const title = `╭${characters}╮\n   ${nameUpperCase}\n╰${characters}╯`;
+      const title = `╭${characters}╮\n    ${nameUpperCase}\n╰${characters}╯`;
       
-      let msg = `${title}\n📜Mô tả: ${configCommand.longDescription || "Không có"}` +
-      `\n\n» Tên lệnh: ${configCommand.name} ${configCommand.shortName ? `\n» Tên gọi khác: ${typeof configCommand.shortName == "string" ? configCommand.shortName : configCommand.shortName.join(", ")}` : ""}` +
-      `\n\n» 👥Role: ${((configCommand.role == 0) ? "Tất cả người dùng" : (configCommand.role == 1) ? "Quản trị viên nhóm" : "Admin bot" )}` +
-      `\n» ⏱Thời gian mỗi lần dùng lệnh: ${configCommand.cooldowns || 1}s` +
-      `\n» ✳️Phân loại: ${configCommand.category || "Không có phân loại"}` +
-      `\n\n» 👨‍🎓Author: ${author}` +
-      `\n» 📱Contacts: ${contacts}`;
-      if (configCommand.guide) msg += `\n\n» 📄Hướng dẫn cách dùng:\n${configCommand.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, configCommand.name)}\n✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏\n` +
-      `📝Chú thích:\n• Nội dung bên trong <XXXXX> là có thể thay đổi\n• Nội dung bên trong [a|b|c] là a hoặc b hoặc c`;
+      const msg = `${title}\n» Mô tả: ${configCommand.longDescription || "Không có"}`
+      + `${configCommand.shortName ? `\n\n» Tên gọi khác: ${typeof configCommand.shortName == "string" ? configCommand.shortName : configCommand.shortName.join(", ")}` : ""}`
+      + `\n\n» Role: ${((configCommand.role == 0) ? "Tất cả người dùng" : (configCommand.role == 1) ? "Quản trị viên nhóm" : "Admin bot" )}`
+      + `\n» Thời gian mỗi lần dùng lệnh: ${configCommand.cooldowns || 1}s`
+      + `\n» Phân loại: ${configCommand.category || "Không có phân loại"}`
+      + (author ? `\n» Author: ${author}` : "")
+      + (contacts ? `\n» Contacts: ${contacts}` : "")
+      + (configCommand.guide ? `\n───────────────\n» Hướng dẫn cách dùng:\n${configCommand.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, configCommand.name)}\n───────────────\n` +
+      `» Chú thích:\n• Nội dung bên trong <XXXXX> là có thể thay đổi\n• Nội dung bên trong [a|b|c] là a hoặc b hoặc c` : "");
+      
       const formSendMessage = {
         body: msg
       };
       
       const { sendFile } = configCommand;
-      if (sendFile &&
-          typeof(sendFile) == 'object' &&
-          !Array.isArray(sendFile)
-      ) {
+      if (sendFile && typeof(sendFile) == 'object' && !Array.isArray(sendFile)) {
         formSendMessage.attachment = [];
-        for (let pathFile in sendFile) {
+        for (const pathFile in sendFile) {
           if (!existsSync(pathFile)) await download(sendFile[pathFile], pathFile);
           formSendMessage.attachment.push(createReadStream(pathFile));
         }

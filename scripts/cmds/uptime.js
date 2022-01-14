@@ -1,6 +1,6 @@
 this.config = {    
   name: "uptime",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "xem thời gian bot đã online",
   longDescription: "xem thời gian bot đã online",
-  category: "system-bot",
+  category: "info",
   guide: "{p}{n}"
 };
 

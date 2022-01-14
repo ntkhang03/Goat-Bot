@@ -1,14 +1,15 @@
 this.config = {    
   name: "reload",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
   },
   cooldowns: 5,
-  role: 0,
+  role: 2,
   shortDescription: "reload file config",
   longDescription: "load lại file config.json hoặc configComands.json vào biến globalGoat",
+  guide: "{p}{n} [config|cmds]",
   category: "owner"
 };
 

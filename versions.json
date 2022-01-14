@@ -302,5 +302,15 @@
     "info": {
       "scripts/cmds/adduser.js": "fix bugs"
     }
+  },
+  {
+    "version": "1.2.7",
+    "info": {
+      "scripts/cmds/adduser.js": "change category \"info\" => \"box chat\"",
+      "scripts/cmds/backupmongo.js": "update",
+      "scripts/cmds/help.js": "simplify code",
+      "scripts/cmds/reload.js": "add guide to config",
+      "scripts/cmds/uptime.js": "change category \"system-bot\" => \"info\""
+    }
   }
 ]
