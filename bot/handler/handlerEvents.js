@@ -23,10 +23,9 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
     //                   WHEN CHAT                   //
     //===============================================//
     async function whenChat() {
-      if (!body) return;
       const { isGroup } = event;
       const allWhenChat = globalGoat.whenChat || [];
-      const args = body.split(" ");
+      const args = body ? body.split(" ") : [];
       for (const key of allWhenChat) {
         const command = globalGoat.commands.get(key);
         try {
