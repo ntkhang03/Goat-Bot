@@ -58,7 +58,7 @@ module.exports = async function({ globalGoat, client, api }) {
     client.allThreadData = Threads;
     
   	async function saveData(Tid) {
-  	  Threads[Tid].lastUpdate = Date.now();
+  	  Tid != "delete" ? Threads[Tid].lastUpdate = Date.now() : "";
   	  client.allThreadData = Threads;
   	  if (databaseType == "local") {
 	      fs.writeFileSync(__dirname + "/../threadsData.json", JSON.stringify(Threads, null, 2));
@@ -102,7 +102,6 @@ module.exports = async function({ globalGoat, client, api }) {
     	    name: name,
     	    emoji: threadInfo.emoji,
     	    prefix: null,
-    	    members: newMembers,
     	    adminIDs: newadminsIDs,
     	    avatarbox: threadInfo.imageSrc,
     	    approvalMode: threadInfo.approvalMode,
@@ -112,7 +111,8 @@ module.exports = async function({ globalGoat, client, api }) {
     	    },
     	    data: {
     	      createDate: Date.now()
-    	    }
+    	    },
+    	    members: newMembers
     	  };
     	  Threads[threadID] = data;
     	  await saveData(threadID);
@@ -132,10 +132,14 @@ module.exports = async function({ globalGoat, client, api }) {
     	  const ThreadInfo = await getData(threadID);
     	  const newThreadInfo = await api.getThreadInfo(threadID);
     	  
-    	  const { userInfo } = newThreadInfo;
+    	  const {
+    	    userInfo,
+    	    adminIDs
+        } = newThreadInfo;
+        
     	  const oldMembers = ThreadInfo.members;
     		const newMembers = {};
-    		for (let user of userInfo) {
+    		for (const user of userInfo) {
     		  const userID = user.id;
     		  const oldDataUser = oldMembers[userID];
     		  const data = {
@@ -150,16 +154,22 @@ module.exports = async function({ globalGoat, client, api }) {
           };
     		}
     		
-    		const newadminsIDs = [];
-  			newThreadInfo.adminIDs.forEach(item => newadminsIDs.push(item.id));
+    		const newadminsIDs = adminIDs.map(item => item.id);
+  			const ThreadInfoNew = {
+  			  name: newThreadInfo.name,
+    			emoji: newThreadInfo.emoji,
+    			adminIDs: newadminsIDs,
+      		avatarbox: newThreadInfo.imageSrc,
+      		members: {
+      		  ...oldMembers,
+      		  ...newMembers
+      		}
+  			};
   			
-  			ThreadInfo.name = newThreadInfo.name;
-  			ThreadInfo.emoji = newThreadInfo.emoji;
-    		ThreadInfo.members = newMembers;
-  			ThreadInfo.adminIDs = newadminsIDs;
-    		ThreadInfo.avatarbox = newThreadInfo.imageSrc;
-    		
-    		Threads[threadID] = ThreadInfo;
+    		Threads[threadID] = {
+    		  ...ThreadInfo,
+    		  ...ThreadInfoNew
+        };
     		
     		await saveData(threadID);
     		if (callback && typeof callback == "function") callback(null, Threads[threadID]);
@@ -177,12 +187,12 @@ module.exports = async function({ globalGoat, client, api }) {
     	  if (!keys) return Object.values(Threads);
     	  if (!Array.isArray(keys)) throw new Error("Tham số truyền vào phải là 1 array");
     	  const data = [];
-      	for (let threadID in Threads) {
+      	for (const threadID in Threads) {
       	  const db = {
       	    id: threadID
           };
       	  const dataT = Threads[threadID];
-      	  for (let key of keys) db[key] = dataT[key];
+      	  for (const key of keys) db[key] = dataT[key];
       	  data.push(db);
       	}
       	if (callback && typeof callback == "function") callback(null, data);
@@ -230,7 +240,7 @@ module.exports = async function({ globalGoat, client, api }) {
   	async function delData(threadID, callback) {
   		try {
   			delete Threads[threadID];
-  			await saveData(threadID);
+  			await saveData("delete");
   			if (callback && typeof callback == "function") callback(null, "DELDATA THREAD "+threadID+" SUCCES");
   			return true;
   		} catch(err) {
@@ -271,7 +281,7 @@ module.exports = async function({ globalGoat, client, api }) {
     client.allUserData = Users;
   	
     async function saveData(Uid) {
-      Users[Uid].lastUpdate = Date.now();
+      Uid != "delete" ? Users[Uid].lastUpdate = Date.now() : "";
       client.allUserData = Users;
   	  if (databaseType == 'local') {
   	    fs.writeFileSync(__dirname + "/../usersData.json", JSON.stringify(Users, null, 2));
@@ -331,7 +341,10 @@ module.exports = async function({ globalGoat, client, api }) {
   	      isFriend: updateInfoUser.isFriend
   		  }
   	    
-  		  Users[userID] = {...InfoUser,...newData};
+  		  Users[userID] = {
+  		    ...InfoUser,
+  		    ...newData
+        };
   		  
   			await saveData(userID);
   			if (callback && typeof callback == "function") callback(null, InfoUser);
@@ -400,7 +413,7 @@ module.exports = async function({ globalGoat, client, api }) {
   	async function delData(userID, callback) {
   		try {
   			delete Users[userID];
-  			const data = await saveData(userID);
+  			const data = await saveData('delete');
   			if (callback && typeof callback == "function") callback(null, data);
   		} catch (err) {
   			print.err(err.stack, "DELDATA USER");

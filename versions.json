@@ -313,5 +313,12 @@
       "scripts/cmds/uptime.js": "change category \"system-bot\" => \"info\"",
       "scripts/cmds/setbox.js": "fix bugs when set img"
     }
+  },
+  {
+    "version": "1.2.8",
+    "info": {
+      "scripts/cmds/refresh.js": "fix bugs",
+      "database/dataProcessing/handlerData.js": "code optimization"
+    }
   }
 ]

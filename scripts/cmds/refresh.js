@@ -1,6 +1,6 @@
 this.config = {    
   name: "refresh",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -15,7 +15,7 @@ this.config = {
 
 module.exports = {
   config: this.config,
-  start: async function({ args, usersData, threadsData, message }) {
+  start: async function({ args, usersData, threadsData, message, api }) {
     
     async function refreshUsers() {
       const allUser = await usersData.getAll();
@@ -23,8 +23,8 @@ module.exports = {
       return message.reply(`Đã cập nhật dữ liệu của ${allUser.length} người dùng`);
     }
     async function refreshThreads() {
-      const allThread = await threadsData.getAll();
-      for (const thread of allThread) await threadsData.refreshInfo(thread.id);
+      const allThread = (await api.getThreadList(999, null, ["INBOX"])).filter(item => item.isGroup);
+      for (const thread of allThread) await threadsData.refreshInfo(thread.threadID);
       return message.reply(`Đã cập nhật dữ liệu của ${allThread.length} nhóm`);
     }
     
