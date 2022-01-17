@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 module.exports = {
   config: {
     name: "autoUpdateInfoThread",
-    version: "1.0.1",
+    version: "1.0.2",
     type: ["log:subscribe", "log:unsubscribe", "change_thread_admins", "log:thread-name", "change_thread_image", "log:thread-icon"],
     author: { 
       name: "NTKhang", 
@@ -18,13 +18,17 @@ module.exports = {
     if (logMessageType == "log:subscribe") {
       const dataAddedParticipants = event.logMessageData.addedParticipants;
       const { members } = threadInfo;
-      for (let user of dataAddedParticipants) {
+      for (const user of dataAddedParticipants) {
+        const oldData = members[user.userFbId] || {};
         members[user.userFbId] = {
-          id: user.userFbId,
-          name: user.fullName,
-          nickname: null,
-          inGroup: true,
-          count: 0
+          ...oldData,
+          ...{
+            id: user.userFbId,
+            name: user.fullName,
+            nickname: null,
+            inGroup: true,
+            count: 0
+          }
         };
       }
       await threadsData.setData(threadID, { members });
@@ -33,15 +37,13 @@ module.exports = {
       const { members } = threadInfo;
       if (members[logMessageData.leftParticipantFbId]) {
         members[logMessageData.leftParticipantFbId].inGroup = false;
+        await threadsData.setData(threadID, { members });
       }
-      await threadsData.setData(threadID, { members });
     }
     else if (logMessageType == 'change_thread_admins') {
       const { adminIDs } = threadInfo;
-      
       if (logMessageData.ADMIN_EVENT == "add_admin") adminIDs.push(logMessageData.TARGET_ID);
       else adminIDs.splice(adminIDs.findIndex(item => item == logMessageData.TARGET_ID), 1);
-      
       await threadsData.setData(threadID, {adminIDs});
     }
     else if (logMessageType == 'log:thread-name') {

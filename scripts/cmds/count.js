@@ -1,6 +1,6 @@
 this.config = {    
   name: "count",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -34,10 +34,10 @@ module.exports = {
     
     if (args[0]) {
       if (args[0].toLowerCase() == "all") {
-				let msg = "";
+				let msg = "Số tin nhắn của các thành viên:\n";
         for (const item of arraySort) {
-          if (item.count > 0) msg += `\n${item.stt}/ ${item.name}: ${item.count} tin nhắn`;
-        };
+          if (item.count > 0) msg += `\n${item.stt}/ ${item.name}: ${item.count}`;
+        }
         message.reply(msg + "\n\nNhững người không có tên trong danh sách là chưa gửi tin nhắn nào");
       }
       else if (event.mentions) {

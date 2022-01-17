@@ -181,7 +181,6 @@ module.exports = async function({ globalGoat, client, api }) {
   	  }
   	}
   	
-  	
   	async function getAll(keys, callback) {
   	  try {
     	  if (!keys) return Object.values(Threads);
