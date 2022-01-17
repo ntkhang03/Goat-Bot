@@ -1,6 +1,6 @@
 this.config = {    
   name: "ytb",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -54,7 +54,7 @@ module.exports = {
       result = (await axios.get(url)).data;
     }
     catch(err) {
-      return message.reply("Đã xảy ra lỗi: " + err.error.message);
+      return message.reply("Đã xảy ra lỗi: " + err.response.data.error.message);
     }
     result = result.items;
     if (result.length == 0) return message.reply("Không có kết quả tìm kiếm nào phù hợp với từ khóa "+search);
@@ -66,20 +66,16 @@ module.exports = {
     for (let info of result) {
       const idvideo = info.id.videoId;
       const infoWithApi = (await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${idvideo}&key=${API_KEY}`)).data.items[0];
-      
       const time = infoWithApi.contentDetails.duration.slice(2).toLowerCase();
-      
       const listthumbnails = Object.values(infoWithApi.snippet.thumbnails);
       const linkthumbnails = listthumbnails[listthumbnails.length - 1].url;
-      
-      
-      const pathThumnail = __dirname + `/cache/${idvideo}.png`;
-      await download(linkthumbnails, pathThumnail);
-      const ReadStreamImage = createReadStream(pathThumnail);
-      thumbnails.push(ReadStreamImage);
+      const streamThumbnail = (await axios.get(linkthumbnails, {
+        responseType: "stream"
+      })).data;
+      thumbnails.push(streamThumbnail);
+      arrayID.push(idvideo);
       
       msg += `${i++}. ${info.snippet.title}\nTime: ${time}\n\n`;
-      arrayID.push(idvideo);
     }
     
     message.reply({
@@ -95,11 +91,6 @@ module.exports = {
         type
       };
     });
-    
-    setTimeout(function() {
-      for (let idfile of arrayID) unlinkSync(__dirname + `/cache/${idfile}.png`);
-    }, 2000);
-    
   },
   
   whenReply: async ({ event, api, Reply, download, message }) => {

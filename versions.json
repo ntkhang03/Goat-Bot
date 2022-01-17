@@ -334,5 +334,11 @@
       "scripts/cmds/setname.js": "new command set nickname for a group member",
       "scripts/events/autoUpdateInfoThread.js": "fix bugs that lose user data when leaving the group"
     }
+  },
+  {
+    "version": "1.3.2",
+    "info": {
+      "scripts/cmds/ytb.js": "fix bugs"
+    }
   }
 ]
