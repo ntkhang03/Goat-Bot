@@ -51,7 +51,9 @@ module.exports = async (globalGoat, configCommands) => {
     		  const packages = (typeof configCommand.packages == "string") ? configCommand.packages.trim().replace(/\s/g, '').split(',') : configCommand.packages;
     		  if (!Array.isArray(packages)) throw new Error("Value packages needs to be array");
   				for (let i of packages) {
-  				  try { require(i) }
+  				  try {
+  				    require(i);
+  				  }
   				  catch (err) {
       				try {
                 loading(`install package ${chalk.hex("#ff5208")(i)}, wating...`, "INSTALL PACKAGE");
@@ -69,24 +71,31 @@ module.exports = async (globalGoat, configCommands) => {
     		  const { envGlobal } = configCommand;
     		  if (typeof envGlobal != "object" && Array.isArray(envGlobal)) throw new Error("envGlobal need to be a object");
     		  if (!configCommands.envGlobal) configCommands.envGlobal = {};
-    		  for (let i in envGlobal) {
-    		    if (!configCommands.envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
-    		    else {
-    		      const oldCommand = fs.readFileSync(pathCommand).toString();
-    		      const newCommand = oldCommand.replace(envGlobal[i], configCommands.envGlobal[i]);
-    		      fs.writeFileSync(pathCommand, newCommand);
-    		    }
-    		  }
+  		    for (const i in envGlobal) {
+  		      if (!configCommands.envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
+  		      else {
+  		        let readCommand = fs.readFileSync(pathCommand).toString();
+  		        readCommand = readCommand.replace(envGlobal[i], configCommands.envGlobal[i]);
+  		        fs.writeFileSync(pathCommand, readCommand);
+  		      }
+  		    }
     		}
 // ———————————————— CHECK CONFIG CMD ——————————————— //
         if (configCommand.envConfig && typeof configCommand.envConfig == "object") {
+          if (!configCommands[typeEnvCommand]) configCommands[typeEnvCommand] = {};
+          if (!configCommands[typeEnvCommand][commandName]) configCommands[typeEnvCommand][commandName] = {};
+        
     		  for (const [key, value] of Object.entries(configCommand.envConfig)) {
-    		    if (!configCommands[typeEnvCommand]) configCommands[typeEnvCommand] = {};
-    		    if (!configCommands[typeEnvCommand][commandName]) configCommands[typeEnvCommand][commandName] = {};
     		    if (!configCommands[typeEnvCommand][commandName][key]) configCommands[typeEnvCommand][commandName][key] = value;
+    		    else {
+    		      let readCommand = fs.readFileSync(pathCommand).toString();
+  		        readCommand = readCommand.replace(value, configCommands[typeEnvCommand][commandName][key]);
+  		        fs.writeFileSync(pathCommand, readCommand);
+    		    }
     		  }
     		}
 // ——————————— CHECK UPDATE FROM GITHUB ——————————— //
+       /*
   	    if (globalGoat.config.autoUpdateCommand == true) {
     	    try {
         		const result = await axios.get(`https://raw.githubusercontent.com/ntkhang03/Goat-Bot/master/${folderModules}/${file}`, {
@@ -101,14 +110,15 @@ module.exports = async (globalGoat, configCommands) => {
   	          loading(`Đã cập nhật ${text} ${chalk.hex("#FFFF00")(commandName)} lên phiên bản ${version}\n`, "UPDATE COMMAND");
       		  }
     	    }
-      		catch(e) {}
+      		catch(e) {
+      		}
   	    }
+  	    */
 // ——————————————— CHECK RUN ANYTIME ——————————————— //
     		if (command.whenChat) globalGoat.whenChat.push(commandName);
 // ————————————— IMPORT TO GLOBALGOAT ————————————— //
     		globalGoat[setMap].set(commandName.toLowerCase(), command);
-    		let color = "#00ff2f";
-    		if (text == "command") color = "#ff7100";
+    		const color = text == "command" ? "#ff7100" : "#00ff2f";
     		loading(`${chalk.hex(color)(`[ ${text.toUpperCase()} ]`)} ${chalk.hex("#FFFF00")(commandName)} succes\n`, "LOADED");
     	}
     	catch (error) {

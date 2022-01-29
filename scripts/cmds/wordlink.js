@@ -32,7 +32,7 @@ module.exports = {
       for (let item of top) {
         msg += `\nTop ${i}: ${(await usersData.getData(item.id)).name} với ${item.point} điểm`;
         i++;
-      };
+      }
       return message.reply(msg);
     }
     message.reply(`Đã bật game nối chữ\nHãy reply tin nhắn này với 2 từ để bắt đầu trò chơi`, (err, info) => {
@@ -40,7 +40,7 @@ module.exports = {
         nameCmd: require(__filename).config.name,
         messageID: info.messageID,
         senderID
-      }
+      };
     });
   },
   
@@ -64,7 +64,7 @@ module.exports = {
         wordConnect: null,
         currentPoint: 0 
       });
-    };
+    }
     const dataWLuser = cacheWordlink.find(item => item.id == senderID);
     if (dataWLuser.wordConnect != args[0].toLowerCase() && dataWLuser.wordConnect != null ) return;
     
@@ -77,21 +77,22 @@ module.exports = {
       hightPoint = currentPoint;
       Data.hightPoint.find(item => item.id == senderID).point = hightPoint;
       fs.writeFileSync(__dirname + "/database/custom.json", JSON.stringify(database, null, 2));
-    };
+    }
     
     var top = Data.hightPoint.sort((a, b) => b.point - a.point );
     if (word == "You Lose!!") {
       message.reply(`Bạn đã thua\n• Điểm lần này là: ${currentPoint}\n• Điểm cao nhất là: ${hightPoint}\n• Top #${top.findIndex(item => item.id == senderID) + 1} trong bảng xếp hạng`);
       dataWLuser.currentPoint = 0;
-      return dataWLuser.wordConnect = null;
-    };
+      dataWLuser.wordConnect = null;
+      return;
+    }
     const wordConnect = word.split(" ")[1];
     message.reply(`${word}\nTừ liên kết là "${wordConnect}", reply tin nhắn này với từ tiếp theo để tiếp tục chơi`, (err, info) => {
       globalGoat.whenReply[info.messageID] = {
         nameCmd: require(__filename).config.name,
         messageID: info.messageID,
         senderID
-      }
+      };
     });
     dataWLuser.currentPoint = currentPoint + 1;
     dataWLuser.wordConnect = wordConnect;

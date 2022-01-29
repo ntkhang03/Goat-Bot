@@ -8,7 +8,7 @@
   const print = require("./logger/print.js");
   const loading = require("./logger/loading.js");
   const login = require("fb-chat-api");
-  const { readdirSync, readFileSync, writeFileSync, existsSync, copySync, unlinkSync } = require("fs-extra");
+  const { writeFileSync } = require("fs-extra");
   
   const globalGoat = {
     print,
@@ -25,7 +25,7 @@
   
   // ————————————————— LOAD CONFIG ————————————————— //
   const configCommands = require("./configCommands.json");
-  var config = require("./config.json");
+  const config = require("./config.json");
 	globalGoat.config = config;
 	print("Đã cài đặt thiết lặp cho bot", "CONFIG");
   

@@ -1,6 +1,6 @@
 this.config = {    
   name: "cmd",
-  version: "1.0.3",
+  version: "1.0.4",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -23,13 +23,12 @@ module.exports = {
     const chalk = require("chalk");
     const fs = require("fs-extra");
     const allWhenChat = globalGoat.whenChat;
+    const { configCommands } = globalGoat;
 
     const loadCommand = function (filename) {
       try {
         const pathCommand = __dirname + `/${filename}.js`;
-        
         if (!fs.existsSync(pathCommand)) throw new Error(`Không tìm thấy file ${filename}.js`);
-        
         const oldCommand = require(join(__dirname, filename + ".js"));
         const oldNameCommand = oldCommand.config.name;
         const oldEnvConfig = oldCommand.config.envConfig || {};
@@ -43,7 +42,6 @@ module.exports = {
         
         // delete old command
         delete require.cache[require.resolve(pathCommand)];
-        
         const command = require(join(__dirname, filename + ".js"));
         const configCommand = command.config;
         if (!configCommand) throw new Error("Config of command undefined");
@@ -62,15 +60,17 @@ module.exports = {
             else globalGoat.shortName.set(aliases, configCommand.name);
           }
         }
-        var { packages, envGlobal, envConfig } = configCommand;
-        const { configCommands } = globalGoat;
+        let { packages, envGlobal, envConfig } = configCommand;
         if (!command.start) throw new Error(`Command không được thiếu function start!`);
         if (!configCommand.name) throw new Error(`Tên Command không được để trống!`);
+        
         if (packages) {
-          packages = (typeof packages == "string") ? packages.trim().replace(/\s+/g, '').split(',') : packages;
+           typeof packages == "string" ? packages = packages.trim().replace(/\s+/g, '').split(',') : "";
           if (!Array.isArray(packages)) throw new Error("Value packages needs to be array");
   				for (let i of packages) {
-  				  try { require(i) }
+  				  try {
+  				    require(i);
+  				  }
   				  catch (err) {
       				try {
                 loading(`Install package ${chalk.hex("#ff5208")(i)}`, "PACKAGE");
@@ -86,20 +86,18 @@ module.exports = {
         // env Global
         if (envGlobal && typeof envGlobal == "object") {
     		  if (!configCommands.envGlobal) configCommands.envGlobal = {};
-    		  for (let i in envGlobal) if (configCommands.envGlobal[i] != envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
+    		  if (JSON.stringify(envGlobal) != JSON.stringify(oldEnvGlobal)) configCommands.envGlobal = envGlobal;
         }
         // env Config
         if (envConfig && typeof envConfig == "object") {
-          for (const [key, value] of Object.entries(envConfig)) {
-    		    if (!configCommands.envCommands) configCommands.envCommands = {};
-    		    if (!configCommands.envCommands[nameScript]) configCommands.envCommands[nameScript] = {};
-    		    if (JSON.stringify(configCommands.envCommands[nameScript]) != JSON.stringify(oldEnvConfig)) configCommands.envCommands[nameScript] = envConfig;
-    		  }
+          if (!configCommands.envCommands) configCommands.envCommands = {};
+          if (!configCommands.envCommands[nameScript]) configCommands.envCommands[nameScript] = {};
+          if (JSON.stringify(configCommands.envCommands[nameScript]) != JSON.stringify(oldEnvConfig)) configCommands.envCommands[nameScript] = envConfig;
         }
         globalGoat.commands.delete(oldNameCommand);
         globalGoat.commands.set(nameScript, command);
         fs.writeFileSync(client.dirConfigCommands, JSON.stringify(configCommands, null, 2));
-        globalGoat.print.master("Đã load tệp lệnh "+filename+".js", "LOADED");
+        globalGoat.print.master(`Đã load tệp lệnh ${filename}.js`, "LOADED");
         return {
           status: "succes",
           name: filename
@@ -123,8 +121,8 @@ module.exports = {
     }
     else if (args[0].toLowerCase() == "loadall") {
       const allFile = fs.readdirSync(__dirname)
-      .filter(item => item.endsWith(".js"))
-      .map(item => item = item.split(".")[0]);
+        .filter(item => item.endsWith(".js"))
+        .map(item => item = item.split(".")[0]);
       const arraySucces = [];
       const arrayFail = [];
       for (let name of allFile) {
