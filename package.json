@@ -28,6 +28,7 @@
     "canvas": "",
     "chalk": "^4.1.1",
     "child_process": "^1.0.2",
+    "crypto": "",
     "express": "^4.17.1",
     "fb-chat-api": "^10.3.13",
     "fb-tools": "",
@@ -39,6 +40,7 @@
     "readline": "^1.3.0",
     "request": "^2.88.2",
     "require-from-string": "^2.0.2",
+    "uuid": "3.3.2",
     "ytdl-core": "^4.9.1"
   },
   "homepage": "https://github.com/ntkhang03/Goat-Bot#readme"

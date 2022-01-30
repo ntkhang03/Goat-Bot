@@ -1,12 +1,12 @@
 this.config = {    
   name: "cmd",
-  version: "1.0.4",
+  version: "1.0.5",
   author: {
     name: "NTKhang", 
     contacts: ""
   },
   cooldowns: 5,
-  role: 1,
+  role: 2,
   shortDescription: "Quản lý command",
   longDescription: "Quản lý các tệp lệnh của bạn",
   category: "owner",

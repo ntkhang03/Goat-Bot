@@ -357,5 +357,16 @@
       "bot/loadAllScript.js": "synchronized envGlobal & envConfig when load scripts",
       "index.js": "no description"
     }
+  },
+  {
+    "version": "1.4.0",
+    "info": {
+      "config.json": "có thể đăng nhập bot bằng email & password (nhập vào config)",
+      "index.js": "có thể đăng nhập bot bằng email & password (nhập vào config)",
+      "scripts/cmds/cmd.js": "đổi quyền sử dụng lệnh (1 => 2)",
+      "scripts/cmds/help.js": "sửa vài lỗi chính tả",
+      "scripts/cmds/logsbot.js": "đổi quyền sử dụng lệnh (1 => 2) & sửa vài lỗi chính tả",
+      "scripts/cmds/uptime.js": "fix hiển thị giờ"
+    }
   }
 ]
