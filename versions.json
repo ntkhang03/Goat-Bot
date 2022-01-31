@@ -385,5 +385,11 @@
       "bot/loadAllScript.js": "no description",
       "index.js": "no description"
     }
+  },
+  {
+    "version": "1.4.2",
+    "info": {
+      "index.js": "fix error config is not defined"
+    }
   }
 ]

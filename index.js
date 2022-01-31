@@ -26,7 +26,7 @@
   
   // ————————————————— LOAD CONFIG ————————————————— //
 	print("Đã cài đặt thiết lặp cho bot", "CONFIG");
-  const { configCommands } = globalGoat;
+  const { configCommands, config } = globalGoat;
   
   const client = {
     dirConfig: __dirname + "/config.json",
