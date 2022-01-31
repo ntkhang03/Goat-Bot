@@ -1,6 +1,6 @@
 this.config = {    
   name: "cmd",
-  version: "1.0.5",
+  version: "1.0.6",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -116,7 +116,7 @@ module.exports = {
       if (!args[1]) return message.reply("Vui lòng nhập vào tên lệnh bạn muốn reload");
       const infoLoad = loadCommand(args[1]);
       if (infoLoad.status == "succes") message.reply(`Đã load command ${infoLoad.name} thành công`);
-      else message.reply(`Load command ${infoLoad.name} thất bại với lỗi\n${infoLoad.error.stack.split("\n").filter(i => i.length > 0).slice(0, 5).join("\n")}`);
+      else message.reply(`Load command ${infoLoad.name} thất bại với lỗi\n${infoLoad.error.stack.split("\n").filter(i => i.length > 0).slice(0, 3).join("\n")}`);
       globalGoat.whenChat = allWhenChat.filter(item => item != null);
     }
     else if (args[0].toLowerCase() == "loadall") {

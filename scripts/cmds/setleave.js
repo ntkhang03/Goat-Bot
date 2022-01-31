@@ -1,6 +1,6 @@
 this.config = {    
   name: "setleave",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "chỉnh sửa nội dung tin nhắn tạm biệt",
   longDescription: "chỉnh sửa nội dung tin nhắn tạm biệt thành viên rời khỏi nhóm chat của bạn",
-  category: "box chat",
+  category: "custom",
   guide: "{p}{n} text [<nội dung>|reset]: chỉnh sửa nội dung văn bản hoặc reset về mặc định, những shortcut có sẵn:"
        + "\n+ {userName}: tên của thành viên mới"
        + "\n+ {boxName}:  tên của nhóm chat"

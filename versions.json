@@ -368,5 +368,22 @@
       "scripts/cmds/logsbot.js": "đổi quyền sử dụng lệnh (1 => 2) & sửa vài lỗi chính tả",
       "scripts/cmds/uptime.js": "fix hiển thị giờ"
     }
+  },
+  {
+    "version": "1.4.1",
+    "info": {
+      "scripts/cmds/cmd.js": "no description",
+      "scripts/cmds/help.js": "sửa vài lỗi chính tả",
+      "scripts/cmds/logsbot.js": "đổi category (box chat => owner)",
+      "scripts/cmds/prefix.js": "đổi category (custom => box chat)",
+      "scripts/cmds/adminonly.js": "đổi category (admin => owner)",
+      "scripts/cmds/leavemsg.js": "đổi category (box chat => custom)",
+      "scripts/cmds/welcome.js": "đổi category (box chat => custom)",
+      "scripts/cmds/setleave.js": "đổi category (box chat => custom)",
+      "scripts/cmds/setwelcome.js": "đổi category (box chat => custom)",
+      "scripts/cmds/reload.js": "fix bugs",
+      "bot/loadAllScript.js": "no description",
+      "index.js": "no description"
+    }
   }
 ]

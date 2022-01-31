@@ -6,7 +6,7 @@
   const chalk = require("chalk");
   const login = require("fb-chat-api");
   const { writeFileSync } = require("fs-extra");
-	const qs = require('querystring');
+	const qs = require("querystring");
 	
 	const print = require("./logger/print.js");
   const loading = require("./logger/loading.js");
@@ -20,15 +20,13 @@
   	whenChat: [],
   	whenReply: {},
   	whenReaction: {},
-  	config: {},
-  	configCommands: {}
+  	config: require("./config.json"),
+  	configCommands: require("./configCommands.json")
   };
   
   // ————————————————— LOAD CONFIG ————————————————— //
-  const configCommands = require("./configCommands.json");
-  const config = require("./config.json");
-	globalGoat.config = config;
 	print("Đã cài đặt thiết lặp cho bot", "CONFIG");
+  const { configCommands } = globalGoat;
   
   const client = {
     dirConfig: __dirname + "/config.json",
@@ -44,12 +42,17 @@
   	},
   	allThread: [],
   	allUser: [],
-  	commandBanned: configCommands.commandBanned
+  	commandBanned: configCommands.commandBanned,
+  	getPrefix: function (threadID) {
+      let prefix = globalGoat.config.prefix;
+      client.allThreadData[threadID] ? prefix = client.allThreadData[threadID].prefix || prefix : "";
+      return prefix;
+    }
   };
   
   // ———————————— LOAD TẤT CẢ TỆP LỆNH ———————————— //
   print("Tiến hành tải các tệp lệnh, vui lòng chờ", "LOAD COMMANDS");
-  await require("./bot/loadAllScript.js")(globalGoat, configCommands);
+  await require("./bot/loadAllScript.js")(globalGoat);
   // ———————— // ———————— // ———————— // ———————— //
   console.log(chalk.blue(`================================================`));
   print(`Đã load thành công: ${globalGoat.commands.size} Script commands`, "LOADED");

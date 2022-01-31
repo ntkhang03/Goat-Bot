@@ -1,6 +1,6 @@
 this.config = {    
   name: "leavemsg",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "bật/tắt gửi tin nhắn tạm biệt",
   longDescription: "bật hoặc tắt gửi nhắn tạm biệt khi có thành viên out hoặc bị kick khỏi nhóm bạn",
-  category: "box chat",
+  category: "custom",
   guide: "{p}{n} on: bật"
        + "\n{p}{n} off: tắt"
 };
@@ -22,7 +22,7 @@ module.exports = {
     
     if (args[0] == "on") data.sendLeaveMessage = true;
     else if (args[0] == "off") data.sendLeaveMessage = false;
-    else message.SyntaxError();
+    else message.reply("Vui lòng chọn on hoặc off");
     
     await threadsData.setData(threadID, {
       data

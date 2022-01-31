@@ -1,6 +1,6 @@
 this.config = {    
   name: "welcome",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "bật/tắt gửi  tin nhắn chào mừng",
   longDescription: "bật hoặc tắt gửi nhắn chào mừng khi có thành viên mới tham gia nhóm chat của bạn",
-  category: "box chat",
+  category: "custom",
   guide: "{p}{n} on: bật"
        + "\n{p}{n} off: tắt"
 };
@@ -22,7 +22,7 @@ module.exports = {
     
     if (args[0] == "on") data.sendWelcomeMessage = true;
     else if (args[0] == "off") data.sendWelcomeMessage = false;
-    else message.SyntaxError();
+    else message.reply("Vui lòng chọn on hoặc off");
     
     await threadsData.setData(threadID, {
       data

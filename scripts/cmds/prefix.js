@@ -1,6 +1,6 @@
 this.config = {    
   name: "prefix",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "Xem hoặc đổi prefix",
   longDescription: "Xem hoặc đổi prefix của nhóm bạn",
-  category: "custom",
+  category: "box chat",
   guide: "{prefix}prefix <prefix muốn đổi>: đổi prefix của nhóm"
        + "\nprefix: xem prefix hiện tại"
        + "\n"

@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 this.config = {    
   name: "adminonly",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -10,7 +10,7 @@ this.config = {
   role: 2,
   shortDescription: "bật/tắt chỉ admin sử dụng bot",
   longDescription: "bật/tắt chế độ chỉ admin mới có thể sử dụng bot",
-  category: "admin",
+  category: "owner",
   guide: "{prefix}{name} [on|off]"
 };
 

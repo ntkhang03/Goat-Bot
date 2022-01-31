@@ -1,11 +1,9 @@
-module.exports = async (globalGoat, configCommands) => {
+module.exports = async (globalGoat) => {
   const axios = require("axios");
   const chalk = require("chalk");
-  const { print, loading } = globalGoat;
+  const { print, loading, configCommands } = globalGoat;
   const { execSync } = require('child_process');
-  const { readdirSync } = require("fs-extra");
-  const requireFromString = require("require-from-string");
-  const fs = require("fs-extra");
+  const { readdirSync, readFileSync, writeFileSync } = require("fs-extra");
   var spiner = "\\|/-";
   var ij = 0;
   
@@ -74,9 +72,9 @@ module.exports = async (globalGoat, configCommands) => {
   		    for (const i in envGlobal) {
   		      if (!configCommands.envGlobal[i]) configCommands.envGlobal[i] = envGlobal[i];
   		      else {
-  		        let readCommand = fs.readFileSync(pathCommand).toString();
+  		        let readCommand = readFileSync(pathCommand).toString();
   		        readCommand = readCommand.replace(envGlobal[i], configCommands.envGlobal[i]);
-  		        fs.writeFileSync(pathCommand, readCommand);
+  		        writeFileSync(pathCommand, readCommand);
   		      }
   		    }
     		}
@@ -88,32 +86,12 @@ module.exports = async (globalGoat, configCommands) => {
     		  for (const [key, value] of Object.entries(configCommand.envConfig)) {
     		    if (!configCommands[typeEnvCommand][commandName][key]) configCommands[typeEnvCommand][commandName][key] = value;
     		    else {
-    		      let readCommand = fs.readFileSync(pathCommand).toString();
+    		      let readCommand = readFileSync(pathCommand).toString();
   		        readCommand = readCommand.replace(value, configCommands[typeEnvCommand][commandName][key]);
-  		        fs.writeFileSync(pathCommand, readCommand);
+  		        writeFileSync(pathCommand, readCommand);
     		    }
     		  }
     		}
-// ——————————— CHECK UPDATE FROM GITHUB ——————————— //
-       /*
-  	    if (globalGoat.config.autoUpdateCommand == true) {
-    	    try {
-        		const result = await axios.get(`https://raw.githubusercontent.com/ntkhang03/Goat-Bot/master/${folderModules}/${file}`, {
-        		  responseType: "arraybuffer"
-        		});
-      		  const data = result.data.toString();
-      		  const version = requireFromString(data).version;
-      		  const local = configCommand.version;
-      		  if (local != version) {
-      		    loading(`Đã có phiên bản mới cho ${text} ${chalk.hex("#FFFF00")(commandName)}: ${version}, đang tiến hành cập nhật`, "UPDATE COMMAND");
-      		    fs.writeFileSync(__dirname+"/../scripts/"+folderModules+"/"+file, Buffer.from(data));
-  	          loading(`Đã cập nhật ${text} ${chalk.hex("#FFFF00")(commandName)} lên phiên bản ${version}\n`, "UPDATE COMMAND");
-      		  }
-    	    }
-      		catch(e) {
-      		}
-  	    }
-  	    */
 // ——————————————— CHECK RUN ANYTIME ——————————————— //
     		if (command.whenChat) globalGoat.whenChat.push(commandName);
 // ————————————— IMPORT TO GLOBALGOAT ————————————— //

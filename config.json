@@ -14,7 +14,6 @@
   },
   "SERVER_UPTIME": true,
   "autoRefreshFbstate": true,
-  "autoUpdateScript": false,
   "restartListenMqtt": 3600000,
   "logEvents": {
     "eventAndMessage": true,

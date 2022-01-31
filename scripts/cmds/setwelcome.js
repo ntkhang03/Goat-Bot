@@ -1,6 +1,6 @@
 this.config = {    
   name: "setwelcome",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -9,7 +9,7 @@ this.config = {
   role: 0,
   shortDescription: "chỉnh sửa nội dung tin nhắn chào mừng",
   longDescription: "chỉnh sửa nội dung tin nhắn chào mừng thành viên mới tham gia vào nhóm chat của bạn",
-  category: "box chat",
+  category: "custom",
   guide: "{p}{n} text [<nội dung>|reset]: chỉnh sửa nội dung văn bản hoặc reset về mặc định, những shortcut có sẵn:"
        + "\n+ {userName}: tên của thành viên mới"
        + "\n+ {boxName}:  tên của nhóm chat"
