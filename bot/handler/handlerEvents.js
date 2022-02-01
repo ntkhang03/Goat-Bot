@@ -32,11 +32,13 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
           message.SyntaxError = function() {
     		    return message.reply(contentSyntaxError.replace("{nameCmd}", command.config.name));
     		  };
-          command.whenChat({ ...parameters, ...{args} });
+          command.whenChat({
+            ...parameters,
+            ...{args} 
+          });
         }
         catch (err) {
-          print.err("Đã xảy ra lỗi khi thực hiện commamd whenChat ở lệnh " + command.config.name + ", lỗi: "+err.stack, "WHEN CHAT");
-          return message.reply(`❎\nĐã có lỗi xảy ra tại command whenChat ${command.config.name}\n${err.stack}`);
+          print.err("Đã xảy ra lỗi khi thực hiện commamd whenChat ở lệnh " + command.config.name + ", lỗi: " + err.stack, "WHEN CHAT");
         }
       }
     }
@@ -72,7 +74,6 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		}
   		if (!command) return message.reply("Lệnh bạn sử dụng không tồn tại");
   		//============================================//
-  		
       // ————————————— COMMAND BANNED ————————————— //
   		if (client.commandBanned[commandName]) return message.reply(`Lệnh này đã bị Admin cấm sử dụng trong hệ thống bot với lý do: ${client.commandBanned[commandName]}`);
       // ————————————— CHECK PERMISSION ———————————— //
@@ -99,21 +100,35 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		    return message.reply(contentSyntaxError.replace("{nameCmd}", command.config.name));
   		  };
   		  message.guideCmd = async function() {
-  		    const formSendMessage = {
-  		      body: command.config.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, commandName)
-  		    };
-  		    const { sendFile } = command.config;
-  		    if (sendFile &&
-             typeof(sendFile) == 'object' &&
-             !Array.isArray(sendFile)
-          ) {
-            formSendMessage.attachment = [];
-            for (let pathFile in sendFile) {
-              if (!existsSync(pathFile)) await download(sendFile[pathFile], pathFile);
-              formSendMessage.attachment.push(createReadStream(pathFile));
+  		    let msg = "";
+  		    let guide = configCommand.guide || {
+            body: ""
+          };
+          if (typeof(guide) == "string") guide = {
+            body: guide
+          };
+          msg += '\n───────────────\n'
+                + '» Hướng dẫn cách dùng:\n'
+                + guide.body
+                    .replace(/\{prefix\}|\{p\}/g, prefix)
+                    .replace(/\{name\}|\{n\}/g, configCommand.name)
+                + '\n───────────────\n'
+                + '» Chú thích:\n• Nội dung bên trong <XXXXX> là có thể thay đổi\n• Nội dung bên trong [a|b|c] là a hoặc b hoặc c';
+          
+          const formSendMessage = {
+            body: msg
+          };
+          
+          if (guide.attachment) {
+            if (guide.attachment && typeof(guide.attachment) == 'object' && !Array.isArray(guide.attachment)) {
+              formSendMessage.attachment = [];
+              for (const pathFile in guide.attachment) {
+                if (!existsSync(pathFile)) await download(guide.attachment[pathFile], pathFile);
+                formSendMessage.attachment.push(createReadStream(pathFile));
+              }
             }
           }
-          return api.sendMessage(formSendMessage, threadID, messageID);
+          message.reply(formSendMessage);
   		  };
   	    const time = moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss");
   		  print(`${chalk.hex("#ffb300")(time)} | ${commandName} | ${senderID} | ${threadID} | ${args.join(" ")}`, "CALL CMD");

@@ -1,6 +1,6 @@
 this.config = {
   name: "avatar",
-  version: "1.0.4",
+  version: "1.0.5",
   author: {
     name: "NTKhang",
     contacts: ""
@@ -10,10 +10,12 @@ this.config = {
   shortDescription: "tạo avatar anime",
   longDescription: "tạo avatar anime với chữ ký",
   category: "image",
-  sendFile: {
-    [__dirname+"/cache/hexcolor.png"]: "https://www.htlvietnam.com/images/bai-viet/code-mau/bang-ma-mau-02.jpg"
-  },
-  guide: "{p}{n} <mã số nhân vật hoặc tên nhân vật> | <chữ nền> | <chữ ký> | <tên màu tiếng anh hoặc mã màu nền (hex color)>\n{p}{n} help: xem cách dùng lệnh"
+  guide: {
+    body: "{p}{n} <mã số nhân vật hoặc tên nhân vật> | <chữ nền> | <chữ ký> | <tên màu tiếng anh hoặc mã màu nền (hex color)>\n{p}{n} help: xem cách dùng lệnh",
+    attachment: {
+      [__dirname+"/cache/hexcolor.png"]: "https://seotct.com/wp-content/uploads/2020/03/code-backgroud.png"
+    }
+  }
 };
 
 module.exports = {

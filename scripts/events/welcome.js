@@ -53,7 +53,7 @@ module.exports = {
       body: messageWelcome,
       mentions
     };
-    threadData.welcomeAttachment ? form.attachment = fs.createReadStream(__dirname + "/src/mediaWelcome/"+threadData.welcomeAttachment) : "";
+    threadData.welcomeAttachment ? form.attachment = fs.createReadStream(__dirname + "/src/mediaWelcome/" + threadData.welcomeAttachment) : "";
     
     message.send(form);
   }

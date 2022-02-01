@@ -1,6 +1,6 @@
 this.config = {    
   name: "customrankcard",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -10,7 +10,8 @@ this.config = {
   shortDescription: "Thiết kế thẻ rank",
   longDescription: "Thiết kế thẻ rank theo ý bạn",
   category: "rank",
-  guide: "{p}{n} [maincolor | subcolor | expcolor | expnextlevelcolor | alphasubcolor | textcolor | reset] <value>\nTrong đó: "
+  guide: {
+    body: "{p}{n} [maincolor | subcolor | expcolor | expnextlevelcolor | alphasubcolor | textcolor | reset] <value>\nTrong đó: "
        + "\n+ Maincolor: background chính của thẻ rank (hex color or rgba or url image)"
        + "\n+ Subcolor: background phụ (hex color or rgba or url image)"
        + "\n+ Expcolor: màu của thanh exp hiện tại"
@@ -22,8 +23,9 @@ this.config = {
         + "\n  {p}{n} maincolor #fff000"
         + "\n  {p}{n} subcolor rgba(255,136,86,0.4)"
         + "\n  {p}{n} reset",
-  sendFile: {
-    [__dirname + "/src/image/helpcustomrankcard.jpg"]: "https://github.com/ntkhang03/resources-goat-bot/raw/master/image/helpcustomrankcard.jpg"
+    attachment: {
+      [__dirname + "/src/image/helpcustomrankcard.jpg"]: "https://github.com/ntkhang03/resources-goat-bot/raw/master/image/helpcustomrankcard.jpg"
+    }
   }
 };
 

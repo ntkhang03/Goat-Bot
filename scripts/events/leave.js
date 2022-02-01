@@ -26,14 +26,16 @@ module.exports = {
     // {userName}: tên của thành viên bị kick / tự out
     // {type}: tự rời/bị qtv kick
     // {boxName}:  tên của nhóm chat
-    // {session}: buổi tring ngày
+    // {session}: buổi trong ngày
     messageLeave = messageLeave
     .replace(/\{userName}/g, userName)
     .replace(/\{type}/g, leftParticipantFbId == event.author ? "tự rời" : "bị quản trị viên xóa")
     .replace(/\{boxName}/g, boxName)
-    .replace(/\{session}/g, hours <= 10 ? "sáng" : 
-    hours > 10 && hours <= 12 ? "trưa" :
-    hours > 12 && hours <= 18 ? "chiều" : "tối");
+    .replace(/\{session}/g, hours <= 10 ? "sáng" :
+      hours > 10 && hours <= 12 ? "trưa" :
+      hours > 12 && hours <= 18 ? "chiều" :
+      "tối"
+    );
     
     const form = {
       body: messageLeave,
@@ -43,7 +45,6 @@ module.exports = {
       }]
     };
     threadData.data.leaveAttachment ? form.attachment = fs.createReadStream(__dirname + "/src/mediaLeave/" + threadData.data.leaveAttachment) : "";
-    
     message.send(form);
   }
 };

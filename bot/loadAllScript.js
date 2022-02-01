@@ -100,6 +100,8 @@ module.exports = async (globalGoat) => {
     		loading(`${chalk.hex(color)(`[ ${text.toUpperCase()} ]`)} ${chalk.hex("#FFFF00")(commandName)} succes\n`, "LOADED");
     	}
     	catch (error) {
+    	  const color = text == "command" ? "#ff7100" : "#00ff2f";
+    		loading.error(`${chalk.hex(color)(`[ ${text.toUpperCase()} ]`)} ${chalk.hex("#FFFF00")(commandName)} failed ${error.message}\n`, "FAILED");
     		commandError.push({ name: file, error });
     	}
     }

@@ -23,7 +23,6 @@
   	config: require("./config.json"),
   	configCommands: require("./configCommands.json")
   };
-  
   // ————————————————— LOAD CONFIG ————————————————— //
 	print("Đã cài đặt thiết lặp cho bot", "CONFIG");
   const { configCommands, config } = globalGoat;

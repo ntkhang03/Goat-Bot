@@ -391,5 +391,15 @@
     "info": {
       "index.js": "fix error config is not defined"
     }
+  },
+  {
+    "version": "1.4.3",
+    "info": {
+      "scripts/cmds/help.js": "đổi giao diện ăn Tết 🙈",
+      "scripts/cmds/avatar.js": "fix lỗi download",
+      "scripts/cmds/count.js": "chỉ hiển thị số tin nhắn của thành viên trong nhóm",
+      "scripts/cmds/customrankcard.js": "no description",
+      "bot/handler/handlerEvents": "cập nhật message.guide()"
+    }
   }
 ]

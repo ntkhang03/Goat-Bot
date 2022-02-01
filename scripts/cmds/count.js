@@ -1,6 +1,6 @@
 this.config = {    
   name: "count",
-  version: "1.0.2",
+  version: "1.0.3",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -17,19 +17,19 @@ this.config = {
 
 module.exports = {
   config: this.config,
-  start: async function({ args, threadsData, message, event, globalGoat }) {
-    const { threadID, senderID, messageID } = event;
+  start: async function({ args, threadsData, message, event, globalGoat, api }) {
+		const { threadID, senderID, messageID } = event;
     const threadData = await threadsData.getData(threadID);
     const { members } = threadData;
     const arraySort = [];
-    
+    const usersInGroup = (await api.getThreadInfo(threadID)).participantIDs;
     for (let id in members) {
       const count = members[id].count;
       const name = members[id].name;
-      arraySort.push({ name, count, uid: id });
+      usersInGroup.includes(id) ? arraySort.push({ name, count, uid: id }) : "";
     }
-    arraySort.sort((a, b) => b.count - a.count);
     let stt = 1;
+    arraySort.sort((a, b) => b.count - a.count);
     arraySort.map(item => item.stt = stt++);
     
     if (args[0]) {
@@ -66,12 +66,11 @@ module.exports = {
           name: (await api.getUserInfo(senderID))[senderID].name,
           nickname: null,
           inGroup: true,
-          count: 0
+          count: 1
         };
         await threadsData.setData(threadID, { members });
       }
-      
-      members[senderID].count += 1;
+      else members[senderID].count += 1;
       await threadsData.setData(threadID, { members });
     }
     catch (err) {}
