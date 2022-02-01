@@ -399,7 +399,7 @@
       "scripts/cmds/avatar.js": "fix lỗi download",
       "scripts/cmds/count.js": "chỉ hiển thị số tin nhắn của thành viên trong nhóm",
       "scripts/cmds/customrankcard.js": "no description",
-      "bot/handler/handlerEvents": "cập nhật message.guide()"
+      "bot/handler/handlerEvents.js": "cập nhật message.guide()"
     }
   }
 ]
