@@ -401,5 +401,18 @@
       "scripts/cmds/customrankcard.js": "no description",
       "bot/handler/handlerEvents.js": "cập nhật message.guide()"
     }
+  },
+  {
+    "version": "1.4.4",
+    "info": {
+      "index.js": "no description",
+      "logger/loading.js": "đổi màu hex trong exports.error (#000000 => #ff0000)",
+      "logger/print.js": "đổi màu hex trong exports.error (#000000 => #ff0000)",
+      "bot/createFuncMessage.js": "bổ sung event.threadID (dòng 4)",
+      "bot/loadAllScript.js": "no description",
+      "scripts/cmds/warn.js": "new commnad",
+      "scripts/events/checkwarn.js": "new event commnad",
+      "scripts/events/welcome.js": "no description"
+    }
   }
 ]

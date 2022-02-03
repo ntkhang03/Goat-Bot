@@ -53,10 +53,10 @@
   print("Tiến hành tải các tệp lệnh, vui lòng chờ", "LOAD COMMANDS");
   await require("./bot/loadAllScript.js")(globalGoat);
   // ———————— // ———————— // ———————— // ———————— //
-  console.log(chalk.blue(`================================================`));
+  console.log(chalk.blue(`===========================================`));
   print(`Đã load thành công: ${globalGoat.commands.size} Script commands`, "LOADED");
   print(`Đã load thành công: ${globalGoat.events.size} Script events`, "LOADED");
-  console.log(chalk.blue(`================================================`));
+  console.log(chalk.blue(`===========================================`));
   // ——————————————————— LOGIN ————————————————— //
   print.blue("Đang tiến hành đăng nhập", "LOGIN");
   let appState;

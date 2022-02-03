@@ -10,7 +10,10 @@ module.exports = async (globalGoat) => {
   const folder = ["cmds", "events"];
   
   for (let folderModules of folder) {
-    console.log(chalk.blue(`============ LOADING COMMANDS${(folderModules == "cmds" ? "" : " " + folderModules).toUpperCase()} ============`));
+    const makeColor = folderModules == "cmds" ?
+      "============ LOADING COMMANDS ============" :
+      "========= LOADING COMMANDS EVENTS =========";
+    console.log(chalk.blue(makeColor));
     const commandError = [];
     let text = "", typeConfigCommand = "", setMap = "";
     if (folderModules == "cmds") {
@@ -101,7 +104,7 @@ module.exports = async (globalGoat) => {
     	}
     	catch (error) {
     	  const color = text == "command" ? "#ff7100" : "#00ff2f";
-    		loading.error(`${chalk.hex(color)(`[ ${text.toUpperCase()} ]`)} ${chalk.hex("#FFFF00")(commandName)} failed ${error.message}\n`, "FAILED");
+    		loading.error(`${chalk.hex(color)(`[ ${text.toUpperCase()} ]`)} ${chalk.hex("#FFFF00")(file)} failed: ${error.message}\n`, "FAILED");
     		commandError.push({ name: file, error });
     	}
     }

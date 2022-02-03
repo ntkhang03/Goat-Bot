@@ -5,7 +5,7 @@ module.exports = (text, type) => {
 };
 
 module.exports.error = (text, type) => {
-	process.stderr.write(chalk.bold.hex("#000000").bold(`\r» ${type} « `) + text);
+	process.stderr.write(chalk.bold.hex("#ff0000").bold(`\r» ${type} « `) + text);
 };
 
 module.exports.err = (text, type) => {

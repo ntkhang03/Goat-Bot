@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 module.exports = {
   config: {
     name: "welcome",
-    version: "1.0.1",
+    version: "1.0.2",
     type: ["log:subscribe"],
     author: { 
       name: "NTKhang", 
@@ -15,8 +15,9 @@ module.exports = {
     const hours = moment.tz("Asia/Ho_Chi_Minh").format("HH");
     const { threadID } = event;
     const { prefix } = globalGoat.config;
+    const dataAddedParticipants = event.logMessageData.addedParticipants;
     // Nếu là bot;
-    if (event.logMessageData.addedParticipants.some(item => item.userFbId == globalGoat.botID)) {
+    if (dataAddedParticipants.some(item => item.userFbId == globalGoat.botID)) {
       return message.send(`Thank you for inviting me!\nPrefix bot: ${globalGoat.config.prefix}\nĐể xem danh sách lệnh hãy nhập: ${globalGoat.config.prefix}help`);
     }
     
@@ -26,7 +27,7 @@ module.exports = {
     const boxName = client.allThreadData[threadID].name;
     const userName = [], mentions = [];
     let multiple = false;
-    const dataAddedParticipants = event.logMessageData.addedParticipants;
+    
     if (dataAddedParticipants.length > 1) multiple = true;
     for (let user of dataAddedParticipants) {
       userName.push(user.fullName);

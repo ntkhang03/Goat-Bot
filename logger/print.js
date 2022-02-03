@@ -5,7 +5,7 @@ module.exports = (text, type) => {
 };
 
 module.exports.error = (text, type) => {
-	console.log(chalk.bold.hex("#000000").bold(`» ${type} «`), text);
+	console.log(chalk.bold.hex("#ff0000").bold(`» ${type} «`), text);
 };
 
 module.exports.err = (text, type) => {

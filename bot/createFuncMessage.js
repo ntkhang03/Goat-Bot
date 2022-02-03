@@ -1,7 +1,7 @@
 module.exports = (event, api) => {
   return {
     send: function(text, callback) {
-      if (callback && typeof callback == "function") return api.sendMessage(text, callback);
+      if (callback && typeof callback == "function") return api.sendMessage(text, event.threadID, callback);
       else return api.sendMessage(text, event.threadID);
     },
     reply: function(text, callback) {
