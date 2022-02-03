@@ -420,5 +420,11 @@
     "info": {
       "scripts/cmds/warn.js": "update role"
     }
+  },
+  {
+    "version": "1.4.6",
+    "info": {
+      "scripts/cmds/leavemsg.js": "fix bugs"
+    }
   }
 ]

@@ -1,6 +1,6 @@
 this.config = {    
   name: "leavemsg",
-  version: "1.0.1",
+  version: "1.0.2",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -28,7 +28,7 @@ module.exports = {
       data
     }, (err, info) => {
       if (err) return message.reply(`Đã xảy ra lỗi, vui lòng thử lại sau: ${err.name}: ${err.message}`);
-      message.reply(`Đã ${data.sendWelcomeMessage ? "bật" : "tắt"} gửi tin nhắn tạm biệt khi có thành viên out hoặc bị kick khỏi nhóm bạn`);
+      message.reply(`Đã ${data.sendLeaveMessage ? "bật" : "tắt"} gửi tin nhắn tạm biệt khi có thành viên out hoặc bị kick khỏi nhóm bạn`);
     });
   }
 };
