@@ -1,7 +1,7 @@
 const moment = require("moment-timezone");
 this.config = {    
   name: "warn",
-  version: "1.0.0",
+  version: "1.0.1",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -23,8 +23,8 @@ module.exports = {
   config: this.config,
   start: async function({ message, api, event, args, threadsData, usersData, client }) {
     if (!args[0]) return message.SyntaxError();
-    const { threadID } = event;
-    const { data } = await threadsData.getData(threadID);
+    const { threadID, senderID } = event;
+    const { data, adminIDs } = await threadsData.getData(threadID);
     if (!data.warn) data.warn = {
       banned: [],
       warnList: []
@@ -79,6 +79,7 @@ module.exports = {
     
     
     else if (args[0] == "unban") {
+      if (!adminIDs.includes(senderID)) return message.reply("Chỉ quản trị viên nhóm mới có thể unban thành viên bị ban khỏi box");
       const uidUnban = args[1];
       if (!uidUnban || isNaN(uidUnban)) return message.reply("Vui lòng nhập uid hợp lệ của người muốn gỡ ban");
       if (!banned.includes(uidUnban)) return message.reply(`Người dùng mang id ${uidUnban} chưa bị ban khỏi box của bạn`);
@@ -93,6 +94,7 @@ module.exports = {
     
     
     else {
+      if (!adminIDs.includes(senderID)) return message.reply("Chỉ quản trị viên nhóm mới có thể cảnh cáo thành viên trong nhóm");
       let reason, uid;
       if (event.messageReply) {
         uid = event.messageReply.senderID;

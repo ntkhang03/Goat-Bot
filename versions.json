@@ -414,5 +414,11 @@
       "scripts/events/checkwarn.js": "new event commnad",
       "scripts/events/welcome.js": "no description"
     }
+  },
+  {
+    "version": "1.4.5",
+    "info": {
+      "scripts/cmds/warn.js": "update role"
+    }
   }
 ]
