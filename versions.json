@@ -426,5 +426,11 @@
     "info": {
       "scripts/cmds/leavemsg.js": "fix bugs"
     }
+  },
+  {
+    "version": "1.4.7",
+    "info": {
+      "scripts/events/autoUpdateInfoThread.js": "fix lỗi mất số tin nhắn (count) của thành viên khi out khỏi nhóm vào lại"
+    }
   }
 ]
