@@ -15,7 +15,7 @@ module.exports = function({ globalGoat, usersData, threadsData, client, api, mes
 				}
 				catch(e) {
 				  client.database.threadBusy = false;
-					print.err("Không thể ghi nhóm có id " + threadID + " vào database! "+e.stack, "DATABASE");
+					print.err(`Không thể ghi nhóm có id '${threadID}' vào database! ${e.stack}`, "DATABASE");
 				}
 			}
 // ——————————————— CREATE USER DATA ——————————————— //
@@ -29,7 +29,7 @@ module.exports = function({ globalGoat, usersData, threadsData, client, api, mes
 				}
 				catch(err) {
 				  client.database.userBusy = false;
-					print.err("Không thể ghi người dùng có id " + senderID + " vào database! "+err.stack, "DATABASE");
+					print.err(`Không thể ghi người dùng có id '${senderID}' vào database! ${err.stack}`, "DATABASE");
 				}
 			}
 		}

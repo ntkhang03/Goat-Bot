@@ -432,5 +432,14 @@
     "info": {
       "scripts/events/autoUpdateInfoThread.js": "fix lỗi mất số tin nhắn (count) của thành viên khi out khỏi nhóm vào lại"
     }
+  },
+  {
+    "version": "1.4.8",
+    "info": {
+      "index.js": "rename globalGoat.shortName to globalGoat.shortNameCommands",
+      "bot/loadAllScript": "rename globalGoat.shortName to globalGoat.shortNameCommands",
+      "bot/handler/handlerEvents.js": "no description",
+      "scripts/cmds/help.js": "can you get commandName with shortName"
+    }
   }
 ]

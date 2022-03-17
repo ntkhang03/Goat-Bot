@@ -30,7 +30,7 @@ module.exports = async (globalGoat) => {
     for (const file of Files) {
       try {
         const pathCommand = __dirname + `/../scripts/${folderModules}/${file}`;
-        var command = require(pathCommand);
+        const command = require(pathCommand);
         const configCommand = command.config;
 // ——————————————— CHECK SYNTAXERROR ——————————————— //
     		if (!configCommand) throw new Error("Config of command undefined");
@@ -43,15 +43,15 @@ module.exports = async (globalGoat) => {
           let { shortName } = configCommand;
           if (typeof shortName == "string") shortName = [shortName];
           for (const aliases of shortName) {
-            if (globalGoat.shortName.has(aliases)) throw new Error(`Short Name ${aliases} bị trùng lặp với short name của command ${chalk.hex("#ff5208")(globalGoat.shortName.get(aliases))}`);
-            else globalGoat.shortName.set(aliases, configCommand.name);
+            if (globalGoat.shortNameCommands.has(aliases)) throw new Error(`Short Name ${aliases} bị trùng lặp với short name của command ${chalk.hex("#ff5208")(globalGoat.shortNameCommands.get(aliases))}`);
+            else globalGoat.shortNameCommands.set(aliases, configCommand.name);
           }
         }
 // ————————————————— CHECK PACKAGE ————————————————— //
     		if (configCommand.packages) {
     		  const packages = (typeof configCommand.packages == "string") ? configCommand.packages.trim().replace(/\s/g, '').split(',') : configCommand.packages;
     		  if (!Array.isArray(packages)) throw new Error("Value packages needs to be array");
-  				for (let i of packages) {
+  				for (const i of packages) {
   				  try {
   				    require(i);
   				  }
@@ -110,7 +110,7 @@ module.exports = async (globalGoat) => {
     }
     if (commandError.length > 0) {
       print.err(`Những file ${chalk.yellow(text)} xảy ra lỗi trong quá trình load:`, "LOADED");
-      for (let item of commandError) print.err(`${chalk.hex("#ff4112")(item.name)}: ${item.error.stack}`, text.toUpperCase());
+      for (const item of commandError) print.err(`${chalk.hex("#ff4112")(item.name)}: ${item.error.stack}`, text.toUpperCase());
     }
   }
 };

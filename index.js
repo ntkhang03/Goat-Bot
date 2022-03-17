@@ -15,7 +15,7 @@
     print,
     loading,
   	commands: new Map(),
-  	shortName: new Map(),
+  	shortNameCommands: new Map(),
   	events: new Map(),
   	whenChat: [],
   	whenReply: {},
@@ -35,7 +35,6 @@
   	cooldowns: {},
   	cache: {},
   	database: {
-  	  autoCreate: globalGoat.config.autoCreateDB,
   	  threadBusy: false,
   	  userBusy: false
   	},

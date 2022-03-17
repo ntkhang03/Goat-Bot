@@ -47,45 +47,54 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
     //              WHEN CALL COMMAND                //
     //===============================================//
   	async function whenStart() {
-  		const dateNow = Date.now();
-  		const { isGroup } = event;
-  		const { adminBot } = globalGoat.config;
       // —————————————— CHECK USE BOT —————————————— //
   		if (body && !body.startsWith(prefix) || !body) return;
+  		const dateNow = Date.now();
+  		const { adminBot } = globalGoat.config;
   		const args = body.slice(prefix.length).trim().split(/ +/);
   		// —————————  CHECK HAS IN DATABASE  ————————— //
   		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
   		if (!client.allUserData[senderID]) await usersData.createData(senderID);
   		// ————————————  CHECK HAS COMMAND ——————————— //
-  		const commandName = args.shift().toLowerCase();
-  		const command = globalGoat.commands.get(commandName) || globalGoat.commands.get(globalGoat.shortName.get(commandName));
-  		
+  		let commandName = args.shift().toLowerCase();
+  		const command = globalGoat.commands.get(commandName) || globalGoat.commands.get(globalGoat.shortNameCommands.get(commandName));
+  		if (command) commandName = command.name;
   		// ————————————— GET THREAD INFO ————————————— //
   		const threadInfo = client.allThreadData[threadID] || {};
-  		if (threadInfo.onlyAdminBox === true && !threadInfo.adminIDs.includes(senderID)) return message.reply("Hiện tại nhóm này đã được bật chế độ chỉ quản trị viên nhóm mới có thể sử dụng bot");
+  		if (threadInfo.onlyAdminBox === true && !threadInfo.adminIDs.includes(senderID) && commandName != "rules") return message.reply("Hiện tại nhóm này đã được bật chế độ chỉ quản trị viên nhóm mới có thể sử dụng bot");
   		// —————————————— CHECK BANNED —————————————— //
   		// +++++++++++     Check User     +++++++++++ //
     	const infoBannedUser = client.allUserData[senderID].banned;
-  		if (infoBannedUser.status == true) return message.reply(`Bạn đã bị Admin cấm sử dụng bot\n> Lý do: ${infoBannedUser.reason}\n> Thời gian: ${infoBannedUser.date}\n> User ID: ${senderID}`);
+  		if (infoBannedUser.status == true) {
+  		  return message.reply(
+    		  `Bạn đã bị Admin cấm sử dụng bot`
+    		+ `\n> Lý do: ${infoBannedUser.reason}`
+    		+ `\n> Thời gian: ${infoBannedUser.date}`
+    		+ `\n> User ID: ${senderID}`);
+  		}
   		// +++++++++++    Check Thread    +++++++++++ //
   		if (isGroup == true) {
     		const infoBannedThread = threadInfo.banned;
-    		if (infoBannedThread.status == true) return message.reply(`Nhóm của bạn đã bị Admin bot cấm dùng bot\n> Lý do: ${infoBannedThread.reason}\n> Thời gian: ${infoBannedThread.date}\n> Thread ID: ${threadID}`);
+    		if (infoBannedThread.status == true) return message.reply(
+    		  `Nhóm của bạn đã bị Admin bot cấm dùng bot`
+    		+ `\n> Lý do: ${infoBannedThread.reason}`
+    		+ `\n> Thời gian: ${infoBannedThread.date}`
+    		+ `\n> Thread ID: ${threadID}`);
   		}
-  		if (!command) return message.reply("Lệnh bạn sử dụng không tồn tại");
+  		if (!command) return message.reply(`Lệnh ${commandName ? `'${commandName}'` : 'bạn sử dụng'} không tồn tại, gõ ${prefix}help để xem tất cả lệnh hiện có`);
   		//============================================//
       // ————————————— COMMAND BANNED ————————————— //
-  		if (client.commandBanned[commandName]) return message.reply(`Lệnh này đã bị Admin cấm sử dụng trong hệ thống bot với lý do: ${client.commandBanned[commandName]}`);
+  		if (client.commandBanned[commandName]) return message.reply(`Lệnh ${commandName} đã bị Admin cấm sử dụng trong hệ thống bot với lý do: ${client.commandBanned[commandName]}`);
       // ————————————— CHECK PERMISSION ———————————— //
-  		let role = 0;
-  		let needRole = command.config.role || 0;
+  		const needRole = command.config.role || 0;
   		const adminBox = threadInfo.adminIDs || [];
   		
-  		if (adminBot.includes(senderID)) role = 2;
-  		else if (adminBox.includes(senderID)) role = 1;
+  		const role = adminBot.includes(senderID) ? 2 :
+  		             adminBox.includes(senderID) ? 1 :
+  		             0;
   		
-  		if (needRole > role && needRole == 1) return message.reply(`Chỉ quản trị viên của nhóm chat mới có thể dùng lệnh ${commandName}`);
-  		if (needRole > role && needRole == 2) return message.reply(`Chỉ admin bot mới có thể dùng lệnh ${commandName}`);
+  		if (needRole > role && needRole == 1) return message.reply(`Chỉ quản trị viên của nhóm chat mới có thể dùng lệnh '${commandName}'`);
+  		if (needRole > role && needRole == 2) return message.reply(`Chỉ admin bot mới có thể dùng lệnh '${commandName}'`);
       // ———————————————— COOLDOWNS ———————————————— //
   		if (!client.cooldowns[commandName]) client.cooldowns[commandName] = {};
   		const timestamps = client.cooldowns[commandName];
@@ -100,20 +109,19 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		    return message.reply(contentSyntaxError.replace("{nameCmd}", command.config.name));
   		  };
   		  message.guideCmd = async function() {
-  		    let msg = "";
   		    let guide = configCommand.guide || {
             body: ""
           };
           if (typeof(guide) == "string") guide = {
             body: guide
           };
-          msg += '\n───────────────\n'
-                + '» Hướng dẫn cách dùng:\n'
-                + guide.body
-                    .replace(/\{prefix\}|\{p\}/g, prefix)
-                    .replace(/\{name\}|\{n\}/g, configCommand.name)
-                + '\n───────────────\n'
-                + '» Chú thích:\n• Nội dung bên trong <XXXXX> là có thể thay đổi\n• Nội dung bên trong [a|b|c] là a hoặc b hoặc c';
+          const msg = '\n───────────────\n'
+                    + '» Hướng dẫn cách dùng:\n'
+                    + guide.body
+                        .replace(/\{prefix\}|\{p\}/g, prefix)
+                        .replace(/\{name\}|\{n\}/g, configCommand.name)
+                    + '\n───────────────\n'
+                    + '» Chú thích:\n• Nội dung bên trong <XXXXX> là có thể thay đổi\n• Nội dung bên trong [a|b|c] là a hoặc b hoặc c';
           
           const formSendMessage = {
             body: msg
