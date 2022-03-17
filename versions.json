@@ -441,5 +441,11 @@
       "bot/handler/handlerEvents.js": "no description",
       "scripts/cmds/help.js": "can you get commandName with shortName"
     }
+  },
+  {
+    "version": "1.4.9",
+    "info": {
+      "bot/handler/handlerEvents.js": "no description"
+    }
   }
 ]
