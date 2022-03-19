@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.6",
+  version: "1.0.7",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -28,46 +28,42 @@ module.exports = {
 		  uids: []
 		}];
 		const failed = [];
+		
+	  function checkAndPushError(messageError, item) {
+	    const findType = failed.find(error => error.type == messageError);
+      if (findType) findType.uids.push(item);
+      else failed.push({
+        type: messageError,
+        uids: [item]
+      });
+	  }
 	  
 		for (const item of args) {
 		  let uid;
-		  if (!isNaN(item)) {
+		  if (isNaN(item)) {
         try {
-          uid = await fbtools.findUid(args[0]);
+          uid = await fbtools.findUid(item);
         }
         catch(err) {
-          const findType = failed.find(item => item.type == err.errorDescription);
-          if (findType) findType.uids.push(item);
-          else failed.push({
-            type: err.errorDescription,
-            uids: [item]
-          });
+          checkAndPushError(err.message, item);
+          continue;
         }
       }
       else uid = item;
       
-      try {
-        if (threadInfo.participantIDs.includes(uid)) {
-          const findTypeIngroup = failed.find(item => item.type == "Đã có trong nhóm");
-          if (findTypeIngroup) findTypeIngroup.uids.push(item);
-          else failed.push({
-            type: "Đã có trong nhóm",
-            uids: [item]
-          });
-        }
-        else {
-          const addU = await api.addUserToGroup(uid, event.threadID);
-          if (threadInfo.approvalMode && !threadInfo.adminIDs.some(admin => admin.id == api.getCurrentUserID())) success[1].uids.push(uid);
+      if (threadInfo.participantIDs.includes(uid)) {
+        checkAndPushError("Đã có trong nhóm", item);
+      }
+      else {
+        try {
+          await api.addUserToGroup(uid, event.threadID);
+          const botID = api.getCurrentUserID();
+          if (threadInfo.approvalMode && !threadInfo.adminIDs.some(admin => admin.id == botID)) success[1].uids.push(uid);
           else success[0].uids.push(uid);
         }
-      }
-      catch (err) {
-        const findType = failed.find(item => item.type == err.errorDescription);
-        if (findType) findType.uids.push(item);
-        else failed.push({
-          type: err.errorDescription,
-          uids: [item]
-        });
+        catch (err) {
+          checkAndPushError(err.errorDescription);
+        }
       }
 		}
     const lengthUserSuccess = success[0].uids.length;
@@ -77,8 +73,7 @@ module.exports = {
     let msg = "";
     if (lengthUserSuccess) msg += `- Đã thêm thành công ${lengthUserSuccess} thành viên vào nhóm`;
     if (lengthUserWaitApproval) msg += `\n- Đã thêm ${lengthUserWaitApproval} thành viên vào danh sách phê duyệt`;
-    if (lengthUserError) msg += `\n- Đã xảy ra lỗi khi thêm ${lengthUserError} thành viên vào nhóm: ${failed.reduce((a, b) => a += `\n   + ${b.uids.join('; ')}: ${b.type}`, "")}`;
-		
+    if (lengthUserError) msg += `\n- Đã xảy ra lỗi khi thêm ${lengthUserError} thành viên vào nhóm:${failed.reduce((a, b) => a += `\n    + ${b.uids.join('; ')}: ${b.type}`, "")}`;
 		message.reply(msg);
   }
 };

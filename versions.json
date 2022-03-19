@@ -470,5 +470,11 @@
     "info": {
       "scripts/cmds/adduser.js": "sửa vài lỗi nhỏ"
     }
+  },
+  {
+    "version": "1.4.13",
+    "info": {
+      "scripts/cmds/adduser.js": "sửa vài lỗi nhỏ T.T"
+    }
   }
 ]
