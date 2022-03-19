@@ -464,5 +464,11 @@
       "bot/handlerAction.js": "kiểm tra database trước khi thực hiện lệnh",
       "scripts/cmds/adduser.js": "có thể thêm nhiều thành viên"
     }
+  },
+  {
+    "version": "1.4.12",
+    "info": {
+      "scripts/cmds/adduser.js": "sửa vài lỗi nhỏ"
+    }
   }
 ]

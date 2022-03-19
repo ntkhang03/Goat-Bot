@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.5",
+  version: "1.0.6",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -31,12 +31,17 @@ module.exports = {
 	  
 		for (const item of args) {
 		  let uid;
-		  if (isNaN(item)) {
+		  if (!isNaN(item)) {
         try {
           uid = await fbtools.findUid(args[0]);
         }
         catch(err) {
-          message.reply(`Đã xảy ra lỗi khi thêm ${item} ${err.name}: ${err.message}`);
+          const findType = failed.find(item => item.type == err.errorDescription);
+          if (findType) findType.uids.push(item);
+          else failed.push({
+            type: err.errorDescription,
+            uids: [item]
+          });
         }
       }
       else uid = item;
@@ -58,7 +63,6 @@ module.exports = {
       }
       catch (err) {
         const findType = failed.find(item => item.type == err.errorDescription);
-        
         if (findType) findType.uids.push(item);
         else failed.push({
           type: err.errorDescription,
