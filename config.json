@@ -14,7 +14,11 @@
   },
   "SERVER_UPTIME": true,
   "autoRefreshFbstate": true,
-  "restartListenMqtt": 3600000,
+  "restartListenMqtt": {
+    "allow": true,
+    "timeRestart": 3600000,
+    "logNoti": true
+  },
   "logEvents": {
     "eventAndMessage": true,
     "read_receipt": false,

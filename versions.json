@@ -436,10 +436,10 @@
   {
     "version": "1.4.8",
     "info": {
-      "index.js": "rename globalGoat.shortName to globalGoat.shortNameCommands",
-      "bot/loadAllScript.js": "rename globalGoat.shortName to globalGoat.shortNameCommands",
+      "index.js": "đổi tên globalGoat.shortName thành globalGoat.shortNameCommands",
+      "bot/loadAllScript.js": "đổi tên globalGoat.shortName thành globalGoat.shortNameCommands",
       "bot/handler/handlerEvents.js": "no description",
-      "scripts/cmds/help.js": "can you get commandName with shortName"
+      "scripts/cmds/help.js": "có thể lấy commandName từ shortName"
     }
   },
   {
@@ -451,8 +451,18 @@
   {
     "version": "1.4.10",
     "info": {
-      "update.js": "keep the old value of config.json (if there is an update to this file)",
-      "bot/handler/handlerEvents.js": "fix commandName undefined"
+      "update.js": "bỏ qua giá trị cũ của config.json (nếu có cập nhật file này)",
+      "bot/handler/handlerEvents.js": "sửa lỗi commandName undefined"
+    }
+  },
+  {
+    "version": "1.4.11",
+    "info": {
+      "config.json": "sửa lỗi listenMqtt",
+      "index.js": "",
+      "bot/login.js": "sửa lỗi listenMqtt bị x2",
+      "bot/handlerAction.js": "kiểm tra database trước khi thực hiện lệnh",
+      "scripts/cmds/adduser.js": "có thể thêm nhiều thành viên"
     }
   }
 ]

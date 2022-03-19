@@ -73,11 +73,7 @@ module.exports = {
     let msg = "";
     if (lengthUserSuccess) msg += `- Đã thêm thành công ${lengthUserSuccess} thành viên vào nhóm`;
     if (lengthUserWaitApproval) msg += `\n- Đã thêm ${lengthUserWaitApproval} thành viên vào danh sách phê duyệt`;
-    if (lengthUserError) {
-      msg += `\n- Đã xảy ra lỗi khi thêm ${lengthUserError} thành viên vào nhóm:`;
-      const msg2 = failed.reduce((a, b) => a += `\n  + ${b.uids.join('; ')}: ${b.type}`, "");
-			msg += msg2;
-		}
+    if (lengthUserError) msg += `\n- Đã xảy ra lỗi khi thêm ${lengthUserError} thành viên vào nhóm: ${failed.reduce((a, b) => a += `\n   + ${b.uids.join('; ')}: ${b.type}`, "")}`;
 		
 		message.reply(msg);
   }

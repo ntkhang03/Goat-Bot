@@ -1,8 +1,8 @@
 module.exports = ({ api, handlerEvents, handlerCreateDB }) => {
   return async (event) => {
     const message = require("./createFuncMessage.js")(event, api);
+    await handlerCreateDB({ event });
 	  const handlerChat = await handlerEvents({ event, message });
-	  await handlerCreateDB({ event });
 		switch (event.type) {
 			case "message":
 			case "message_reply":
