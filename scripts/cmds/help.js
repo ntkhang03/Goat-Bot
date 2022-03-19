@@ -1,6 +1,6 @@
 this.config = {    
   name: "help",
-  version: "1.0.8",
+  version: "1.0.10",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -27,7 +27,7 @@ module.exports = {
     let sortHelp = dataThread.sortHelp || "name";
     if (!["category", "name"].includes(sortHelp)) sortHelp = "name";
     const commandName = args[0] || "";
-    const command = globalGoat.commands.get(commandName).toLowerCase() || globalGoat.commands.get(globalGoat.shortNameCommands.get(commandName));
+    const command = globalGoat.commands.get(commandName.toLowerCase()) || globalGoat.commands.get(globalGoat.shortNameCommands.get(commandName));
     
 // ———————————————— LIST ALL COMMAND ——————————————— //
     if (!command && !args[0] || !isNaN(args[0])) {
@@ -51,7 +51,7 @@ module.exports = {
         const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
         const characters = "━━━━━━━━━━━━━";
         
-        returnArray.reduce((msg, item) => msg += `【${++i}】 ${item.data}\n`, '');
+        msg += returnArray.reduce((text, item) => text += `【${++i}】 ${item.data}\n`, '');
        
         const doNotDelete = "[ 🐐 | Project Goat Bot ]";
         message.reply(`${characters}\n${msg}${characters}\nTrang [ ${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)} ]\nHiện tại bot có ${globalGoat.commands.size} lệnh có thể sử dụng\n► Gõ ${prefix}help <số trang> để xem danh sách lệnh\n► Gõ ${prefix}help <tên lệnh> để xem chi tiết cách sử dụng lệnh đó\n${characters}\n${doNotDelete}`);

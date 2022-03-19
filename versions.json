@@ -476,5 +476,11 @@
     "info": {
       "scripts/cmds/adduser.js": "sửa vài lỗi nhỏ T.T"
     }
+  },
+  {
+    "version": "1.4.14",
+    "info": {
+      "scripts/cmds/help.js": "sửa lỗi \"cannot read property 'toLowerCase' of undefined\""
+    }
   }
 ]
