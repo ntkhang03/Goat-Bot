@@ -10,7 +10,7 @@
   "database": {
     "type": "local",
     "uriMongodb": "",
-    "notes": "type chọn *local* hoặc *mongodb*, nếu chọn mongodb thì điền uri connect mongodb vào phần uriMongodb, còn local sẽ lưu file json tại thư mục database"
+    "notes": "type chọn *local* hoặc *mongodb*, nếu chọn mongodb thì điền uri connect mongodb vào phần uriMongodb, còn local sẽ tự lưu file json tại thư mục database"
   },
   "SERVER_UPTIME": true,
   "autoRefreshFbstate": true,

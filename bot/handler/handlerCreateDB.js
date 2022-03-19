@@ -1,4 +1,4 @@
-module.exports = function({ globalGoat, usersData, threadsData, client, api, message, dataModels }) {
+module.exports = function({ globalGoat, usersData, threadsData, client }) {
 	const print = globalGoat.print;
 	const CREATEDATA = async function({ event }) {
 		try {

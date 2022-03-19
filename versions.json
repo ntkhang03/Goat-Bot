@@ -447,5 +447,12 @@
     "info": {
       "bot/handler/handlerEvents.js": "no description"
     }
+  },
+  {
+    "version": "1.4.10",
+    "info": {
+      "update.js": "keep the old value of config.json (if there is an update to this file)",
+      "bot/handler/handlerEvents": "fix commandName undefined"
+    }
   }
 ]

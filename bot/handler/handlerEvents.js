@@ -56,9 +56,9 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   		if (!client.allThreadData[threadID]) await threadsData.createData(threadID);
   		if (!client.allUserData[senderID]) await usersData.createData(senderID);
   		// ————————————  CHECK HAS COMMAND ——————————— //
-  		let commandName = args.shift().toLowerCase();
+  		var commandName = args.shift().toLowerCase();
   		const command = globalGoat.commands.get(commandName) || globalGoat.commands.get(globalGoat.shortNameCommands.get(commandName));
-  		if (command) commandName = command.name;
+  		if (command) commandName = command.config.name;
   		// ————————————— GET THREAD INFO ————————————— //
   		const threadInfo = client.allThreadData[threadID] || {};
   		if (threadInfo.onlyAdminBox === true && !threadInfo.adminIDs.includes(senderID) && commandName != "rules") return message.reply("Hiện tại nhóm này đã được bật chế độ chỉ quản trị viên nhóm mới có thể sử dụng bot");
