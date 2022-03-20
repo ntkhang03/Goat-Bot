@@ -482,5 +482,12 @@
     "info": {
       "scripts/cmds/help.js": "sửa lỗi \"cannot read property 'toLowerCase' of undefined\""
     }
+  },
+  {
+    "version": "1.4.15",
+    "info": {
+      "scripts/cmds/rules.js": "thêm tính năng edit/chuyển đổi vị trí của 2 rules",
+      "scripts/events/welcome.js": "tự đổi biệt danh bot khi vào box (nếu có điền trong config.json)"
+    }
   }
 ]
