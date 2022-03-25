@@ -17,35 +17,31 @@ module.exports = async function({ globalGoat, client, api }) {
     }, 120);
     
     const uriConnect = config.database.uriMongodb;
-    await mongoose.connect(uriConnect, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
-    .then(result => {
+    try {
+      await mongoose.connect(uriConnect, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      });
       loading.master("Kết nối cơ sở dữ liệu Mongodb thành công\n", "MONGODB");
       clearInterval(loadmongo);
-      })
-    .catch(err => {
+    }
+    catch(err) {
       loading.err("Kết nối cơ sở dữ liệu Mongodb thất bại với lỗi: "+err.stack+"\n", "MONGODB");
       clearInterval(loadmongo);
-    });
-    
-    if ((await dataModels.find({ type: "thread" })).length == 0) await dataModels.create({ 
-      type: "thread",
-      data: {}
-    });
-    
-    if ((await dataModels.find({ type: "user" })).length == 0) await dataModels.create({ 
-      type: "user", 
-      data: {}
-    });
+    }
+    for (const type of ["thread", "user"]) {
+      if ((await dataModels.find({ type })).length == 0) await dataModels.create({
+        type, 
+        data: {}
+      });
+    }
   }
   /*
         ▀▀█▀▀ █░░█ █▀▀█ █▀▀ █▀▀█ █▀▀▄ █▀▀
         ░░█░░ █▀▀█ █▄▄▀ █▀▀ █▄▄█ █░░█ ▀▀█
         ░░▀░░ ▀░░▀ ▀░▀▀ ▀▀▀ ▀░░▀ ▀▀▀░ ▀▀▀
   */
-  async function threadsData () {
+  async function threadsData() {
     let Threads = {};
     if (databaseType == "mongodb") {
       Threads = (await dataModels.find({ type: "thread"}))[0].data || {};
@@ -57,19 +53,23 @@ module.exports = async function({ globalGoat, client, api }) {
 	  
     client.allThreadData = Threads;
     
-  	async function saveData(Tid) {
-  	  Tid != "delete" ? Threads[Tid].lastUpdate = Date.now() : "";
+  	async function saveData(threadID) {
+  	  threadID != "delete" ? Threads[threadID].lastUpdate = Date.now() : "";
   	  client.allThreadData = Threads;
   	  if (databaseType == "local") {
 	      fs.writeFileSync(__dirname + "/../threadsData.json", JSON.stringify(Threads, null, 2));
   	  }
   	  else if (databaseType == "mongodb") {
-	      await dataModels.updateOne({
-	        type: "thread"
-	      }, {
-	        data: Threads
-	      })
-	      .catch(err => print.err("Đã xảy ra lỗi khi cập nhật dữ liệu của nhóm mang id " + Tid  + "\n" + err, "MONGODB"));
+  	    try {
+  	      await dataModels.updateOne({
+  	        type: "thread"
+  	      }, {
+  	        data: Threads
+  	      });
+  	    }
+	      catch(err) {
+	        print.err("Đã xảy ra lỗi khi cập nhật dữ liệu của nhóm mang id " + threadID  + "\n" + err, "MONGODB");
+	      }
   	  }
   	  else throw new Error("Database Type không hợp lệ");
   	}
