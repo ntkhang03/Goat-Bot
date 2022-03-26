@@ -495,5 +495,11 @@
     "info": {
       "scripts/cmds/adduser.js": ""
     }
+  },
+  {
+    "version": "1.4.17",
+    "info": {
+      "bot/createFuncMessage.js": ""
+    }
   }
 ]
