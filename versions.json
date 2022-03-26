@@ -489,5 +489,11 @@
       "scripts/cmds/rules.js": "thêm tính năng edit/chuyển đổi vị trí của 2 rules",
       "scripts/events/welcome.js": "tự đổi biệt danh bot khi vào box (nếu có điền trong config.json)"
     }
+  },
+  {
+    "version": "1.4.16",
+    "info": {
+      "scripts/cmds/adduser.js": ""
+    }
   }
 ]

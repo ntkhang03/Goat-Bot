@@ -1,6 +1,6 @@
 this.config = {    
   name: "adduser",
-  version: "1.0.7",
+  version: "1.0.8",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -62,7 +62,7 @@ module.exports = {
           else success[0].uids.push(uid);
         }
         catch (err) {
-          checkAndPushError(err.errorDescription);
+          checkAndPushError(err.errorDescription, item);
         }
       }
 		}
