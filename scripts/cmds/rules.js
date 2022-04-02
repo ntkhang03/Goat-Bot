@@ -1,6 +1,6 @@
 this.config = {    
   name: "rules",
-  version: "1.0.4",
+  version: "1.0.5",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -26,13 +26,12 @@ this.config = {
 
 module.exports = {
   config: this.config,
-  start: async function({ api, globalGoat, args, download, message, event, threadsData, }) {
+  start: async function({ api, role, globalGoat, args, message, event, threadsData }) {
     const { senderID, threadID, messageID } = event;
     
     const type = args[0];
     const threadData = await threadsData.getData(threadID);
     const dataOfThread = threadData.data;
-    const adminIDs = threadData.adminIDs;
     
     if (!dataOfThread.rules) dataOfThread.rules = [];
     const rulesOfThread = dataOfThread.rules;
@@ -44,7 +43,7 @@ module.exports = {
       message.reply(msg || "Hiện tại nhóm bạn chưa có bất kỳ nội quy nào, để thêm nội quy cho nhóm hãy sử dụng `rules add`");
     }
     else if (["add", "-a"].includes(type)) {
-      if (!adminIDs.includes(senderID)) return message.reply("Chỉ có quản trị viên nhóm mới có thể thêm nội quy");
+      if (role < 1) return message.reply("Chỉ quản trị viên mới có thể thêm nội quy cho nhóm");
       if (!args[1]) return message.reply("Vui lòng nhập nội dụng cho nội quy bạn muốn thêm");
       rulesOfThread.push(args.slice(1).join(" "));
       threadsData.setData(threadID, {
@@ -55,6 +54,7 @@ module.exports = {
       });
     }
     else if (["edit", "-e"].includes(type)) {
+      if (role < 1) return message.reply("Chỉ quản trị viên mới có thể chỉnh sửa nội quy nhóm");
       const stt = parseInt(args[1]);
       if (isNaN(stt)) return message.reply(`Vui lòng nhập số thứ tự của quy định bạn muốn chỉnh sửa`);
       if (!rulesOfThread[stt-1]) return message.reply(`Không tồn tại nội quy thứ ${stt}, hiện tại nhóm bạn ${totalRules == 0 ? `chưa có nội quy nào được đặt ra` : `chỉ có ${totalRules} nội quy`}`);
@@ -69,6 +69,7 @@ module.exports = {
       });
     }
     else if (["move", "-m"].includes(type)) {
+      if (role < 1) return message.reply("Chỉ quản trị viên mới có thể đổi vị trí nội quy của nhóm");
       const stt1 = parseInt(args[1]);
       const stt2 = parseInt(args[2]);
       if (isNaN(stt1) || isNaN(stt2)) return message.reply(`Vui lòng nhập số thứ tự của 2 nội quy nhóm bạn muốn chuyển đổi vị trí với nhau`);
@@ -82,7 +83,7 @@ module.exports = {
       });
     }
     else if (["delete", "del", "-d"].includes(type)) {
-      if (!adminIDs.includes(senderID)) return message.reply("Chỉ có quản trị viên nhóm mới có thể xóa nội quy");
+      if (role < 1) return message.reply("Chỉ quản trị viên mới có thể xóa nội quy của nhóm");
       if (!args[1] || isNaN(args[1])) return message.reply("Vui lòng nhập số thứ tự của nội quy bạn muốn xóa");
       const rulesDel = rulesOfThread[parseInt(args[1])-1];
       if (!rulesDel) return message.reply(`Không tồn tại nội quy thứ ${args[1]}, hiện tại nhóm bạn có ${totalRules} nội quy`);
@@ -95,7 +96,7 @@ module.exports = {
       });
     }
     else if (type == "remove" || type == "-r") {
-      if (!adminIDs.includes(senderID)) return message.reply("Chỉ có quản trị viên nhóm mới có thể xoá bỏ tất cả nội quy của nhóm");
+      if (role < 1) return message.reply("Chỉ có quản trị viên nhóm mới có thể xoá bỏ tất cả nội quy của nhóm");
       dataOfThread.rules = [];
       threadsData.setData(threadID, {
         data: dataOfThread

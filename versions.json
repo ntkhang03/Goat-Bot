@@ -501,5 +501,11 @@
     "info": {
       "bot/createFuncMessage.js": ""
     }
+  },
+  {
+    "version": "1.4.18",
+    "info": {
+      "scripts/cmds/rules.js": "fix bug"
+    }
   }
 ]
