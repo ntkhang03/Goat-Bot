@@ -507,5 +507,11 @@
     "info": {
       "scripts/cmds/rules.js": "fix bug"
     }
+  },
+  {
+    "version": "1.4.19",
+    "info": {
+      "bot/login.js": ""
+    }
   }
 ]
