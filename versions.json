@@ -513,5 +513,11 @@
     "info": {
       "bot/login.js": ""
     }
+  },
+  {
+    "version": "1.4.20",
+    "info": {
+      "scripts/cmd/tikuser.js": "xem thông tin người dùng tiktok"
+    }
   }
 ]
