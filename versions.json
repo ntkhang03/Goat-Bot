@@ -517,7 +517,7 @@
   {
     "version": "1.4.20",
     "info": {
-      "scripts/cmd/tikuser.js": "xem thông tin người dùng tiktok"
+      "scripts/cmds/tikuser.js": "xem thông tin người dùng tiktok"
     }
   }
 ]
