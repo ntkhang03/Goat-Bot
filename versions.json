@@ -519,5 +519,11 @@
     "info": {
       "scripts/cmds/tikuser.js": "xem thông tin người dùng tiktok"
     }
+  },
+  {
+    "version": "1.4.21",
+    "info": {
+      "bot/login.js": "fix lỗi restart listenMqtt"
+    }
   }
 ]
