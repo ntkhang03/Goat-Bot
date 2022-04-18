@@ -525,5 +525,13 @@
     "info": {
       "bot/login.js": "fix lỗi restart listenMqtt"
     }
+  },
+  {
+    "version": "1.4.22",
+    "info": {
+      "bot/loadData.js": "fix error Cannot find module '../database/dataProcessing/models/threadsModel.js'",
+      "bot/database/dataProcessing/handlerData.js": "",
+      "bot/database/dataProcessing/handlerEvents.js": ""
+    }
   }
 ]

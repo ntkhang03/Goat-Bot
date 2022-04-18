@@ -1,4 +1,4 @@
-module.exports = function({ api, globalGoat, client, usersData, threadsData, download, usersModel, threadsModel }) {
+module.exports = function({ api, globalGoat, client, usersData, threadsData, download,  }) {
 	const print = globalGoat.print;
 	const axios = require("axios");
 	const chalk = require("chalk");
@@ -14,7 +14,7 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
     
     const contentSyntaxError = `Lệnh bạn đang sử dụng sai cú pháp, vui lòng gõ ${prefix}help {nameCmd} để xem chi tiết cách sử dụng lệnh này`;
     
-    const parameters = { api, globalGoat, client, usersData, threadsData, message, event, download, usersModel, threadsModel };
+    const parameters = { api, globalGoat, client, usersData, threadsData, message, event, download };
     
     if (!isNaN(senderID) && !client.allUserData[senderID]) await usersData.createData(senderID);
     if (!isNaN(threadID) && !client.allThreadData[threadID]) await threadsData.createData(threadID);
@@ -242,7 +242,7 @@ module.exports = function({ api, globalGoat, client, usersData, threadsData, dow
   			try {
   			  const time = moment.tz("Asia/Ho_Chi_Minh").format("DD/MM/YYYY HH:mm:ss");
   				print(`${chalk.hex("#ffb300")(time)} | Event: ${getEvent.config.name} | ${author} | ${threadID}`, "EVENT CMD");
-  				getEvent.start({ event, api, globalGoat, usersData, threadsData, client, download, message, usersModel, threadsModel });
+  				getEvent.start({ event, api, globalGoat, usersData, threadsData, client, download, message });
   			}
   			catch(err) {
   				print.err(`Đã xảy ra lỗi tại command event ${chalk.hex("#ff0000")(getEvent.config.name)}, ${err.stack}`, "EVENT COMMAND");
