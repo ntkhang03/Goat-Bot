@@ -531,7 +531,7 @@
     "info": {
       "bot/loadData.js": "fix error Cannot find module '../database/dataProcessing/models/threadsModel.js'",
       "bot/database/dataProcessing/handlerData.js": "",
-      "bot/database/dataProcessing/handlerEvents.js": ""
+      "bot/handler/handlerEvents.js": ""
     }
   }
 ]
