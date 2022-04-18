@@ -530,7 +530,7 @@
     "version": "1.4.22",
     "info": {
       "bot/loadData.js": "fix error Cannot find module '../database/dataProcessing/models/threadsModel.js'",
-      "bot/database/dataProcessing/handlerData.js": "",
+      "database/dataProcessing/handlerData.js": "",
       "bot/handler/handlerEvents.js": ""
     }
   }
