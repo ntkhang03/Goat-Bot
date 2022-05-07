@@ -533,5 +533,11 @@
       "database/dataProcessing/handlerData.js": "",
       "bot/handler/handlerEvents.js": ""
     }
+  },
+  {
+    "version": "1.4.23",
+    "info": {
+      "scripts/cmds/logsbot.js": "fix bug"
+    }
   }
 ]
