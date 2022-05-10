@@ -539,5 +539,12 @@
     "info": {
       "scripts/cmds/logsbot.js": "fix bug"
     }
+  },
+  {
+    "version": "1.4.24",
+    "info": {
+      "scripts/cmds/callad.js": "fix bug",
+      "scripts/cmds/cmd.js": "fix bug"
+    }
   }
 ]

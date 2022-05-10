@@ -1,6 +1,6 @@
 this.config = {    
   name: "cmd",
-  version: "1.0.6",
+  version: "1.0.7",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -37,7 +37,7 @@ module.exports = {
         if (oldCommand.config.shortName) {
           let oldShortName = oldCommand.config.shortName;
           if (typeof oldShortName == "string") oldShortName = [oldShortName];
-          for (let aliases of oldShortName) globalGoat.shortName.delete(aliases);
+          for (let aliases of oldShortName) globalGoat.shortNameCommands.delete(aliases);
         }
         
         // delete old command

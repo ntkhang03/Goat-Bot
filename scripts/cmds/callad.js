@@ -1,6 +1,6 @@
 this.config = {
   name: "callad",
-  version: "1.0.1",
+  version: "1.0.2",
   author: { 
     name: "NTKhang", 
     contacts: ""
@@ -25,8 +25,8 @@ module.exports = {
     +`\n${userData.gender == 2 ? "🚹" : "🚺"} Name: ${nameSender}`
     +`\n🆔 User ID: ${senderID}`;
     
-    msg += `\n👨‍👩‍👧‍👦 Từ ` + isGroup ? `nhóm: ${(await threadsData.getData(threadID)).name}`
-      +`\n🆔 Thread ID: ${threadID}` : "cá nhân";
+    msg += `\n👨‍👩‍👧‍👦 Từ ` + (isGroup ? `nhóm: ${(await threadsData.getData(threadID)).name}`
+      +`\n🆔 Thread ID: ${threadID}` : "cá nhân");
       
     api.sendMessage({
       body: msg + `\n🆎 Nội dung: ${args.join(" ")}\n─────────────────\nPhản hồi tin nhắn này để gửi tin nhắn về người dùng`,
