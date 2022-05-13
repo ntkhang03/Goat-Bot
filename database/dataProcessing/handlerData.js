@@ -146,13 +146,16 @@ module.exports = async function({ globalGoat, client, api }) {
     		    name: user.name,
     		    gender: user.gender,
     			  nickname: newThreadInfo.nicknames[userID],
-      		  count: oldMembers[userID] ? oldMembers[userID].count : 0
+      		  count: oldMembers[userID] ? oldMembers[userID].count : 0,
+      		  inGroup: true
     		  };
     		  newMembers[userID] = { 
     		    ...oldDataUser,
     		    ...data
           };
+          if (oldMembers[userID]) delete oldMembers[userID];
     		}
+    		for (const uid in oldMembers) oldMembers[uid].inGroup = false;
     		
     		const newadminsIDs = adminIDs.map(item => item.id);
   			const ThreadInfoNew = {

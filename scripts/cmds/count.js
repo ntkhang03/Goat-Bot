@@ -24,9 +24,10 @@ module.exports = {
     const arraySort = [];
     const usersInGroup = (await api.getThreadInfo(threadID)).participantIDs;
     for (let id in members) {
+      if (!usersInGroup.includes(id)) continue;
       const count = members[id].count;
       const name = members[id].name;
-      usersInGroup.includes(id) ? arraySort.push({ name, count, uid: id }) : "";
+      arraySort.push({ name, count, uid: id });
     }
     let stt = 1;
     arraySort.sort((a, b) => b.count - a.count);
