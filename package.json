@@ -1,6 +1,6 @@
 {
   "name": "goat-bot",
-  "version": "1.4.25",
+  "version": "1.4.26",
   "description": "A simple Bot chat messenger made by NTKhang",
   "main": "index.js",
   "author": "NTKhang",

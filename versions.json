@@ -553,5 +553,12 @@
       "scripts/cmds/count.js": "",
       "database/dataProcessing/handlerData.js": "update function refreshInfo for thread"
     }
+  },
+  {
+    "version": "1.4.26",
+    "info": {
+      "scripts/cmds/user.js": "fix error \"Cannot read property 'toLowerCase' of null\" if user name is null",
+      "scripts/cmds/thread.js": "fix error \"Cannot read property 'toLowerCase' of null\" if thread name is null"
+    }
   }
 ]

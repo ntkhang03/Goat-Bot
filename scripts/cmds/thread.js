@@ -1,6 +1,6 @@
 this.config = {    
   name: "thread",
-  version: "1.0.5",
+  version: "1.0.6",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -30,7 +30,7 @@ module.exports = {
     if (["find", "search", "-f", "-s"].includes(type)) {
       const allThread = await threadsData.getAll(["name"]);
       const keyword = args.slice(1).join(" ");
-			const result = allThread.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase()));
+			const result = allThread.filter(item => (item.name || "").toLowerCase().includes(keyword.toLowerCase()));
 			const msg = result.reduce((i, user) => i += `\n╭Name: ${user.name}\n╰ID: ${user.id}`, "");
       message.reply(result.length == 0 ? `❌ Không tìm thấy nhóm nào có tên khớp với từ khoá: ${keyword}` : `🔎Có ${result.length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
     }

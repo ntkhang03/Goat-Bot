@@ -1,6 +1,6 @@
 this.config = {    
   name: "user",
-  version: "1.0.3",
+  version: "1.0.4",
   author: {
     name: "NTKhang", 
     contacts: ""
@@ -26,7 +26,7 @@ module.exports = {
     if (["find", "search", "-f", "-s"].includes(type)) {
       const allUser = await usersData.getAll(["name"]);
       const keyword = args.slice(1).join(" ");
-      const result = allUser.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase()));
+      const result = allUser.filter(item => (item.name || "").toLowerCase().includes(keyword.toLowerCase()));
       const msg = result.reduce((i, user) => i += `\n╭Name: ${user.name}\n╰ID: ${user.id}`, "");
       message.reply(result.length == 0 ? `❌ Không tìm thấy người dùng nào có tên khớp với từ khóa: ${keyword}` : `🔎Có ${result.length} kết quả phù hợp cho từ khóa "${keyword}":\n${msg}`);
     }
