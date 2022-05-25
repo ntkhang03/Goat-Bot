@@ -560,5 +560,11 @@
       "scripts/cmds/user.js": "fix error \"Cannot read property 'toLowerCase' of null\" if user name is null",
       "scripts/cmds/thread.js": "fix error \"Cannot read property 'toLowerCase' of null\" if thread name is null"
     }
+  },
+  {
+    "version": "1.4.27",
+    "info": {
+      "bot/login.js": "fix error is undefined when error no stack"
+    }
   }
 ]
