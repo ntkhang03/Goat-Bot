@@ -2,10 +2,10 @@
   "email": "",
   "password": "",
   "adminOnly": false,
-  "adminBot": [
-    
+  "adminBot": [ 
+  "100021818985662"   
   ],
-  "nickNameBot": "",
+  "nickNameBot": "ツᴇʀʀoʟ•тÙɴg ",
   "prefix": "#",
   "database": {
     "type": "local",
