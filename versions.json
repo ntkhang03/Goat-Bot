@@ -566,5 +566,11 @@
     "info": {
       "bot/login.js": "fix error is undefined when error no stack"
     }
+  },
+  {
+    "version": "1.4.28",
+    "info": {
+      "scripts/cmds/moon.js": "fix error"
+    }
   }
 ]
