@@ -21,6 +21,7 @@ this.config = {
        + "\n + {p}{n} add không spam"
        + "\n + {p}{n} move 1 3"
        + "\n + {p}{n} -e 1 không spam tin nhắn trong nhóm"
+       + "\n + {p}{n} -d 1"
        + "\n + {p}{n} -r"
 };
 

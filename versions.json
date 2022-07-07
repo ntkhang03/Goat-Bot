@@ -572,5 +572,11 @@
     "info": {
       "scripts/cmds/moon.js": "fix error"
     }
+  },
+  {
+    "version": "1.4.29",
+    "info": {
+      "scripts/cmds/rules.js": "edit guide"
+    }
   }
 ]
