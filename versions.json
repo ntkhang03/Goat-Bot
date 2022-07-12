@@ -578,5 +578,11 @@
     "info": {
       "scripts/cmds/rules.js": "edit guide"
     }
+  },
+  {
+    "version": "1.4.30",
+    "info": {
+      "bot/login.js": ""
+    }
   }
 ]
