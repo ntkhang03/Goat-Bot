@@ -5,12 +5,10 @@
 
 	const chalk = require("chalk");
 	const login = require("fb-chat-api");
-	const { readdirSync, readFileSync, writeFileSync, existsSync, copySync, unlinkSync } = require("fs-extra");
-	const qs = require("querystring");
+	const { writeFileSync } = require("fs-extra");
 
 	const print = require("./logger/print.js");
 	const loading = require("./logger/loading.js");
-	const axios = require("axios");
 
 	const globalGoat = {
 		print,
