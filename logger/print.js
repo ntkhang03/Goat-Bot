@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
 module.exports = (text, type) => {
-  console.log(chalk.cyan(`» ${type} «`), text);
+	console.log(chalk.cyan(`» ${type} «`), text);
 };
 
 module.exports.error = (text, type) => {
@@ -17,20 +17,20 @@ module.exports.warn = (text, type) => {
 };
 
 module.exports.master = (text, type) => {
-  console.log(chalk.hex("#ff5208")(`» ${type} «`), text);
+	console.log(chalk.hex("#ff5208")(`» ${type} «`), text);
 };
 
 module.exports.blue = (text, type) => {
-  console.log(chalk.hex("#0568f2").bold(`» ${type} «`), text);
+	console.log(chalk.hex("#0568f2").bold(`» ${type} «`), text);
 };
 
 module.exports.green = (text, type) => {
-  console.log(chalk.green.bold(`» ${type} «`), text);
+	console.log(chalk.green.bold(`» ${type} «`), text);
 };
 
 module.exports.pink = (text, type) => {
-  console.log(chalk.hex("#f205c3").bold(`» ${type} «`), text);
+	console.log(chalk.hex("#f205c3").bold(`» ${type} «`), text);
 };
 module.exports.purple = (text, type) => {
-  console.log(chalk.hex("#a700ffff").bold(`» ${type} «`), text);
+	console.log(chalk.hex("#a700ffff").bold(`» ${type} «`), text);
 };
