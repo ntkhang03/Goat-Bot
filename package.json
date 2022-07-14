@@ -1,6 +1,6 @@
 {
 	"name": "goat-bot",
-	"version": "1.4.30",
+	"version": "1.4.31",
 	"description": "A simple Bot chat messenger made by NTKhang",
 	"main": "index.js",
 	"author": "NTKhang",
@@ -29,7 +29,7 @@
 		"child_process": "^1.0.2",
 		"crypto": "",
 		"express": "^4.17.1",
-		"fb-chat-api": "^10.3.13",
+		"fb-chat-api": "latest",
 		"fb-tools": "",
 		"fs-extra": "^10.0.0",
 		"moment-timezone": "^0.5.33",

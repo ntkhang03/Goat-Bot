@@ -584,5 +584,11 @@
 		"info": {
 			"bot/login.js": ""
 		}
+	}, 
+	{
+		"version": "1.4.31",
+		"info": {
+			"scripts/cmds/kick.js": "new command"
+		}
 	}
 ]
