@@ -1,6 +1,6 @@
 this.config = {
 	name: "adduser",
-	version: "1.0.8",
+	version: "1.0.9",
 	author: {
 		name: "NTKhang",
 		contacts: ""
