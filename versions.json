@@ -590,5 +590,14 @@
 		"info": {
 			"scripts/cmds/kick.js": "new command"
 		}
+	}, 
+	{
+		"version": "1.4.32",
+		"info": {
+			"scripts/cmds/adduser.js": "new command"
+		},
+		"del": {
+			"scripts/cmds/sdtfb.js": ""
+		}
 	}
 ]
