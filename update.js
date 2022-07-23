@@ -14,7 +14,12 @@
 
 	for (const data of versionsUpdate) {
 		if (data.del) {
-			for (const path of data.del) fs.unlinkSync(path);
+			for (const path of data.del)
+				try {
+					fs.unlinkSync(path);
+				}
+				catch (e) {
+				}
 		}
 		const { info, version } = data;
 		print.green(version, "VERSION");
