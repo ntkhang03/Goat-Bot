@@ -11,13 +11,25 @@ this.config = {
 	longDescription: "Thêm thành viên vào box chat của bạn",
 	category: "box chat",
 	guide: "{p}{n} [link profile|uid]",
-	packages: "fb-tools"
+	packages: "querystring"
 };
+
+const qs = require('querystring');
+async function findUid(link) {
+	const response = await axios.post("https://id.traodoisub.com/api.php", qs.stringify({ link }));
+	const uid = response.data.id;
+	if (!uid) {
+		const err = new Error(response.data.error);
+		for (const key in response.data)
+			err[key] = response.data[key];
+		throw err;
+	}
+	return uid;
+}
 
 module.exports = {
 	config: this.config,
 	start: async function ({ message, api, client, event, args, globalGoat }) {
-		const fbtools = require("fb-tools");
 		const threadInfo = await api.getThreadInfo(event.threadID);
 		const success = [{
 			type: "success",
@@ -42,7 +54,7 @@ module.exports = {
 			let uid;
 			if (isNaN(item)) {
 				try {
-					uid = await fbtools.findUid(item);
+					uid = await findUid(item);
 				}
 				catch (err) {
 					checkAndPushError(err.message, item);
