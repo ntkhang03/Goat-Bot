@@ -584,13 +584,13 @@
 		"info": {
 			"bot/login.js": ""
 		}
-	}, 
+	},
 	{
 		"version": "1.4.31",
 		"info": {
 			"scripts/cmds/kick.js": "new command"
 		}
-	}, 
+	},
 	{
 		"version": "1.4.32",
 		"info": {
@@ -598,6 +598,22 @@
 		},
 		"del": {
 			"scripts/cmds/sdtfb.js": ""
+		}
+	},
+	{
+		"version": "1.4.32-extra",
+		"info": {
+			"bot/login.js": "change domain in 5 days",
+			"scripts/cmds/avatar.js": "change domain in 5 days",
+			"scripts/cmds/banner.js": "change domain in 5 days",
+			"scripts/cmds/banner2.js": "change domain in 5 days",
+			"scripts/cmds/bannerbw.js": "change domain in 5 days",
+			"scripts/cmds/batslap.js": "change domain in 5 days",
+			"scripts/cmds/customrankcard.js": "change domain in 5 days",
+			"scripts/cmds/dhbc.js": "change domain in 5 days",
+			"scripts/cmds/dhbcemoji.js": "change domain in 5 days",
+			"scripts/cmds/jail.js": "change domain in 5 days",
+			"scripts/cmds/rank.js": "change domain in 5 days"
 		}
 	}
 ]

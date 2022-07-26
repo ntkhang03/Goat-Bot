@@ -50,7 +50,7 @@ module.exports = {
 		if (["subcolor", "maincolor", "expcolor", "expnextlevelcolor"].includes(key)) {
 			// if image url
 			if (value.match(checkUrlRegex)) {
-				const response = await axios.get("https://goatbot.tk/taoanhdep/checkurlimage?url=" + encodeURIComponent(value));
+				const response = await axios.get("https://api-ntk-production.up.railway.app/taoanhdep/checkurlimage?url=" + encodeURIComponent(value));
 				if (response.data == false) return message.reply("Url hình ảnh không hợp lệ, vui lòng chọn 1 url với trang đích là hình ảnh");
 				key == "maincolor" ? oldDesign.main_color = value
 					: key == "subcolor" ? oldDesign.sub_color = value

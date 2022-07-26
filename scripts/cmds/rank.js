@@ -82,7 +82,7 @@ module.exports = {
 				...dataLevel
 			});
 
-			axios.get("https://goatbot.tk/taoanhdep/makerankcard?" + stringBody, {
+			axios.get("https://api-ntk-production.up.railway.app/taoanhdep/makerankcard?" + stringBody, {
 				responseType: "arraybuffer"
 			})
 				.then(data => {

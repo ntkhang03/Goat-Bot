@@ -26,7 +26,7 @@ module.exports = {
 		const { senderID, mentions } = event;
 		const uid = Object.keys(mentions).length > 0 ? Object.keys(mentions)[0] : senderID;
 		const avatar = `https://graph.facebook.com/${uid}/picture?type=large&width=500&height=500&access_token=${tokenFacebook}`;
-		axios.get(`https://goatbot.tk/taoanhdep/jail`, {
+		axios.get(`https://api-ntk-production.up.railway.app/taoanhdep/jail`, {
 			params: {
 				image: avatar,
 				apikey: "ntkhang"

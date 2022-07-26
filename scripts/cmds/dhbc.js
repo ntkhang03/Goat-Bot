@@ -18,7 +18,7 @@ module.exports = {
 	start: async function ({ globalGoat, message, event, download }) {
 		const axios = require("axios");
 		const fs = require("fs-extra");
-		const datagame = (await axios.get("https://goatbot.tk/api/duoihinhbatchu")).data;
+		const datagame = (await axios.get("https://api-ntk-production.up.railway.app/api/duoihinhbatchu")).data;
 		const { wordcomplete, casi, image1, image2 } = datagame.data;
 		const pathImage1 = __dirname + "/cache/dhbc1.jpg";
 		const pathImage2 = __dirname + "/cache/dhbc2.jpg";

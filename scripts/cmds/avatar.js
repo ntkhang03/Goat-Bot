@@ -32,7 +32,7 @@ module.exports = {
 			const chu_Ky = content[2];
 			const colorBg = content[3];
 			try {
-				const dataChracter = (await axios.get("https://goatbot.tk/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
+				const dataChracter = (await axios.get("https://api-ntk-production.up.railway.app/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
 				if (!isNaN(content[0])) {
 					idNhanVat = parseInt(content[0]);
 					const totalCharacter = dataChracter.length - 1;
@@ -53,7 +53,7 @@ module.exports = {
 				return message.reply(`Đã xảy ra lỗi lấy dữ liệu nhân vật:\n${err.name}: ${err.message}`);
 			}
 
-			const endpoint = `https://goatbot.tk/taoanhdep/avataranime`;
+			const endpoint = `https://api-ntk-production.up.railway.app/taoanhdep/avataranime`;
 			const params = {
 				id: idNhanVat,
 				chu_Nen,
