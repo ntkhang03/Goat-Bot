@@ -615,5 +615,11 @@
 			"scripts/cmds/jail.js": "change domain in 5 days",
 			"scripts/cmds/rank.js": "change domain in 5 days"
 		}
+	},
+	{
+		"version": "1.4.33",
+		"info": {
+			"update.js": "fixes data.del is not iterable"
+		}
 	}
 ]
