@@ -14,7 +14,7 @@
 
 	for (const data of versionsUpdate) {
 		if (data.del) {
-			for (const path of data.del)
+			for (const path in data.del)
 				try {
 					fs.unlinkSync(path);
 				}
