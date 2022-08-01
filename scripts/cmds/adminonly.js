@@ -1,4 +1,5 @@
 const fs = require("fs-extra");
+
 this.config = {
 	name: "adminonly",
 	version: "1.0.1",
@@ -16,7 +17,7 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: function ({ globalGoat, args, message, event, client }) {
+	start: function ({ globalGoat, args, message, client }) {
 		const { config } = globalGoat;
 		if (args[0] == "on") {
 			config.adminOnly = true;

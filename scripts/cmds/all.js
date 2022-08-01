@@ -15,14 +15,14 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ globalGoat, args, threadsData, message, event }) {
+	start: async function ({ args, threadsData, message, event }) {
 		const alluser = Object.keys((await threadsData.getData(event.threadID)).members);
 		const lengthAllUser = alluser.length;
 		const mentions = [];
 		let body = args.join(" ") || "@all";
 		let lengthbody = body.length;
 		let i = 0;
-		for (let uid of alluser) {
+		for (const uid of alluser) {
 			let fromIndex = 0;
 			if (lengthbody < lengthAllUser) {
 				body += body[lengthbody - 1];

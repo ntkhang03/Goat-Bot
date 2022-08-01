@@ -621,5 +621,22 @@
 		"info": {
 			"update.js": "fixes data.del is not iterable"
 		}
+	},
+	{
+		"version": "1.4.34",
+		"info": {
+			"scripts/cmds/adduser.js": "add require pkg axios",
+			"bot/login.js": "go back to domain goatbot.tk",
+			"scripts/cmds/avatar.js": "go back to domain goatbot.tk",
+			"scripts/cmds/banner.js": "go back to domain goatbot.tk",
+			"scripts/cmds/banner2.js": "go back to domain goatbot.tk",
+			"scripts/cmds/bannerbw.js": "go back to domain goatbot.tk",
+			"scripts/cmds/batslap.js": "go back to domain goatbot.tk",
+			"scripts/cmds/customrankcard.js": "go back to domain goatbot.tk",
+			"scripts/cmds/dhbc.js": "go back to domain goatbot.tk",
+			"scripts/cmds/dhbcemoji.js": "go back to domain goatbot.tk",
+			"scripts/cmds/jail.js": "go back to domain goatbot.tk",
+			"scripts/cmds/rank.js": "go back to domain goatbot.tk"
+		}
 	}
 ]

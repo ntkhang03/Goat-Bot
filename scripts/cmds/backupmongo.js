@@ -15,10 +15,9 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ args, message, event, globalGoat }) {
+	start: async function ({ message, event, globalGoat }) {
 		const fs = require("fs-extra");
 		if (globalGoat.config.database.type != "mongodb") return message.send("Bạn phải sử dụng cơ sở dữ liệu mongdb mới có thể dùng lệnh này");
-		const { senderID, threadID, messageID } = event;
 		const pathThreads = __dirname + "/cache/dataThreads.json";
 		const pathUsers = __dirname + "/cache/dataUsers.json";
 		const dataModels = require("../../database/dataProcessing/models/dataModels.js");

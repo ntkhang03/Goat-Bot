@@ -37,7 +37,7 @@
 				for (const key of keysNeddUpdate) oldConfig[key] = getNewConfig[key];
 				response = JSON.stringify(oldConfig, null, 2);
 			}
-			fs.writeFileSync(__dirname + "/" + location, response);
+			fs.writeFileSync(`${__dirname}/${location}`, response);
 			print.green(`Update file ${chalk.hex("#ff5208")(location)} success, description: ${chalk.hex("#d6d6d6")(description || "No description")}`, "UPDATE");
 		}
 	}

@@ -50,7 +50,5 @@ module.exports = {
 			if (Object.keys(client.busyList).includes(userID))
 				return message.reply(`Hiện tại người dùng ${mentions[userID].replace("@", "")} đang bận${busyList[userID] ? ` với lý do: ${busyList[userID]}` : ""}`);
 		}
-
 	}
-
 };

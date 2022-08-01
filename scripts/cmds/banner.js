@@ -15,7 +15,7 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ api, message, event, args, help }) {
+	start: async function ({ message, event, args }) {
 		const axios = require("axios");
 		const fs = require("fs-extra");
 
@@ -35,7 +35,7 @@ module.exports = {
 		for (const i in params) if (!params[i]) return message.SyntaxError();
 		message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
 
-		axios.get("https://api-ntk-production.up.railway.app/taoanhdep/banner1", {
+		axios.get("https://goatbot.tk/taoanhdep/banner1", {
 			params,
 			responseType: "arraybuffer"
 		})

@@ -1,26 +1,24 @@
 module.exports = async (globalGoat) => {
-	const axios = require("axios");
 	const chalk = require("chalk");
 	const { print, loading, configCommands } = globalGoat;
 	const { execSync } = require('child_process');
 	const { readdirSync, readFileSync, writeFileSync } = require("fs-extra");
-	var spiner = "\\|/-";
-	var ij = 0;
 
 	const folder = ["cmds", "events"];
 
-	for (let folderModules of folder) {
+	for (const folderModules of folder) {
 		const makeColor = folderModules == "cmds" ?
 			"============ LOADING COMMANDS ============" :
 			"========= LOADING COMMANDS EVENTS =========";
 		console.log(chalk.blue(makeColor));
 		const commandError = [];
-		let text = "", typeConfigCommand = "", setMap = "";
+		let text = "", typeEnvCommand = "", setMap = "";
 		if (folderModules == "cmds") {
 			text = "command";
 			typeEnvCommand = "envCommands";
 			setMap = "commands";
-		} else {
+		}
+		else {
 			text = "command event";
 			typeEnvCommand = "envEvents";
 			setMap = "events";

@@ -20,7 +20,7 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ args, message, download }) {
+	start: async function ({ args, message }) {
 		const fs = require("fs-extra");
 		const axios = require("axios");
 		if (!args[0] || args[0] == "help") message.guideCmd();
@@ -32,7 +32,7 @@ module.exports = {
 			const chu_Ky = content[2];
 			const colorBg = content[3];
 			try {
-				const dataChracter = (await axios.get("https://api-ntk-production.up.railway.app/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
+				const dataChracter = (await axios.get("https://goatbot.tk/taoanhdep/listavataranime?apikey=ntkhang")).data.data;
 				if (!isNaN(content[0])) {
 					idNhanVat = parseInt(content[0]);
 					const totalCharacter = dataChracter.length - 1;
@@ -40,7 +40,7 @@ module.exports = {
 					tenNhanvat = dataChracter[idNhanVat].name;
 				}
 				else {
-					findChracter = dataChracter.find(item => item.name.toLowerCase() == content[0].toLowerCase());
+					const findChracter = dataChracter.find(item => item.name.toLowerCase() == content[0].toLowerCase());
 					if (findChracter) {
 						idNhanVat = findChracter.stt;
 						tenNhanvat = content[0];
@@ -53,7 +53,7 @@ module.exports = {
 				return message.reply(`Đã xảy ra lỗi lấy dữ liệu nhân vật:\n${err.name}: ${err.message}`);
 			}
 
-			const endpoint = `https://api-ntk-production.up.railway.app/taoanhdep/avataranime`;
+			const endpoint = `https://goatbot.tk/taoanhdep/avataranime`;
 			const params = {
 				id: idNhanVat,
 				chu_Nen,
@@ -67,6 +67,7 @@ module.exports = {
 					params,
 					responseType: "stream"
 				});
+				response.data.path = "avatar.png";
 				message.reply({
 					body: `✅ Avatar của bạn\nNhân vật: ${tenNhanvat}\nMã số: ${idNhanVat}\nChữ nền: ${chu_Nen}\nChữ ký: ${chu_Ky}\nMàu: ${colorBg || "mặc định"}`,
 					attachment: response.data
