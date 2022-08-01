@@ -1,3 +1,6 @@
+const qs = require('querystring');
+const axios = require('axios');
+
 this.config = {
 	name: "adduser",
 	version: "1.0.9",
@@ -14,7 +17,6 @@ this.config = {
 	packages: "querystring"
 };
 
-const qs = require('querystring');
 async function findUid(link) {
 	const response = await axios.post("https://id.traodoisub.com/api.php", qs.stringify({ link }));
 	const uid = response.data.id;
@@ -29,7 +31,7 @@ async function findUid(link) {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ message, api, client, event, args, globalGoat }) {
+	start: async function ({ message, api, event, args }) {
 		const threadInfo = await api.getThreadInfo(event.threadID);
 		const success = [{
 			type: "success",
