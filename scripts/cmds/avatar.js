@@ -21,7 +21,6 @@ this.config = {
 module.exports = {
 	config: this.config,
 	start: async function ({ args, message }) {
-		const fs = require("fs-extra");
 		const axios = require("axios");
 		if (!args[0] || args[0] == "help") message.guideCmd();
 		else {
