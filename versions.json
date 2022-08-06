@@ -638,5 +638,13 @@
 			"scripts/cmds/jail.js": "go back to domain goatbot.tk",
 			"scripts/cmds/rank.js": "go back to domain goatbot.tk"
 		}
+	},
+	{
+		"version": "1.4.35",
+		"info": {
+			"update.js": "",
+			"bot/login.js": "close project when listenMqtt returns error",
+			"scripts/cmds/avatar.js": ""
+		}
 	}
 ]
