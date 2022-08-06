@@ -5,7 +5,8 @@
 	const chalk = require("chalk");
 	const allVersion = (await axios.get("https://github.com/ntkhang03/Goat-Bot/raw/main/versions.json")).data;
 	const localVersion = require("./package.json").version;
-	if (allVersion[allVersion.length - 1].version == localVersion) return print("Bạn đang sử dụng phiên bản mới nhất rồi", "LATEST VERSION");
+	if (allVersion[allVersion.length - 1].version == localVersion)
+		return print("Bạn đang sử dụng phiên bản mới nhất rồi", "LATEST VERSION");
 
 	fs.writeFileSync(__dirname + "/versions.json", JSON.stringify(allVersion, null, 2));
 
