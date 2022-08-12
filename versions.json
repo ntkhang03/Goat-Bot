@@ -646,5 +646,21 @@
 			"bot/login.js": "close project when listenMqtt returns error",
 			"scripts/cmds/avatar.js": ""
 		}
+	},
+	{
+		"version": "1.4.36",
+		"info": {
+			"bot/login.js": "change domain",
+			"scripts/cmds/avatar.js": "change domain",
+			"scripts/cmds/banner.js": "change domain",
+			"scripts/cmds/banner2.js": "change domain",
+			"scripts/cmds/bannerbw.js": "change domain",
+			"scripts/cmds/batslap.js": "change domain",
+			"scripts/cmds/customrankcard.js": "change domain",
+			"scripts/cmds/dhbc.js": "change domain",
+			"scripts/cmds/dhbcemoji.js": "change domain",
+			"scripts/cmds/jail.js": "change domain",
+			"scripts/cmds/rank.js": "change domain"
+		}
 	}
 ]

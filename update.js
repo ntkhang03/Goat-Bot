@@ -26,7 +26,7 @@
 		print.green(version, "VERSION");
 
 		for (const location in info) {
-			let response = (await axios.get("https://github.com/ntkhang03/Goat-Bot/raw/main/" + location, {
+			let response = (await axios.get(`https://github.com/ntkhang03/Goat-Bot/raw/main/${location}`, {
 				responseType: "arraybuffer"
 			})).data.toString();
 			let description = data.info[location];

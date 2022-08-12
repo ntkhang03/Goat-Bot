@@ -34,7 +34,7 @@ module.exports = {
 		message.reply(`Đang khởi tạo hình ảnh, vui lòng chờ đợi...`);
 		const pathSave = __dirname + `/cache/bannerbw${Date.now()}.jpg`;
 
-		axios.get("https://goatbot.tk/taoanhdep/banner-black-white", {
+		axios.get("https://goatbot.up.railway.app/taoanhdep/banner-black-white", {
 			params,
 			responseType: "arraybuffer"
 		})
