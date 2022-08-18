@@ -662,5 +662,12 @@
 			"scripts/cmds/jail.js": "change domain",
 			"scripts/cmds/rank.js": "change domain"
 		}
+	},
+	{
+		"version": "1.4.37",
+		"info": {
+			"bot/login.js": "",
+			"package.json": "change version dependences ytdl-core to 4.10.0"
+		}
 	}
 ]
