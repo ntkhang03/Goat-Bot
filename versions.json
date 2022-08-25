@@ -669,5 +669,12 @@
 			"bot/login.js": "",
 			"package.json": "change version dependences ytdl-core to 4.10.0"
 		}
+	},
+	{
+		"version": "1.4.38",
+		"info": {
+			"bot/handler/handlerEvents.js": "fix bugs",
+			"scripts/cmds/help.js": "fix bugs"
+		}
 	}
 ]

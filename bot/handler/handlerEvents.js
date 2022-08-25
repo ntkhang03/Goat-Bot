@@ -98,6 +98,7 @@ module.exports = function ({ api, globalGoat, client, usersData, threadsData, do
 			// ———————————————— COOLDOWNS ———————————————— //
 			if (!client.cooldowns[commandName]) client.cooldowns[commandName] = {};
 			const timestamps = client.cooldowns[commandName];
+			const configCommand = command.config;
 			const cooldownCommand = (command.config.cooldowns || 1) * 1000;
 			if (timestamps[senderID]) {
 				const expirationTime = timestamps[senderID] + cooldownCommand;
@@ -167,7 +168,7 @@ module.exports = function ({ api, globalGoat, client, usersData, threadsData, do
 				};
 				message.guideCmd = async function () {
 					const formSendMessage = {
-						body: command.config.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, commandName)
+						body: command.config.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, command.config.name)
 					};
 					const { sendFile } = command.config;
 					if (sendFile &&
@@ -206,7 +207,7 @@ module.exports = function ({ api, globalGoat, client, usersData, threadsData, do
 				};
 				message.guideCmd = async function () {
 					const formSendMessage = {
-						body: command.config.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, commandName)
+						body: command.config.guide.replace(/\{prefix\}|\{p\}/g, prefix).replace(/\{name\}|\{n\}/g, command.config.name)
 					};
 					const { sendFile } = command.config;
 					if (sendFile &&
@@ -226,7 +227,7 @@ module.exports = function ({ api, globalGoat, client, usersData, threadsData, do
 			}
 			catch (e) {
 				print.err(`Đã xảy ra lỗi khi thực thi command Reaction tại lệnh ${Reaction.nameCmd}: ${e.stack}`, "HANDLE REACTION");
-				message.reply(`❎\nĐã xảy ra lỗi tại command Reaction ${Reaction.nameCmd}\n${err.stack}`);
+				message.reply(`❎\nĐã xảy ra lỗi tại command Reaction ${Reaction.nameCmd}\n${e.stack}`);
 			}
 		}
 
@@ -283,6 +284,6 @@ module.exports = function ({ api, globalGoat, client, usersData, threadsData, do
 			presence,
 			read_receipt,
 			typ
-		}
+		};
 	};
 };

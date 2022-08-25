@@ -1,6 +1,6 @@
 this.config = {
 	name: "help",
-	version: "1.0.10",
+	version: "1.0.11",
 	author: {
 		name: "NTKhang",
 		contacts: ""
@@ -17,7 +17,7 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ globalGoat, message, args, event, threadsData }) {
+	start: async function ({ globalGoat, message, args, event, threadsData, download }) {
 		const moment = require("moment-timezone");
 		const { statSync, existsSync, createReadStream } = require("fs-extra");
 		const axios = require("axios");
