@@ -15,7 +15,7 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: function ({ message, event, args }) {
+	start: function ({ message, args }) {
 		const axios = require("axios");
 		const fs = require("fs-extra");
 
@@ -42,7 +42,7 @@ module.exports = {
 					attachment: fs.createReadStream(pathSave)
 				}, () => fs.unlinkSync(pathSave));
 			})
-			.catch((e) => {
+			.catch(() => {
 				return message.reply("Rất tiếc. Đã xảy ra lỗi vui lòng thử lại sau");
 			});
 

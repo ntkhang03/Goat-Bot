@@ -274,7 +274,6 @@ module.exports = function ({ api, globalGoat, client, usersData, threadsData, do
 		}
 
 
-
 		return {
 			whenChat,
 			whenStart,

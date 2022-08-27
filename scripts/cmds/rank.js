@@ -18,7 +18,7 @@ this.config = {
 
 module.exports = {
 	config: this.config,
-	start: async function ({ message, client, event, usersData, threadsData, globalGoat }) {
+	start: async function ({ message, event, usersData, threadsData, globalGoat }) {
 		const axios = require("axios");
 		const qs = require("querystring");
 		const { writeFileSync, unlinkSync, createReadStream } = require("fs-extra");
