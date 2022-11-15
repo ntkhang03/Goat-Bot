@@ -4,6 +4,9 @@
   <img alt="visitors" src="https://visitor-badge.laobi.icu/badge?page_id=ntkhang3.Goat-Bot">
 </p>
 
+## **NOTE**: ***There is now version 2 with improved performance and stability: [here](https://github.com/ntkhang03/Goat-Bot-V2)***
+<hr>
+
 ## HOW TO INSTALL
 ### Video
 * Installation Instructions in hosting replit: [click here](https://youtu.be/PIjtrHXLakE)
